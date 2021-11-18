@@ -1,5 +1,24 @@
-from django.shortcuts import render
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from community.models import Review
+from movies.models import Movie
+from .serializers import ReviewListSerializer, ReviewSerializer
+from django.shortcuts import get_object_or_404
+from rest_framework import status
 
-# Create your views here.
-def community_main(request):
-    pass
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def all_reviews(request):
+    reviews = Review.objects.order_by("-pk")
+    serializer = ReviewListSerializer(reviews, many=True)
+    return Response(serializer.data)
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def reviews_create(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    serializer = ReviewSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(movie=movie)# user= request.user
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
