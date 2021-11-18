@@ -8,15 +8,20 @@
 
 <script>
 import MoviesList from '@/components/MoviesList.vue'
+import {mapState} from 'vuex'
+
 
 export default {
   name: 'Movies',
   components: {
-    MoviesList
+    MoviesList,
   },
   data : function(){
     return {
     }
+  },
+  computed:{
+    ...mapState(['movies'])
   },
 }
 </script>

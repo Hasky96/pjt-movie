@@ -4,7 +4,8 @@ from django.conf import settings
 # Create your models here.
 class Movie(models.Model):
     title = models.CharField(max_length=100, null=False)
-    release_date = models.DateField()
+    # release_date = models.DateField()
+    release_date = models.CharField(max_length=40)
     vote_count = models.PositiveIntegerField()
     vote_average = models.FloatField()
     overview = models.TextField()
