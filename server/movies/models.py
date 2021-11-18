@@ -17,7 +17,8 @@ class Comment(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     content = models.CharField(max_length=100)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_comments')
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_comments', blank=True)
+    rank = models.PositiveIntegerField()
 
     def __str__(self):
         return f"comment : {self.content}"
@@ -25,3 +26,6 @@ class Comment(models.Model):
 class Genre(models.Model):
     name = models.CharField(max_length=50)
     movie = models.ManyToManyField(Movie, related_name='genre')
+
+    def __str__(self):
+        return self.name
