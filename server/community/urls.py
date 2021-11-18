@@ -7,4 +7,5 @@ urlpatterns = [
     # 리뷰생성
     path('<int:movie_pk>/new_review/', views.reviews_create),
     # 리뷰의 detail
+    path('<int:movie_pk>/review/<int:review_pk>/', views.reviews_detail),
 ]
