@@ -5,6 +5,7 @@
     <movies-list-item
     v-for="movie in movies" :key=movie.id
     :movie="movie"
+    @show-detail="showDetail"
     >
     </movies-list-item>
     </section>
@@ -25,6 +26,11 @@ export default {
   },
   data : function(){
     return {
+    }
+  },
+  methods:{
+    showDetail(movie){
+      this.$emit('show-detail', movie)
     }
   },
   computed:{
