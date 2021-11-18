@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:movie_pk>/new_review/', views.reviews_create),
     # Recommand
     path('recommend/', views.movie_recommend),
+    path('recommend/movie/', views.show_recommend_movie),
 ]
