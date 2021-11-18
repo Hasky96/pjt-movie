@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <h1>HOME</h1>
-    <div>
-      <section @click="move2Movies">Movies</section>
-      <section @click="move2Reviews">Reviews</section>
-    </div>
+  <div id="d">
+    <h1 class="text-light">Welcome Home</h1>
   </div>
 </template>
 
@@ -12,16 +8,14 @@
 export default {
   name: "Home",
   methods:{
-    move2Movies(){
-      this.$router.push('Movies')
-    },
-    move2Reviews(){
-      this.$router.push('Reviews')
-    }
   },
 }
 </script>
 
-<style>
-
+<style scoped>
+  #d{
+    background : url('../../imgs/mini.gif');
+    background-size: cover;
+    height: 500px;
+  }
 </style>
