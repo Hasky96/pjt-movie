@@ -22,3 +22,11 @@ def reviews_create(request, movie_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(movie=movie)# user= request.user
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def reviews_detail(request,movie_pk, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = ReviewSerializer(review)
+    return Response(serializer.data, status=status.HTTP_200_OK)
