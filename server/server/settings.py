@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'movies',
+    'recommend',
     # 3rd party
     'rest_framework',
     'corsheaders',
