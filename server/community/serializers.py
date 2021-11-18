@@ -10,10 +10,6 @@ class ReviewListSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-
-
-
-
 class ReviewSerializer(serializers.ModelSerializer):
     class MovieSerializer(serializers.ModelSerializer):
         class Meta:
