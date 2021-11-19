@@ -1,8 +1,9 @@
 <template>
   <div class="movies">
-    <movie-detail-modal v-if=movie>
-      @end-modal="exitModal
+    <movie-detail-modal v-if=movie
+      @end-modal="exitModal"
       :movie="movie"
+    >
     </movie-detail-modal>
     <div>
     <movies-list class="moviesChild"
