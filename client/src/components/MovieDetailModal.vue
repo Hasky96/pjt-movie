@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div style="border: 5px solid black;">
         {{movie}}
-        <button @click="$emit('end-modal')"></button>
+        <button @click="endModal">exit</button>
     </div>
 </template>
 <script>
@@ -10,7 +10,11 @@ export default {
     props: {
         movie : Object
     },
-
+    methods:{
+        endModal(){
+            this.$emit('end-modal')
+        }
+    }
 }
 </script>
 <style>
