@@ -1,11 +1,9 @@
 <template>
   <div class="movies">
-    <div v-if=movie class="moviesChildModal">
-      <button @click="exitModal">exit</button>
-      <movies-list-item
+    <movie-detail-modal v-if=movie>
+      @end-modal="exitModal
       :movie="movie"
-      ></movies-list-item>
-    </div>
+    </movie-detail-modal>
     <div>
     <movies-list class="moviesChild"
     @show-detail="showDetail"
@@ -17,19 +15,18 @@
 
 <script>
 import MoviesList from '@/components/MoviesList.vue'
-import MoviesListItem from '@/components/MoviesListItem.vue'
 import {mapState} from 'vuex'
-
+import MovieDetailModal from '@/components/MovieDetailModal.vue'
 
 export default {
   name: 'Movies',
   components: {
     MoviesList,
-    MoviesListItem
+    MovieDetailModal
   },
   data : function(){
     return {
-      movie:null
+      movie:null,
     }
   },
   methods:{
@@ -50,11 +47,5 @@ export default {
 .moviesChild{
   position: absolute;
   z-index: 0;
-}
-
-.moviesChildModal{
-  position: absolute;
-  z-index: 1;
-  background: #eee;
 }
 </style>
