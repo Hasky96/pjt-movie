@@ -4,6 +4,7 @@ import Movies from '@/views/Movies.vue'
 import Home from '@/views/Home.vue'
 import Review from '@/views/Review.vue'
 import Login from '@/views/Login.vue'
+import Recommend from '@/views/Recommend.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/login/',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/Recommend/',
+    name: 'Recommend',
+    component: Recommend
   },
 ]
 
