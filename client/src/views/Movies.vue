@@ -1,16 +1,17 @@
 <template>
   <div class="movies">
-    <movie-detail-modal v-if=movie
-      @end-modal="exitModal"
-      :movie="movie"
-    >
-    </movie-detail-modal>
-    <div>
     <movies-list class="moviesChild"
-    @show-detail="showDetail"
+    @show-detail="setDetail"
     >
     </movies-list>
-    </div>
+    <b-modal id=modal-movie ok-only ok-title="닫기">
+      <div>
+      <movie-detail-modal
+      :movie=movie
+      >
+      </movie-detail-modal>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -23,7 +24,7 @@ export default {
   name: 'Movies',
   components: {
     MoviesList,
-    MovieDetailModal
+    MovieDetailModal,
   },
   data : function(){
     return {
@@ -31,8 +32,9 @@ export default {
     }
   },
   methods:{
-    showDetail(movie){
+    setDetail(movie){
       this.movie = movie
+      this.$bvModal.show('modal-movie')
     },
     exitModal(){
       this.movie = null
