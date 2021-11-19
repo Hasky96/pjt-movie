@@ -1,7 +1,7 @@
 <template>
-    <div style="border: 5px solid black;">
-        {{movie}}
-        <button @click="endModal">exit</button>
+    <div>
+     <img :src="movie.poster_path" alt="" height="200px">
+      <p> {{movie}}</p>
     </div>
 </template>
 <script>
