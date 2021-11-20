@@ -47,12 +47,14 @@ def movie_recommend(request):
             # keyError 값을 return 해줘야 하는데??
             # 리턴값이 XX 이면 ALTER 을 발생?
             context = {
-                'state' : False
+                'state' : False,
+                'Veclist1' : '다른 키워드를 넣어주세요!',
             }
             return context
     # 이때 키워드는 request 에 담겨서 넘어와야 한다.
-    word  = request.POST.get('name')#로맨틱 #아련한
-    print(word)
+    word  = request.data.get('inputKeyword')#로맨틱 #아련한
+    print(type(request.data.get('list')))
+    print(3, word)
     context = keyword_check(word)
     return Response(context, status=status.HTTP_200_OK)
 
