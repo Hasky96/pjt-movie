@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="$router.push({path:`/review/${review.id}`})">
     {{review}}
   </div>
 </template>

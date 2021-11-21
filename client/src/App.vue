@@ -16,6 +16,8 @@
         <router-link 
         class="btn fs-5" 
         to="/reviews">Reviews</router-link>
+        <!-- 추천 시스템 라우터 -->
+        <router-link class="btn fs-5" to="/Recommend">Recommend</router-link>
         <!-- 로그인 라우터 -->
         <span v-if="isLogin">
         <router-link class="btn fs-5" @click.native="logout" to="#">Logout</router-link>
@@ -23,8 +25,6 @@
         <span v-else>
         <router-link class="btn fs-5" to="/login">Login</router-link>
         </span>
-        <!-- 추천 시스템 라우터 -->
-        <router-link class="btn fs-5" to="/Recommend">Recommend</router-link>
         
       </div>
       </b-navbar>
@@ -60,6 +60,15 @@ export default {
     }).catch(err=>{
       console.log(err)
     })
+    axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/server/community/reviews/',
+      }).then(res=>{
+        console.log(res.data)
+        this.$store.dispatch("setReviews", res.data)
+      }).catch(err=>{
+        console.log(err)
+      })
   },
 }
 </script>
