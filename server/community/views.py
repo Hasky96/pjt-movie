@@ -1,9 +1,9 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from community.models import Review
+from community.models import Review, Comment
 from movies.models import Movie
-from .serializers import ReviewListSerializer, ReviewSerializer
+from .serializers import ReviewListSerializer, ReviewSerializer, CommentSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 
@@ -31,6 +31,14 @@ def reviews_detail(request,movie_pk, review_pk):
     serializer = ReviewSerializer(review)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def comment_create(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(review=review,user= request.user)# 
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
