@@ -10,4 +10,7 @@ urlpatterns = [
     path('<int:movie_pk>/review/<int:review_pk>/', views.reviews_detail),
     # 리뷰의 like
     path('<int:movie_pk>/review/<int:review_pk>/like/', views.like_review),
+    # 리뷰의 comment
+    path('<int:movie_pk>/review/<int:review_pk>/createComment/', views.comment_create),
+
 ]
