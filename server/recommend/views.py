@@ -25,7 +25,6 @@ embedding_model = gensim.models.Word2Vec.load('recommend\word2VecModel')
 
 # 키워드 송출 시스템
 @api_view(['POST'])
-@permission_classes([AllowAny])
 def movie_recommend(request):
     # 키워드 check (입력 키워드가 이상하면 다시)
     def keyword_check(keyword):
@@ -60,7 +59,6 @@ def movie_recommend(request):
 
 # 추천영화 전송 시스템
 @api_view(['POST'])
-@permission_classes([AllowAny])
 def show_recommend_movie(request):
     FirstKeyword  = request.data.get('firstKeyword')# 첫번째 키워드
     print(FirstKeyword)

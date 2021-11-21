@@ -13,6 +13,14 @@ export default {
   components: {
     RecommendDetail,
   },
+  created: function () {
+    if (localStorage.getItem('jwt')) {
+      //pass
+    } else {
+      alert("로그인 해주세요!")
+      this.$router.push({name: 'Login'})
+    }
+  }
 
 }
 </script>
