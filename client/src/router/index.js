@@ -5,6 +5,7 @@ import Home from '@/views/Home.vue'
 import Review from '@/views/Review.vue'
 import Login from '@/views/Login.vue'
 import Recommend from '@/views/Recommend.vue'
+import ReviewCreate from '@/views/ReviewCreate.vue'
 
 Vue.use(VueRouter)
 
@@ -30,9 +31,14 @@ const routes = [
     component: Login
   },
   {
-    path: '/Recommend/',
+    path: '/recommend/',
     name: 'Recommend',
     component: Recommend
+  },
+  {
+    path: '/review/',
+    name: 'ReviewCreate',
+    component: ReviewCreate
   },
 ]
 
