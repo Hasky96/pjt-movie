@@ -8,4 +8,6 @@ urlpatterns = [
     path('<int:movie_pk>/new_review/', views.reviews_create),
     # 리뷰의 detail
     path('<int:movie_pk>/review/<int:review_pk>/', views.reviews_detail),
+    # 리뷰의 like
+    path('<int:movie_pk>/review/<int:review_pk>/like/', views.like_review),
 ]
