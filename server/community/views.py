@@ -20,7 +20,7 @@ def reviews_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie)# user= request.user
+        serializer.save(movie=movie, user= request.user)# 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -30,3 +30,18 @@ def reviews_detail(request,movie_pk, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     serializer = ReviewSerializer(review)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def like_review(request,movie_pk,review_pk):
+    print(request.user)
+    review = get_object_or_404(Review,pk=review_pk)
+    if review.like_users.filter(pk=request.user.pk).exists():
+        review.like_users.remove(request.user)
+    else:
+        review.like_users.add(request.user)
+    context = {
+        # 'count' : count
+    }
+    return Response(context, status=status.HTTP_200_OK)
