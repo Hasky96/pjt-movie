@@ -15,7 +15,6 @@ def all_reviews(request):
     return Response(serializer.data)
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def reviews_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewSerializer(data=request.data)
@@ -26,13 +25,12 @@ def reviews_create(request, movie_pk):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def reviews_detail(request,movie_pk, review_pk):
+def reviews_detail(request,review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     serializer = ReviewSerializer(review)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def comment_create(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     serializer = CommentSerializer(data=request.data)
@@ -41,7 +39,6 @@ def comment_create(request, review_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def like_review(request,movie_pk,review_pk):
     print(request.user)
     review = get_object_or_404(Review,pk=review_pk)

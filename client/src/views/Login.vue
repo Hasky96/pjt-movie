@@ -61,6 +61,11 @@ export default {
                 console.log(err)
             })
     },
+  },
+  created: function (){
+    if (localStorage.getItem('jwt')) {
+      this.$router.push({name: 'Movies'})
+    }
   }
 }
 </script>
