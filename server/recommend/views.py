@@ -62,28 +62,18 @@ def movie_recommend(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def show_recommend_movie(request):
-    FirstKeyword  = request.POST.get('FirstKeyword')# 첫번째 키워드
-    SecondKeyword  = request.POST.get('SecondKeyword')# 두번째 키워드
-    ThirdKeyword  = request.POST.get('ThirdKeyword')# 세번째 키워드
+    FirstKeyword  = request.data.get('firstKeyword')# 첫번째 키워드
+    print(FirstKeyword)
+    SecondKeyword  = request.data.get('secoundKeyword')# 두번째 키워드
+    ThirdKeyword  = request.data.get('thirdKeyword')# 세번째 키워드
+    print(SecondKeyword,ThirdKeyword)
     # list_num  = request.# 리스트
-    data = JSONParser().parse(request)
-    print(type(data), data)
-    Veclist1  = request.POST.get('Veclist1')# 리스트
-    Veclist2  = request.POST.get('Veclist2')# 리스트
-    Veclist3  = request.POST.get('Veclist3')# 리스트
-    Veclist4  = request.POST.get('Veclist4')# 리스트
-    Veclist5  = request.POST.get('Veclist5')# 리스트
-    Veclist6  = request.POST.get('Veclist6')# 리스트
-    Veclist7  = request.POST.get('Veclist7')# 리스트
-    Veclist8  = request.POST.get('Veclist8')# 리스트
-    Veclist9  = request.POST.get('Veclist9')# 리스트
-    Veclist10  = request.POST.get('Veclist10')# 리스트
-    Veclits = [Veclist1,Veclist2,Veclist3,Veclist4,Veclist5,Veclist6,Veclist7,Veclist8,Veclist9,Veclist10]
-    # Veclist2  = request.POST.get('Veclist2')# 리스트
-    # Veclist3  = request.POST.get('Veclist3')# 리스트
-    # print(FirstKeyword, SecondKeyword, ThirdKeyword)
+    Veclist1  = request.data.get('firstData')# 리스트
+    Veclist2  = request.data.get('secoundData')# 리스트
+    Veclist3  =request.data.get('thirdData')# 리스트
     # 벡터 가중치 설정
-    myVec = [FirstKeyword]*3+Veclits+[SecondKeyword]*2+Veclits[:5]+[ThirdKeyword] + Veclits[:5]
+    print(Veclist1,Veclist2,Veclist3)
+    myVec = [FirstKeyword]*3+Veclist1+[SecondKeyword]*2+Veclist2[:5]+[ThirdKeyword] + Veclist3[:5]
     # print(Veclist1)
     # 테이블 불러오기
     mymyCut = pd.read_csv("recommend\리뷰코사인을위한데이터테이블3.csv")
