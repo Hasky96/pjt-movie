@@ -1,18 +1,25 @@
 <template>
   <div>
-    <button @click="onC"></button>
+    <button @click="$router.push({name: 'ReviewCreate'})">new Review</button>
+    <review-list
+    :reviews="reviews"
+    ></review-list>
   </div>
 </template>
 
 <script>
+import ReviewList from '@/components/ReviewList.vue'
+import {mapState} from 'vuex'
 export default {
   name: "Reviews",
+  components:{
+    ReviewList,
+  },
   methods:{
-    onC(){
-      this.$router.push({name: 'Movies'})
-    }
-  }
-
+  },
+  computed:{
+    ...mapState(['reviews'])
+  },
 }
 </script>
 
