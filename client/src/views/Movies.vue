@@ -4,7 +4,7 @@
     @show-detail="setDetail"
     >
     </movies-list>
-    <b-modal id=modal-movie ok-only ok-title="닫기">
+    <b-modal id=modal-movie ok-title="후기보기!" ok-only @ok="reviewPage(movie.id)">
       <div>
       <movie-detail-modal
       :movie=movie
@@ -32,6 +32,9 @@ export default {
     }
   },
   methods:{
+    reviewPage(movieId){
+      this.$router.push({name: 'Review', params: {movieId: movieId}})
+    },
     setDetail(movie){
       this.movie = movie
       this.$bvModal.show('modal-movie')

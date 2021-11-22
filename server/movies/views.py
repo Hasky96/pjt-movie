@@ -17,6 +17,14 @@ def movies(request):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def search(request):
+    keyword = request.GET.get('keyword')
+    movies_list = Movie.objects.filter(title__icontains=keyword)
+    serializer = MovieSerializer(movies_list, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk = movie_pk)
     serializer = MovieSerializer(movie)
