@@ -97,7 +97,8 @@ export default {
         axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/server/recommend/',
-        data: Keyword
+        data: Keyword,
+        headers: this.setToken()
         }).then(res=>{
           // console.log(res)
           console.log(res)
@@ -118,7 +119,8 @@ export default {
         axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/server/recommend/',
-        data: Keyword
+        data: Keyword,
+        headers: this.setToken()
         }).then(res=>{
           // console.log(res)
           console.log(res)
@@ -142,7 +144,8 @@ export default {
       axios({
       method: 'post',
       url: 'http://127.0.0.1:8000/server/recommend/movie/',
-      data: keyWordData
+      data: keyWordData,
+      headers: this.setToken()
       }).then(res=>{
         // console.log(res)
         console.log(res)

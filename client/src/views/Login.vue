@@ -8,12 +8,12 @@
     <b-button v-b-modal.modal-signup>회원가입</b-button>
     <b-modal id=modal-signup ok-title="signup" @ok="signup">
       <div>
-          <label for="username">ID : </label>
-          <input v-model="credential.username" name="username" type="text">
-          <label for="password">PW : </label>
-          <input v-model="credential.password" name="password" type="password">
-          <label for="passwordConfirmation">PW : </label>
-          <input v-model="credential.passwordConfirmation" @keyup.enter="signup" name="passwordConfirmation" type="password">
+        <label for="username">ID : </label>
+        <input v-model="credential.username" name="username" type="text">
+        <label for="password">PW : </label>
+        <input v-model="credential.password" name="password" type="password">
+        <label for="passwordConfirmation">PW : </label>
+        <input v-model="credential.passwordConfirmation" @keyup.enter="signup" name="passwordConfirmation" type="password">
       </div>
     </b-modal>
   </div>
@@ -53,16 +53,16 @@ export default {
       })
     },
     signup(){
-            axios({
-                method: 'post',
-                url: 'http://127.0.0.1:8000/server/accounts/signup/',
-                data: this.credential
-            }).then((res)=>{
-                console.log(res)
-                alert(`${res.data.username} 가입성공!`)
-            }).catch(err=>{
-                console.log(err)
-            })
+      axios({
+          method: 'post',
+          url: 'http://127.0.0.1:8000/server/accounts/signup/',
+          data: this.credential
+      }).then((res)=>{
+          console.log(res)
+          alert(`${res.data.username} 가입성공!`)
+      }).catch(err=>{
+          console.log(err)
+      })
     },
   },
   created: function (){
