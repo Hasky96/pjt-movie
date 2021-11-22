@@ -70,6 +70,14 @@ export default {
         console.log(err)
       })
   },
+  created:function(){
+    if (localStorage.getItem('jwt')) {
+      this.isLogin = true
+    }
+    else{
+      this.isLogin = false
+    }
+  }
 }
 </script>
 <style>

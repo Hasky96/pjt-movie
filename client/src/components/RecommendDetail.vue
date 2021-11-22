@@ -23,6 +23,13 @@ export default {
       }
     },
   methods :{
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
     onB : function(){
       const Keyword = {
         inputKeyword: this.inputKeyword,
@@ -32,7 +39,8 @@ export default {
         axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/server/recommend/',
-        data: Keyword
+        data: Keyword,
+        headers: this.setToken()
         }).then(res=>{
           // console.log(res)
           console.log(res)
