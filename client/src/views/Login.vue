@@ -21,7 +21,6 @@
 
 <script>
 import axios from 'axios'
-import Vue from 'vue'
 
 export default {
   components: { 
@@ -46,9 +45,9 @@ export default {
       }).then(res=>{
         const jwt = res.data.token
         localStorage.setItem('jwt', jwt)
-        this.$session.start()
-        this.$session.set('jwt', jwt)
-        Vue.http.headers.common['Authorization'] = `JWT ${jwt}`
+        // this.$session.start()
+        // this.$session.set('jwt', jwt)
+        // Vue.http.headers.common['Authorization'] = `JWT ${jwt}`
         this.$emit('login')
         this.$router.push({ name: 'Movies' })
       })
