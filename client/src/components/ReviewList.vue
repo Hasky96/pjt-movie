@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-list-group class="px-5 py-3">
+      <!-- 제목 -->
       <b-row class="tableHeader fw-bold fs-5">
         <b-col class='myCol' cols="1">작성자</b-col>
         <b-col class='myCol' cols="6">제목</b-col>
