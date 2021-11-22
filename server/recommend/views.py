@@ -155,10 +155,16 @@ def title_recommend(request):
 
 @api_view(['POST'])
 def catch_data(request):
-    a = request.data.get('movietitle')
-    print(a)
-    movie = get_object_or_404(Movie, title=a)
-    print(movie)
-    serializer = MovieSerializer(movie)
+    try:
+        print('들어옴')
+        a = request.data.get('movieList')
+        movie = get_object_or_404(Movie, title=a)
+        print(movie)
+        serializer = MovieSerializer(movie)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except:
+        context = {
+                'title' : '영화없음',
+            }
+        return Response(context, status=status.HTTP_200_OK)

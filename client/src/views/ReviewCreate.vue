@@ -60,7 +60,7 @@ export default {
           content : this.content,
           rank: this.rankInt,
         },
-        // headers: this.setToken()
+        headers: this.setToken()
       }).then(()=>{
         axios({
           method: 'get',
