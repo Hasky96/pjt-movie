@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background : white;">
     <h1>키워드 추천 페이지 입니다!</h1>
     <!-- 키워드 입력  -->
     <input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 0 " @keyup.enter="onB">

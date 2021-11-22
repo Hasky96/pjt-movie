@@ -1,12 +1,32 @@
 <template>
   <div>
-    <div class="mt-5 container ">
-      <img src="..\assets\recommendTitle.png" alt="">
+    <div class="page-top">
+      <div class="page-top-inner-wrap">
+        <h2 class="page-title">추천 시스템</h2>
+      </div>
+    </div>
+  <div class="mt-5 container ">
+      
       <hr>
     </div >
+    <!-- style="width: 25rem; height: 28rem;" -->
       <div v-if="selected == null" class="d-flex justify-content-around">
-      <img src="..\assets\keywordsearch.jpg" alt=""  style="width: 25rem; height: 28rem;" class="m-5 box"  @click="keyword">
-      <img src="..\assets\titlesearch.jpg" alt=""  style="width: 25rem; height: 28rem;" class="m-5 box"  @click="title">
+        <div class="recbox" @click="keyword">
+          <img src="..\assets\keyword.png" alt="" class="recpic">
+          <h2 class="rectitle">키워드 추천</h2>
+          <div class="reccontent">
+            <h4> 3만개의 리뷰를 바탕으로 키워드에 최적화 된 영화를 추천합니다.
+            </h4>
+          </div>
+        </div>
+        <div class="recbox" @click="title">
+          <img src="..\assets\keyword.png" alt="" class="recpic">
+          <h2 class="rectitle">타이틀 추천</h2>
+          <div class="reccontent">
+            <h4> 영화 제목의 코사인 유사도를 바탕으로 가장 비슷한 영화를 추천합니다.
+            </h4>
+          </div>
+        </div>
     </div>
     <div v-if="selected == 1">
       <div  class="d-flex justify-content-center">
@@ -63,21 +83,45 @@ export default {
 </script>
 
 <style>
-.box {
-    border-style: solid;
-    border-width: 1px;
-    display: block;
-    width: 100px;
-    height: 100px;
-    background-color: #0000FF;
-    -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 1s;
-    transition:width 2s, height 2s, background-color 2s, transform 1s;
+.recpic {
+  width: 18rem; 
+  height: 18rem;
 }
-.box:hover {
-    background-color: #FFCCCC;
-    width:200px;
-    height:200px;
-    -webkit-transform:rotate(360deg);
-    transform:rotate(360deg);
+.reccontent {
+  margin: auto;
+  color: white;
 }
+.rectitle {
+  margin-bottom: 2rem;
+  color: white;
+}
+.recbox {
+  border: solid;
+  border-color: white;
+  width: 25rem; 
+  height: 28rem;
+  background: #252525;
+  -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+  transition:width 2s, height 2s, background-color 2s, transform 2s;
+}
+.page-top-inner-wrap {
+    position: relative;
+    max-width: 1240px;
+    margin: 0px auto;
+    text-align: left;
+}
+.page-title {
+    font-size: 24px;
+    line-height: 36px;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+}
+.page-top {
+  background: #252525;
+  padding: 40px 0px;
+  text-align: left;
+  margin: 0 auto;
+
+}
+
 </style>

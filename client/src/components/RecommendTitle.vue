@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div style="background : white;">
     <h1>추천 타이틀 페이지 입니다.</h1>
     <input type="text" name="" id="" v-model.trim="titleGet" class="mt-4" @keyup.enter="titleSend">  
     <b-button  @click="titleSend" variant="primary" class="m-2">제목 전송!</b-button>
-  <transition name="fade">
-    <div class="container">
+  
+    <div class="container" >
+      <transition-group name="fade">
       <div v-for="movieEl in movieList" :key="movieEl">
         <b-container class="bv-example-row text-center" >
           <b-row>
@@ -21,8 +22,9 @@
         </b-container>
         <hr>
       </div>
+       </transition-group>
     </div>
-  </transition>
+ 
 <!-- </div> -->
 </div>
 </template>

@@ -17,6 +17,8 @@
         <div class="col">
           <h5 class="fw-bold">{{movie.title}}</h5>
           <span style="font-size: 0.9em">{{movie.release_date}}</span><span style="font-size: 0.9em">star: {{movie.vote_average}}</span>
+          <p>{{this.likes}}</p>
+          <button @click="like">좋아요</button>
         </div>
         <div class="grayborder reviewContent">
           {{review.content}}
@@ -45,6 +47,7 @@ export default {
     return {
       review: {},
       movie: [],
+      likes : null,
     }
   },
   created:function(){
@@ -53,6 +56,7 @@ export default {
       url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/`,
     }).then(res=>{
       this.review = res.data
+      this.likes = this.review.like_users.length
       axios({
         method: 'get',
         url : `http://127.0.0.1:8000/server/movies/${res.data.movie}/info/`,
@@ -66,6 +70,26 @@ export default {
       console.log(err)
     })
     
+  },
+  methods : {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    like : function() { 
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/like/`,
+        headers: this.setToken()
+        }).then(res=>{
+          this.likes = res.data.review
+        }).catch(err=>{
+          console.log(err)
+        })
+    }
   }
 }
 </script>
