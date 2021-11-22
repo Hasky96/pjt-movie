@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 from community.models import Review, Comment
 from movies.models import Movie
 from .serializers import ReviewListSerializer, ReviewSerializer, CommentSerializer
@@ -36,7 +35,7 @@ def comment_create(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(review=review, user=request.user)# 
+        serializer.save(review=review, user= request.user)# 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(["POST"])
@@ -57,4 +56,12 @@ def like_review(request,movie_pk,review_pk):
 def review_by_movieID(request, movie_id):
     reviews =Review.objects.filter(movie_id=movie_id)
     serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data, status.HTTP_200_OK)
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def comments(request, review_pk):
+    review = get_object_or_404(Review,pk=review_pk)
+    comments =review.comment_set.all()
+    serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data, status.HTTP_200_OK)
