@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import status
@@ -21,8 +22,19 @@ from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
 # Word2Vec 모델 불러오기
 embedding_model = gensim.models.Word2Vec.load('recommend\word2VecModel')
+
+# 코사인 유사도 시스템 설정
+with open('recommend\movie_dict.pickle', 'rb') as f:
+    movie_dict = pickle.load(f)
+df = pd.DataFrame(list(movie_dict.items()),columns = ['title','review'])  
+tfidf = TfidfVectorizer()
+tfidf_matrix = tfidf.fit_transform(df.review)
+cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
+indices = pd.Series(df.index, index = df.title)
 ###------------ 추천시스템 -------------- ###
 
+from movies.models import Movie
+from movies.serializers import MovieSerializer
 # 키워드 송출 시스템
 @api_view(['POST'])
 def movie_recommend(request):
@@ -108,3 +120,45 @@ def show_recommend_movie(request):
     }
     return Response(context, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def title_recommend(request):
+    print('도착했음')
+    def movie_Recommendation(title, cosine_sim=cosine_sim):
+        try:
+            print('멈추기 전')
+            idx = indices[title]
+            print('들어옴')
+            # 모든 영화에 대해서 해당 영화와의 유사도를 구하기
+            sim_scores = list(enumerate(cosine_sim[idx]))
+            sim_scores = sorted(sim_scores, key=lambda x:x[1], reverse = True) # score 순으로 정렬
+
+            sim_scores = sim_scores[1:11] # 가장 유사한 10개의 영화를 받아옴
+            movie_indices = [i[0] for i in sim_scores] # 인덱스 받아오기
+            
+            result_df = df.iloc[movie_indices].copy()  #기존에 읽어들인 데이터에서 해당 인덱스의 값을 가져오기 스코어 열을 추가
+            result_df['score'] = [i[1] for i in sim_scores]
+            # 가장 유사한 10개의 영화의 제목을 리턴
+            context = {
+                'state' : True,
+                'Veclist1' : result_df,
+            }
+            return context
+        except KeyError:
+            context = {
+                'state' : False,
+                'Veclist1' : '다른 키워드를 넣어주세요!',
+            }
+            return context
+    a = request.data.get('titleGet')
+    context = movie_Recommendation(a)
+    return Response(context, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def catch_data(request):
+    a = request.data.get('movietitle')
+    print(a)
+    movie = get_object_or_404(Movie, title=a)
+    print(movie)
+    serializer = MovieSerializer(movie)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
