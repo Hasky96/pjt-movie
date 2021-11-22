@@ -7,7 +7,7 @@ import Login from '@/views/Login.vue'
 import Recommend from '@/views/Recommend.vue'
 import ReviewCreate from '@/views/ReviewCreate.vue'
 import ReviewDetail from '@/views/ReviewDetail.vue'
-
+import MovieDetail from '@/views/MovieDetail.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,6 +15,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/movie/:movieId',
+    name: 'MovieDetail',
+    component: MovieDetail
   },
   {
     path: '/movies/',
