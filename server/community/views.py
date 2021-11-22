@@ -39,15 +39,16 @@ def comment_create(request, review_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(["POST"])
-def like_review(request,movie_pk,review_pk):
-    print(request.user)
+def like_review(request,review_pk):
+    me = request.user
     review = get_object_or_404(Review,pk=review_pk)
-    if review.like_users.filter(pk=request.user.pk).exists():
+    print(review.like_users)
+    if review.like_users.filter(pk=me.pk).exists():
         review.like_users.remove(request.user)
     else:
         review.like_users.add(request.user)
     context = {
-        # 'count' : count
+         'review' : review.like_users.count()
     }
     return Response(context, status=status.HTTP_200_OK)
 
