@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
 from community.models import Review, Comment
 from movies.models import Movie
 from .serializers import ReviewListSerializer, ReviewSerializer, CommentSerializer
@@ -50,3 +51,10 @@ def like_review(request,movie_pk,review_pk):
         # 'count' : count
     }
     return Response(context, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def review_by_movieID(request, movie_id):
+    reviews =Review.objects.filter(movie_id=movie_id)
+    serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data, status.HTTP_200_OK)

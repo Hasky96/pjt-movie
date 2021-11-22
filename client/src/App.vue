@@ -64,7 +64,6 @@ export default {
         method: 'get',
         url: 'http://127.0.0.1:8000/server/community/reviews/',
       }).then(res=>{
-        console.log(res.data)
         this.$store.dispatch("setReviews", res.data)
       }).catch(err=>{
         console.log(err)

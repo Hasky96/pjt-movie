@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <h1>무비리스트</h1>
-    <section v-if="movies">
-    <movies-list-item
-    v-for="movie in movies" :key=movie.id
-    :movie="movie"
-    @show-detail="showDetail"
-    >
-    </movies-list-item>
-    </section>
+  <div style="width:100%;">
+    <b-container v-if="movies" style="width:100%;">
+      <b-row style="width:100%; ">
+        <movies-list-item
+        v-for="movie in movies" :key=movie.id
+        :movie="movie"
+        @show-detail="showDetail"
+        >
+        </movies-list-item>
+      </b-row>
+    </b-container>
     <section v-else>
       <h3>아직 영화정보가 없습니다.</h3>
     </section>

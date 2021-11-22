@@ -9,6 +9,8 @@ urlpatterns = [
     # 영화 한줄평
     path('<int:movie_pk>/createComment/', views.comment_create),
     # 한줄평 좋아요
-    path('<int:movie_pk>/<int:comment_pk>/like', views.like_comment),
+    path('<int:movie_pk>/<int:comment_pk>/like/', views.like_comment),
+    # 영화리스트 제목
+    path('search/', views.search),
 
 ]

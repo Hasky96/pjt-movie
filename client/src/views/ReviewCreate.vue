@@ -1,10 +1,27 @@
 <template>
   <div>
-    <label for="reviewTitle">title : </label>
-    <input v-model="title" name="reviewTitle" type="text">
+    <label for="reviewTitle">글 제목 : </label>
+    <input v-model="title" name="reviewTitle" type="text"><br>
+    <label for="movieTitle">영화제목 : </label>
+    <input type="text"  @click="$bvModal.show('modal-movie')" name="movieTitle" :value='movieTitle' readonly> 
+    <b-button v-b-modal.modal-movie>영화검색</b-button>
+    <b-modal id=modal-movie ok-title="확인" ok-only>
+      <div>
+        <input type="text" v-model="search" placeholder="영화제목을 입력하세요" style="width: 100%">
+        <section style="overflow: auto; height: 500px;">
+          <div class="movieItem p-2" v-for="movie in searchList" :key="movie.id" @click="setSearch(movie.id, movie.title)">
+            <img :src="movie.poster_path" height="100px" alt="">
+            <section class="sec1">
+              <p class="fs-5">{{movie.title}}</p> 
+              <p style="text-align: end;">개봉일{{movie.release_date}}</p>
+            </section>
+          </div>
+        </section>
+      </div>
+    </b-modal>
     <div>
       <div class="rate">
-        <input v-model="rankString" type="radio" id="star5" name="rate" value=5 />
+        <input v-model="rankString" type="radio" id="star5" name="rate" value="5" />
         <label  for="star5" title="text">5 stars</label>
         <input v-model="rankString" type="radio" id="star4" name="rate" value="4" />
         <label for="star4" title="text">4 stars</label>
@@ -31,7 +48,10 @@ export default {
   name: 'ReviewCreate',
   data:function(){
     return {
-      movieId: 1,
+      searchList: null,
+      search: null,
+      movieTitle: null,
+      movieId: null,
       rankString:"",
       title: null,
       content: null,
@@ -42,7 +62,30 @@ export default {
       return parseInt(this.rankString)
     }
   },
+  watch:{
+    search: function(){
+      axios({
+        method : 'get',
+        url: 'http://127.0.0.1:8000/server/movies/search/',
+        params:{
+          keyword : String(this.search)
+        }
+      }).then(res=>{
+        this.searchList = res.data
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+  },
   methods:{
+    setSearch(id, title){
+      this.movieId = id
+      this.movieTitle = title
+      console.log(title)
+      this.$bvModal.hide('modal-movie')
+      // document.querySelector('#movieTitle').setText(title)
+
+    },
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
@@ -51,7 +94,6 @@ export default {
       return config
     },
     create(){
-      console.log(this.rankInt)
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/server/community/${this.movieId}/new_review/`,
@@ -66,7 +108,6 @@ export default {
           method: 'get',
           url: 'http://127.0.0.1:8000/server/community/reviews/',
         }).then(res=>{
-          console.log(res.data)
           this.$store.dispatch("setReviews", res.data)
         }).catch(err=>{
           console.log(err)
@@ -79,16 +120,37 @@ export default {
   },
   created: function () {
     if (localStorage.getItem('jwt')) {
-      //pass
+      axios({
+        method : 'get',
+        url: 'http://127.0.0.1:8000/server/movies/search/',
+        params:{
+          keyword : String("")
+        }
+      }).then(res=>{
+        this.searchList = res.data
+      }).catch(err=>{
+        console.log(err)
+      })
     } else {
       alert("로그인 해주세요!")
       this.$router.push({name: 'Login'})
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
+.sec1{
+  display: inline-block; 
+  height: 100%;
+  width:70%;
+}
+
+.movieItem:hover{
+  cursor:pointer;
+  background: #eee;
+}
+
 .rate {
   text-align: center;
   display: inline-block;
