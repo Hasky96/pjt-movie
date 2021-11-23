@@ -16,23 +16,19 @@
           <h2 style="margin-top : 2rem;">추천 영화</h2>
           <div class="container" style="margin-top : 2rem">
               <swiper class="swiper" :options="swiperOption">
-                <!-- div로 감싸고, 크기 조절하면 될 듯 -->
-                <swiper-slide  v-for="movies in movieList" :key="movies.id">
-                  
-                  <div style=" margin :0rem 0.5rem;">
-                      <img :src="movies[1]" alt="" style="width: 15rem; height: 18rem;"> 
-                    <h5 class="recplat" style="width: 15rem;  padding : 0.5rem 0rem;">{{ movies[0] }}</h5> 
+                <swiper-slide  v-for="movie in movies" :key="movie.id">
+                  <div class="slide-content" style=" margin :0rem 0.5rem;" @click="move(movie[2])">
+                      <img :src="movie[1]" alt="" style="width: 15rem; height: 18rem;"> 
+                    <h5 class="recplat" style="width: 15rem;  padding : 0.5rem 0rem;">{{ movie[0] }}</h5> 
                   <br>
                 </div>
-               
                 </swiper-slide>
-                <div class="swiper-pagination" slot="pagination"></div>
+                <div class="swiper-pagination sp-custom" slot="pagination"></div>
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
           </div>
         </div>
-
     </section>
     <section class="community">
       <nav>
@@ -72,15 +68,13 @@ export default {
     ReviewList,
         swiper,
     swiperSlide,
-
-
   },
   name: 'MovieDetail',
   data:function(){
     return {
       model: null,
       movie: {},
-      movieList : null,
+      movieList : [],
       number : 1,
     swiperOption: {
           slidesPerView: 5,
@@ -97,8 +91,6 @@ export default {
             prevEl: '.swiper-button-prev'
           }
         }
-
-      
     }
   },
   methods : {
@@ -109,35 +101,50 @@ export default {
       }
       return config
     },
-  },
-  created:function(){
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/server/movies/${this.$route.params.movieId}/info/`,
-    }).then(res=>{
-      this.movie = res.data
+    getRecData(){
       axios({
-              method: 'get',
-              url: `http://127.0.0.1:8000/server/recommend/${res.data.id}/detail/`,
-              headers: this.setToken(),
-              }).then(res=>{
-                console.log(res)
-                this.movieList = res.data
-                const movie_list = []
-                var step;
-                for (step = 0; step < 10; step++) {
-                  movie_list.push([res.data.title[step], res.data.pp[step],`http://localhost:8080/movie/${res.data.pk[step]}`])
-                } 
-                this.movieList = movie_list
-                console.log(movie_list)
+        method: 'get',
+        url: `http://127.0.0.1:8000/server/movies/${this.$route.params.movieId}/info/`,
+        }).then(res=>{
+          this.movie = res.data
+          axios({
+            method: 'get',
+            url: `http://127.0.0.1:8000/server/recommend/${res.data.id}/detail/`,
+            headers: this.setToken(),
+            }).then(res=>{
+              // console.log(res)
+              this.movieList = res.data
+              const movie_list = []
+              var step;
+              for (step = 0; step < 24; step++) {
+                movie_list.push([res.data.title[step], res.data.pp[step], res.data.pk[step]])
+              } 
+              this.movieList = movie_list
+              // console.log(movie_list)
               }).catch(err=>{
                 console.log(err)
               })
-    }).catch(err=>{
-      console.log(err)
-    })
-    
+        }).catch(err=>{
+          console.log(err)
+        })
+    },
+    move(id){
+      if(id!=this.$route.params.movieId){
+        this.$router.replace(`/movie/${id}/`)
+        this.getRecData()
+        window.scrollTo(0,0)
+      }
+    }
   },
+  created:function(){
+    this.getRecData()
+  },
+  computed:{
+    movies:function(){
+      const id = this.$route.params.movieId
+      return this.movieList.filter( movie => movie[2] != id)
+    }
+  }
 }
 </script>
 
@@ -238,6 +245,9 @@ export default {
 
 font-family: 'Hanna', sans-serif;
 }
+.slide-content:hover{
+  transform:scale(1.05);
+}
 
 
 </style>
@@ -259,20 +269,20 @@ font-family: 'Hanna', sans-serif;
 }
 </style>
 <style lang="scss" scoped>
- .swiper-button-next, .swiper-container-rtl .swiper-button-prev .swiper-button-prev {
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev .swiper-button-prev {
 filter : hue-rotate(180deg) brightness(200%) contrast(10%);
 fill: white;
 --swiper-theme-color: #ffffff;
 }
- .swiper-button-prev , .swiper-container-rtl .swiper-button-prev .swiper-button-prev {
+.swiper-button-prev , .swiper-container-rtl .swiper-button-prev .swiper-button-prev {
 filter : hue-rotate(180deg) brightness(200%) contrast(10%);
 fill: white;
 --swiper-theme-color: #ffffff;
 }
-.swiper-pagination-bullet {
-    opacity: 1;
-    border: white solid 1px;
-    background-color: transparent;
+.swiper-pagination-bullet{
+  opacity: 1;
+  border: white solid 1px;
+  background-color: transparent;
 }
 .swiper-pagination-bullet-active {
   background-color: #000;

@@ -176,7 +176,9 @@ def detail_recommend(request,movie_pk):
     genres = movie.genre.all()
     print(genres)
     data = Movie.objects.filter(genre__in = genres).order_by('-vote_count').distinct()
-    data = data[10:20]
+    selctions = [0, 10, 20, 30, 40]
+    pick = random.choice(selctions)
+    data = data[pick:pick+24]
     title = []
     overview = []
     pp = []

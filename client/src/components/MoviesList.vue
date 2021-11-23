@@ -6,7 +6,6 @@
         v-for="movie in movies" :key=movie.id
         :movie="movie.fields"
         :movieId="movie.pk"
-        @show-detail="showDetail"
         >
         </movies-list-item>
       </b-row>
@@ -33,9 +32,6 @@ export default {
     movies : Array
   },
   methods:{
-    showDetail(movie){
-      this.$emit('show-detail', movie)
-    }
   },
 }
 </script>
