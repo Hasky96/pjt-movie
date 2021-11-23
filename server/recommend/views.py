@@ -168,3 +168,30 @@ def catch_data(request):
                 'title' : '영화없음',
             }
         return Response(context, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def detail_recommend(request,movie_pk):
+    print('들어옴')
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    genres = movie.genre.all()
+    print(genres)
+    data = Movie.objects.filter(genre__in = genres).order_by('-vote_count').distinct()
+    data = data[:10]
+    title = []
+    overview = []
+    pp = []
+    pk = []
+    for i in range(len(data)):
+        title .append(data[i].title)
+        overview .append(data[i].overview)
+        pp.append(data[i].poster_path)
+        pk.append(data[i].pk)
+    if movie.overview == '':
+        movie.overview = '줄거리를 준비중 입니다'
+    context = {
+        'title' : title,
+        'overview' : overview,
+        'pp' : pp,
+        'pk' : pk,
+    }
+    return Response(context, status=status.HTTP_200_OK)
