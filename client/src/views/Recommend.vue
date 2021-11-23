@@ -21,7 +21,7 @@
             </div>
           </div>
         </a>
-        <a href="#"  @click="keyword" style="text-decoration:none margin-left: 2rem;">
+        <a href="#"  @click="title" style="text-decoration:none; margin-left: 2rem;">
           <div class="recbox" @click="title">
             <img src="..\assets\keyword2.png" alt="" class="recpic2">
             <h2 class="rectitle">유사도 추천</h2>

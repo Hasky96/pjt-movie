@@ -1,5 +1,5 @@
 <template>
-  <div style="background : white;" class="container">
+  <div style="background : #202020;" class="container">
     <h1>키워드 추천 페이지 입니다!</h1>
     <!-- 키워드 입력  -->
 
