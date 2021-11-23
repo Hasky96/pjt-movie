@@ -1,16 +1,16 @@
 <template>
   <div style="background : #202020;" class="container">
-    <h1>키워드 추천 페이지 입니다!</h1>
+    <h1 class="rectitle" style="margin-top : 1rem; padding-top:1rem;"  v-if="tryNum != 3 ">키워드 추천 페이지 입니다!</h1>
     <!-- 키워드 입력  -->
 
-    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 0 " @keyup.enter="onB"  placeholder="키워드를 입력해 주세요" class="keyword-input-button"></b-form-input>
-    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 1 " @keyup.enter="onC"  placeholder="키워드를 입력해 주세요" class="keyword-input-button"></b-form-input>
-    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 2 " @keyup.enter="onD"  placeholder="키워드를 입력해 주세요" class="keyword-input-button"></b-form-input>
-  
-    <b-button v-if="tryNum == 0" @click="onB" variant="outline-primary">첫번째 전송</b-button>
-    <b-button v-if="tryNum == 1" @click="onC" variant="outline-primary">두번째 전송</b-button>
-    <b-button v-if="tryNum == 2" @click="onD" variant="outline-primary">세번째 전송</b-button>
-    <b-button v-if="tryNum == 4" @click="reset">리셋</b-button>
+    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 0 " @keyup.enter="onB"  placeholder="키워드를 입력해 주세요" class="keyword-input-button" style="width : 30rem; margin : auto;"></b-form-input>
+    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 1 " @keyup.enter="onC"  placeholder="키워드를 입력해 주세요" class="keyword-input-button" style="width : 30rem; margin : auto;"></b-form-input>
+    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 2 " @keyup.enter="onD"  placeholder="키워드를 입력해 주세요" class="keyword-input-button" style="width : 30rem; margin : auto;"></b-form-input>
+    <br>
+    <b-button v-if="tryNum == 0" @click="onB"  style="margin : auto;">첫번째 전송</b-button>
+    <b-button v-if="tryNum == 1" @click="onC"  style="margin : auto;">두번째 전송</b-button>
+    <b-button v-if="tryNum == 2" @click="onD"  style="margin : auto;">세번째 전송</b-button>
+    <b-button v-if="tryNum == 4" @click="reset"  variant="danger" style="margin-top : -2rem;">리셋</b-button>
 
     <!-- if 로 첫번째, 두번째 ,세번째 키워드 넣을 수 있도록 하고, 이후에는 연관 키워드 선택하기 or 그냥 키워드 입력하기로 할 수 있도록 -->
     <transition name="fade">
@@ -32,12 +32,16 @@
     <transition name="fade">
       <div v-if="tryNum == 3">
         <div v-if="loding == 0">
+        
         <h2  class="rectitle">선택하신 키워드는 다음과 같습니다.</h2>
-        <p class="reccontent">첫번째 키워드 : {{firstKeyword}}</p>
-        <p class="reccontent">두번째 키워드 : {{secoundKeyword}}</p>
-        <p class="reccontent">세번째 키워드 : {{thirdKeyword}}</p>
-        <button v-if="tryNum == 3" @click="getMovie" >키워드 전송!</button>
-        <b-button  @click="reset">리셋</b-button>
+                
+
+        <p class="reccontent" style="margin-bottom: 1rem;">첫번째 키워드 : {{firstKeyword}}</p>
+        <p class="reccontent" style="margin-bottom: 1rem;">두번째 키워드 : {{secoundKeyword}}</p>
+        <p class="reccontent" style="margin-bottom: 1rem;">세번째 키워드 : {{thirdKeyword}}</p>
+        <b-button  @click="reset" style="margin-bottom:1rem;" variant="danger">리셋</b-button>
+        <b-button v-if="tryNum == 3" @click="getMovie" style="margin-left:2rem; margin-bottom:1rem;"  variant="success">키워드 전송!</b-button>
+        
         </div>
       </div>
     </transition>
@@ -48,14 +52,14 @@
         <hr>
         
           <div v-for="movieEl in movieList" v-bind:key="movieEl">
-            <b-container class="bv-example-row text-center" style="margin: -1.5rem;" >
-              <b-row class=" justify-content-md-center text-center" >
-                <b-col cols="1" class="d-flex align-items-center text-center rectitle">{{movieEl[0]}}</b-col>
-                <b-col cols="3" class="d-flex align-items-center text-center rectitle">{{movieEl[1]}}</b-col>
-                <b-col cols="5" class="d-flex align-items-center text-center rectitle">{{movieEl[2]}}</b-col>
-                <b-col cols="1" class="d-flex align-items-center text-center rectitle">
-                  <a v-if="movieEl[0] != '순번'" :href="movieEl[3]">  <b-button variant="outline-primary">이동</b-button></a>
-                    <p v-if="movieEl[0] == '순번'">{{movieEl[3]}}</p>
+            <b-container class="bv-example-row text-center" style="margin: -0.5rem;" >
+              <b-row   >
+                <b-col cols="1" class="reccontent" style="margin: auto;">{{movieEl[0]}}</b-col>
+                <b-col cols="4" class="reccontent" style="margin: auto;">{{movieEl[1]}}</b-col>
+                <b-col cols="5" class="reccontent" style="margin: auto;">{{movieEl[2]}}</b-col>
+                <b-col cols="1" class="reccontent" style="margin: auto;">
+                  <a v-if="movieEl[0] != '순번'" :href="movieEl[3]">  <b-button  style="margin: auto;">이동</b-button></a>
+                    <p v-if="movieEl[0] == '순번'" style="margin: auto;">{{movieEl[3]}}</p>
                   </b-col>
               </b-row>
             </b-container>
