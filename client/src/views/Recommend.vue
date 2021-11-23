@@ -11,20 +11,20 @@
     </div >
     <!-- style="width: 25rem; height: 28rem;" -->
       <div v-if="selected == null" class="d-flex justify-content-around">
-        <div class="recbox" @click="keyword">
-          <img src="..\assets\keyword.png" alt="" class="recpic">
+        <div class="recbox" @click="title">
+          <img src="..\assets\keypa.png" alt="" class="recpic2">
           <h2 class="rectitle">키워드 추천</h2>
           <div class="reccontent">
-            <h4> 3만개의 리뷰를 바탕으로 키워드에 최적화 된 영화를 추천합니다.
-            </h4>
+            <h4>선택한 키워드를 바탕으로</h4>
+            <h4> 연관된 영화를 추천합니다.</h4>
           </div>
         </div>
         <div class="recbox" @click="title">
-          <img src="..\assets\keyword.png" alt="" class="recpic">
-          <h2 class="rectitle">타이틀 추천</h2>
+          <img src="..\assets\keyword2.png" alt="" class="recpic2">
+          <h2 class="rectitle">유사도 추천</h2>
           <div class="reccontent">
-            <h4> 영화 제목의 코사인 유사도를 바탕으로 가장 비슷한 영화를 추천합니다.
-            </h4>
+            <h4> COS 유사도를 바탕으로 선택한 영화와</h4>
+            <h4>  가장 비슷한 영화를 추천합니다.</h4>
           </div>
         </div>
     </div>
@@ -54,7 +54,8 @@ export default {
   name: "Recommend",
   components: {
     RecommendDetail,
-    RecommendTitle
+    RecommendTitle,
+
   },
   data: function(){
       return {
@@ -83,26 +84,33 @@ export default {
 </script>
 
 <style>
-.recpic {
-  width: 18rem; 
-  height: 18rem;
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+.recpic2 {
+  width: 15rem; 
+  height: 15rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 .reccontent {
   margin: auto;
   color: white;
+  font-family: 'Hanna', sans-serif;
+
 }
 .rectitle {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: white;
+  font-family: 'Hanna', sans-serif;
 }
 .recbox {
   border: solid;
   border-color: white;
+  border-radius: 20px;
   width: 25rem; 
   height: 28rem;
-  background: #252525;
-  -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
-  transition:width 2s, height 2s, background-color 2s, transform 2s;
+  background: #1b1b1b;
+  opacity:0.9; 
+  padding: 0.5  rem;
 }
 .page-top-inner-wrap {
     position: relative;
