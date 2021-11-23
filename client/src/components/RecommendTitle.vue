@@ -1,9 +1,9 @@
 <template>
   <div style="background : #202020;" class="container">
-    <h1 class="rectitle">추천 타이틀 페이지 입니다.</h1>
+    <h1 class="rectitle" style="margin-top : 1rem; padding-top:1rem;">추천 타이틀 페이지 입니다.</h1>
     <div >
-    <b-form-input type="text" name="" id="" v-model.trim="titleGet" class="" @keyup.enter="titleSend"  placeholder="영화 제목을 입력해 주세요" style="width : 30rem; margin : auto;">  </b-form-input>
-    <b-button  @click="titleSend" variant="primary" class="m-2">제목 전송!</b-button>
+    <b-form-input type="text" name="" id="" v-model.trim="titleGet" class="" @keyup.enter="titleSend"  placeholder="영화 제목을 입력해 주세요" style="width : 30rem; margin : auto;  margin-bottom : 0.5rem;">  </b-form-input>
+    <b-button  @click="titleSend"  class="m-2" style="margin:auto;">제목 전송!</b-button>
     </div>
     <div class="container"   style="margin-bottom: 10rem;">
       <transition-group name="fade">
@@ -16,7 +16,7 @@
             <b-col cols="6" class="reccontent"  style="margin: auto;">{{movieEl[1]}}</b-col>
             <b-col cols="3" class="reccontent"  style="margin: auto;">{{movieEl[2]}}</b-col>
             <b-col cols="2" class="reccontent"   style="margin: auto;">
-              <a v-if="movieEl[0] != '순번'" :href="movieEl[3]" target='_blank'>  <b-button variant="outline-primary" class="reccontent">이동</b-button></a>
+              <a v-if="movieEl[0] != '순번'" :href="movieEl[3]" target='_blank'>  <b-button  class="reccontent">이동</b-button></a>
                 <p v-if="movieEl[0] == '순번'" class="reccontent">{{movieEl[3]}}</p>
             </b-col>
           </b-row>
@@ -57,6 +57,9 @@ export default {
       const Keyword = {
         titleGet: this.titleGet,
       }
+      if (Keyword.titleGet == null){
+        alert('영화제목을 입력해 주세요')
+      }else {
       if (Keyword.titleGet) {
         this.loding = 1
         axios({
@@ -74,7 +77,7 @@ export default {
             var line_score =110/(res.data.Veclist1.score[0]+res.data.Veclist1.score[1])
             var step;
             
-            for (step = 0; step < 10; step++) {
+            for (step = 0; step < 20; step++) {
               var score = res.data.Veclist1.score[step] * line_score
               Math.ceil(score)
               movie_list.push([this.number,res.data.Veclist1.title[step], `${score.toFixed(2)} %`,`https://movie.naver.com/movie/search/result.naver?query=${res.data.Veclist1.title[step]}&section=all`])
@@ -90,6 +93,7 @@ export default {
         }).catch(err=>{
           console.log(err)
         })
+      }
       }
     },
   

@@ -133,7 +133,7 @@ def title_recommend(request):
             sim_scores = list(enumerate(cosine_sim[idx]))
             sim_scores = sorted(sim_scores, key=lambda x:x[1], reverse = True) # score 순으로 정렬
 
-            sim_scores = sim_scores[1:11] # 가장 유사한 10개의 영화를 받아옴
+            sim_scores = sim_scores[1:21] # 가장 유사한 10개의 영화를 받아옴
             movie_indices = [i[0] for i in sim_scores] # 인덱스 받아오기
             
             result_df = df.iloc[movie_indices].copy()  #기존에 읽어들인 데이터에서 해당 인덱스의 값을 가져오기 스코어 열을 추가
