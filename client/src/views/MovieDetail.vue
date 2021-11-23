@@ -204,13 +204,11 @@ export default {
   margin-left: 10vw;
   margin-right: 10vw;
 }
-<<<<<<< HEAD
 .review{
   padding: 20px;
   padding-left: 30px;
   padding-right: 30px;
 }
-=======
 .swiper-button-next,
 .swiper-button-prev, 
 .swiper-container-rtl .swiper-button-prev,
@@ -222,7 +220,6 @@ export default {
 }
 
 
->>>>>>> 14d20231d6bd3d733c8802aedeea60607728b3f9
 </style>
 <style>
 .active{
@@ -236,8 +233,5 @@ export default {
 .tab-pane{
   background-color: #1b1b1b !important;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 14d20231d6bd3d733c8802aedeea60607728b3f9
 </style>
