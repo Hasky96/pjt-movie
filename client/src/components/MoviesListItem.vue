@@ -1,6 +1,6 @@
 <template>
     <b-col cols="3" class="p-2 movieContainer">
-      <div class="poster" @click="$router.push({path:`/movie/${movie.id}`})">>
+      <div class="poster" @click="$router.push({path:`/movie/${movieId}`})">
         <img :src="movie.poster_path" alt="" height="95%"  width="100%">
         <div class="movieCard">
           <b-card :title="movie.title" :sub-title="movie.release_date" style="height: 80%; overflow:hidden;">
@@ -19,7 +19,8 @@
 export default {
   name : 'MovieListItem',
   props:{
-    movie: Object
+    movie: Object,
+    movieId:Number
   },
   data:function(){
     return{
@@ -27,7 +28,6 @@ export default {
   },
   methods:{
     showDetail(){
-      this.$emit('show-detail', this.movie)
     }
   }
 }

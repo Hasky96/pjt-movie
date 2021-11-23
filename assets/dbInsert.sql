@@ -7,6 +7,6 @@ DELETE FROM movies_genre;
 DELETE FROM movies_genre_movie;
 -- 삽입되는 문장입니다.
 
-.import 파일 경로를 입력해 주세요s\\genre_movie.csv movies_genre_movie
+.import C:\\Users\\SSAFY\\Desktop\\pjt-final\\assets\\genre_movie.csv movies_genre_movie
 .import 파일 경로를 입력해 주세요\\assets\\genres.csv movies_genre
-.import 파일 경로를 입력해 주세요\\movies.csv movies_movie
+.import C:\\Users\\SSAFY\\Desktop\\pjt-final\\assets\\movies.csv movies_movie

@@ -4,7 +4,8 @@
       <b-row style="width:100%; ">
         <movies-list-item
         v-for="movie in movies" :key=movie.id
-        :movie="movie"
+        :movie="movie.fields"
+        :movieId="movie.pk"
         @show-detail="showDetail"
         >
         </movies-list-item>
@@ -18,7 +19,6 @@
 
 <script>
 import MoviesListItem from '@/components/MoviesListItem.vue'
-import {mapState} from 'vuex'
 
 export default {
   name: "MovieList",
@@ -29,14 +29,14 @@ export default {
     return {
     }
   },
+  props:{
+    movies : Array
+  },
   methods:{
     showDetail(movie){
       this.$emit('show-detail', movie)
     }
   },
-  computed:{
-    ...mapState(['movies'])
-  }
 }
 </script>
 

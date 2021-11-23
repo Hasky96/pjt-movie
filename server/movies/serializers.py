@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import ReadOnlyField
 
 from .models import Movie, Comment
 
@@ -14,8 +15,9 @@ class MovieSerializer(serializers.ModelSerializer):
     #     model = Comment
     #     fields = "__all__"
     comment_set = CommentSerializer(many=True,read_only=True)
-    
+
     class Meta:
         model = Movie
         fields = '__all__'
         read_only_fields = ('comment_set',)
+

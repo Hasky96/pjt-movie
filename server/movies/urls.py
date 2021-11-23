@@ -4,6 +4,10 @@ from . import views
 urlpatterns = [
     # 전체영화
     path('list/', views.movies),
+    # pagination
+    path('list/<int:page_num>/', views.page),
+    # pagination total page
+    path('list/totalpage/', views.totalpage),
     # 단일영화
     path('<int:movie_pk>/info/', views.movie_detail),
     # 영화 한줄평

@@ -1,19 +1,43 @@
+import json
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
+from django.core.paginator import Paginator
 from movies.serializers import CommentSerializer, MovieSerializer
 from rest_framework import status
+from django.core import serializers
+from django.db.models import Count
+import math
+
 from .models import Movie, Comment
 # Create your views here.
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def movies(request):
-    movies_list = Movie.objects.all()
+    movies_list = Movie.objects.order_by('-pk')
     serializer = MovieSerializer(movies_list, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def totalpage(request):
+    data= Movie.objects.all().aggregate(datasize=Count('id'))
+    data = {'pages': math.ceil(data.get("datasize")/8)}
+    return JsonResponse(data, safe=False)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def page(request, page_num):
+    movies_list = Movie.objects.order_by('-pk')
+    paginator = Paginator(movies_list, 8)
+    page = page_num
+    page_obj = paginator.get_page(page)
+    data = serializers.serialize('json', page_obj)
+    return HttpResponse(data, content_type='application/json')
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

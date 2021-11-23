@@ -22,11 +22,11 @@
       <div class="col-2">
         <!-- 로그인 라우터 -->
         <span v-if="isLogin">
-          <router-link class="btn fs-5 nav-font-color" @click.native="logout" to="#">Logout</router-link>
+          <router-link class="btn fs-5 nav-font-color" @click.native="logout" to="#">{{user}} Logout</router-link>
         </span>
         <span v-else>
           <button @click="$bvModal.show('modal-login')" class="btn fs-5 nav-font-color">Login</button>
-          <b-modal id=modal-login class="moda" hide-footer hide-header>
+          <b-modal centered id=modal-login class="moda" hide-footer hide-header>
             <div class="moda" id="login-modal">
               <p class="pTag">Login</p>
               <label :class="{'hovered':idHover}" class="label-id" for="username">I D : </label>
@@ -45,34 +45,36 @@
               <p @click='changeModal' class="p-signup">회원가입</p>
             </div>
           </b-modal>
-          <b-modal id=modal-signup class="moda" hide-footer hide-header>
+          <b-modal centered id=modal-signup class="moda" hide-footer hide-header>
             <div class="moda" id="login-modal">
               <p class="pTag">Signup</p>
-              <label :class="{'hovered':idHover}" class="label-id" for="username">I D : </label>
+              <label :class="{'hovered':idHover}" class="label-id" for="username2">I D : </label>
               <input v-model="credential.username" name="username" type="text"
               @mouseover="idHover=!idHover" @mouseleave="idHover=!idHover"
               >
               <br>
-              <label :class="{'hovered':pwHover}" class="label-pw" for="password">PW : </label>
-              <input v-model="credential.password" @keyup.enter="login" name="password" type="password"
+              <label :class="{'hovered':pwHover}" class="label-pw" for="password2">PW : </label>
+              <input v-model="credential.password" @keyup.enter="login" name="password2" type="password"
               @mouseover="pwHover=!pwHover" @mouseleave="pwHover=!pwHover" 
               >
               <br>
               <label :class="{'hovered':pwckHover}" class="label-pwck" for="passwordck">PWCHECK : </label>
-              <input id="pwck" v-model="credential.passwordConfirmation" @keyup.enter="login" name="passwordck" type="password"
-              @mouseover="pwckHover=!pwckHover" @mouseleave="pwckHover=!pwckHover" @keyup="checkpw"
+              <input 
+              id="pwck" 
+              v-model="credential.passwordConfirmation" 
+              name="passwordck" type="password" @mouseover="pwckHover=!pwckHover" @mouseleave="pwckHover=!pwckHover" 
+              @keyup.enter="signup"
               >
               <br>
             </div>
             <div class="btn-group">
-              <button @ class="btn-login">회원가입</button>
+              <button @click="signup" class="btn-login">회원가입</button>
             </div>
-          </b-modal>
+        </b-modal>
         </span>
       </div>
       </b-navbar>
     </div>
-    <!--  -->
     <router-view @login="isLogin=true"/>
   </div>
 </template>
@@ -93,7 +95,8 @@ export default {
         username:null,
         password:null,
         passwordConfirmation:null,
-      }
+      },
+      user: null
     }
   },
   methods:{
@@ -104,15 +107,6 @@ export default {
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
-      this.$router.push({ name: 'Login' })
-    },
-    checkpw(){
-      const pwcheckinput = document.getElementById('pwck')
-      if ((this.credential.password === this.credential.passwordConfirmation )&&this.credential.password ){
-        pwcheckinput.style.border = "2px green solid"
-      }else{
-        pwcheckinput.style.border = "2px red solid"
-      }
     },
     login(){
       axios({
@@ -122,25 +116,42 @@ export default {
       }).then(res=>{
         const jwt = res.data.token
         localStorage.setItem('jwt', jwt)
-        // this.$session.start()
-        // this.$session.set('jwt', jwt)
-        // Vue.http.headers.common['Authorization'] = `JWT ${jwt}`
-        this.$emit('login')
-        this.$router.push({ name: 'Movies' })
+        localStorage.setItem('user', this.credential.username)
+        this.user = this.credential.username
+        this.isLogin = true
         this.$bvModal.hide('modal-login')
+        alert("로그인 성공!")
+      }).catch(err=>{
+        console.log(err)
+        alert('아이디 또는 비밀번호가 틀렸습니다.')
       })
-    }
+    },
+    signup(){
+      
+      axios({
+          method: 'post',
+          url: 'http://127.0.0.1:8000/server/accounts/signup/',
+          data: this.credential
+      }).then((res)=>{
+          alert(`${res.data.username} 가입성공!`)
+          this.$bvModal.hide('modal-signup')
+          this.$bvModal.show('modal-login')
+      }).catch(err=>{
+          alert('잘못된 가입정보 입니다.')
+          console.log(err)
+      })
+    },
   },
   beforeCreate: function(){
-    axios({
-      method: 'get',
-      url: 'http://127.0.0.1:8000/server/movies/list/',
-    }).then(res=>{
-      // console.log(res)
-      this.$store.dispatch("setMovies", res.data)
-    }).catch(err=>{
-      console.log(err)
-    })
+    // axios({
+    //   method: 'get',
+    //   url: 'http://127.0.0.1:8000/server/movies/list/',
+    // }).then(res=>{
+    //   // console.log(res)
+    //   this.$store.dispatch("setMovies", res.data)
+    // }).catch(err=>{
+    //   console.log(err)
+    // })
     axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/server/community/reviews/',
@@ -152,6 +163,7 @@ export default {
   },
   created:function(){
     if (localStorage.getItem('jwt')) {
+      this.user = localStorage.getItem('user')
       this.isLogin = true
     }
     else{
@@ -229,7 +241,11 @@ export default {
   font-size: 25px;
 }
 #pwck{
+  height:35px;
   font-size: 25px;
+}
+#pwck{
+  border: none;
 }
 .btn-group{
   display: flex;
@@ -272,6 +288,9 @@ export default {
 <style>
 .modal-body{
   text-align: center;
+  background-color: #1b1b1b !important;
+}
+#modal-login___BV_modal_content_, #modal-signup___BV_modal_content_{
   background-color: #1b1b1b !important;
 }
 </style>

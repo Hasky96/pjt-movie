@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Movies from '@/views/Movies.vue'
 import Home from '@/views/Home.vue'
 import Review from '@/views/Review.vue'
-import Login from '@/views/Login.vue'
 import Recommend from '@/views/Recommend.vue'
 import ReviewCreate from '@/views/ReviewCreate.vue'
 import ReviewDetail from '@/views/ReviewDetail.vue'
@@ -31,11 +30,7 @@ const routes = [
     name: 'Review',
     component: Review
   },
-  {
-    path: '/login/',
-    name: 'Login',
-    component: Login
-  },
+
   {
     path: '/recommend/',
     name: 'Recommend',

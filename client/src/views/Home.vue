@@ -5,17 +5,17 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: "Home",
   methods:{
+  },
+  computed:{
+    ...mapState(['movies'])
   },
 }
 </script>
 
 <style scoped>
-  #d{
-    background : url('../../imgs/mini.gif');
-    background-size: cover;
-    height: 500px;
-  }
 </style>
