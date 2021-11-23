@@ -11,29 +11,28 @@
       <p id="contentTag">{{movie.overview}}</p>
     </section>
     <section class="recommendTag">
-      <!-- 추천 시스 -->
-      <div >
-        <br>
-      <h2 style="margin-top : 2rem;">추천 영화</h2>
-      <div class="container" style="margin-top : 2rem">
-           <swiper class="swiper" :options="swiperOption">
-             <!-- div로 감싸고, 크기 조절하면 될 듯 -->
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[0]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[0] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[1]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[1] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[2]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[2] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[3]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[3] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[4]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[4] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[5]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[5] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[6]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[6] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[7]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[7] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[8]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[8] }}</p> <br></div></swiper-slide>
-            <swiper-slide ><div style=" margin :0rem 0.5rem;"><img :src="this.movieList.pp[9]" alt="" style="width: 15rem; height: 18rem;"><p class="recplat" style="width: 15rem;">{{ this.movieList.title[9] }}</p> <br></div></swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-            <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div>
-          </swiper>
+            <div >
+          <br>
+          <h2 style="margin-top : 2rem;">추천 영화</h2>
+          <div class="container" style="margin-top : 2rem">
+              <swiper class="swiper" :options="swiperOption">
+                <!-- div로 감싸고, 크기 조절하면 될 듯 -->
+                <swiper-slide  v-for="movies in movieList" :key="movies.id">
+                  
+                  <div style=" margin :0rem 0.5rem;">
+                      <img :src="movies[1]" alt="" style="width: 15rem; height: 18rem;"> 
+                    <h5 class="recplat" style="width: 15rem;  padding : 0.5rem 0rem;">{{ movies[0] }}</h5> 
+                  <br>
+                </div>
+               
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
+              </swiper>
+          </div>
         </div>
-        </div>
+
     </section>
     <section class="community">
       <nav>
@@ -63,15 +62,23 @@
 import axios from 'axios'
 import MovieComment from '@/components/MovieComment.vue'
 import ReviewList from '@/components/ReviewList.vue'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 
 export default {
   components: { 
     MovieComment,
-    ReviewList 
+    ReviewList,
+        swiper,
+    swiperSlide,
+
+
   },
   name: 'MovieDetail',
   data:function(){
     return {
+      model: null,
       movie: {},
       movieList : null,
       number : 1,
@@ -90,6 +97,7 @@ export default {
             prevEl: '.swiper-button-prev'
           }
         }
+
       
     }
   },
@@ -113,7 +121,15 @@ export default {
               url: `http://127.0.0.1:8000/server/recommend/${res.data.id}/detail/`,
               headers: this.setToken(),
               }).then(res=>{
+                console.log(res)
                 this.movieList = res.data
+                const movie_list = []
+                var step;
+                for (step = 0; step < 10; step++) {
+                  movie_list.push([res.data.title[step], res.data.pp[step],`http://localhost:8080/movie/${res.data.pk[step]}`])
+                } 
+                this.movieList = movie_list
+                console.log(movie_list)
               }).catch(err=>{
                 console.log(err)
               })
@@ -126,6 +142,7 @@ export default {
 </script>
 
 <style scoped>
+  @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 #template{
   position: relative;
 }
@@ -216,7 +233,10 @@ export default {
     fill: #000;
 }
 .recplat {
-  background: #808080;
+  background-color:#808080 !important;
+  color:#1b1b1b !important;
+
+font-family: 'Hanna', sans-serif;
 }
 
 
@@ -234,4 +254,27 @@ export default {
   background-color: #1b1b1b !important;
 }
 
+.swiper-pagination-bullet-active {
+  background-color: #000;
+}
+</style>
+<style lang="scss" scoped>
+ .swiper-button-next, .swiper-container-rtl .swiper-button-prev .swiper-button-prev {
+filter : hue-rotate(180deg) brightness(200%) contrast(10%);
+fill: white;
+--swiper-theme-color: #ffffff;
+}
+ .swiper-button-prev , .swiper-container-rtl .swiper-button-prev .swiper-button-prev {
+filter : hue-rotate(180deg) brightness(200%) contrast(10%);
+fill: white;
+--swiper-theme-color: #ffffff;
+}
+.swiper-pagination-bullet {
+    opacity: 1;
+    border: white solid 1px;
+    background-color: transparent;
+}
+.swiper-pagination-bullet-active {
+  background-color: #000;
+}
 </style>

@@ -1,10 +1,12 @@
 <template>
-  <div style="background : white;">
+  <div style="background : #202020;" class="container">
     <h1>키워드 추천 페이지 입니다!</h1>
     <!-- 키워드 입력  -->
-    <input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 0 " @keyup.enter="onB">
-    <input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 1 " @keyup.enter="onC">
-    <input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 2 " @keyup.enter="onD">
+
+    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 0 " @keyup.enter="onB"  placeholder="키워드를 입력해 주세요" class="keyword-input-button"></b-form-input>
+    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 1 " @keyup.enter="onC"  placeholder="키워드를 입력해 주세요" class="keyword-input-button"></b-form-input>
+    <b-form-input  type="text" name="" id="" v-model.trim="inputKeyword" v-if="tryNum == 2 " @keyup.enter="onD"  placeholder="키워드를 입력해 주세요" class="keyword-input-button"></b-form-input>
+  
     <b-button v-if="tryNum == 0" @click="onB" variant="outline-primary">첫번째 전송</b-button>
     <b-button v-if="tryNum == 1" @click="onC" variant="outline-primary">두번째 전송</b-button>
     <b-button v-if="tryNum == 2" @click="onD" variant="outline-primary">세번째 전송</b-button>
@@ -13,7 +15,7 @@
     <!-- if 로 첫번째, 두번째 ,세번째 키워드 넣을 수 있도록 하고, 이후에는 연관 키워드 선택하기 or 그냥 키워드 입력하기로 할 수 있도록 -->
     <transition name="fade">
       <div v-if="tryNum == 1">
-        <h2>첫번째 키워드 {{ firstKeyword }}에 대한 연관 키워드 입니다.</h2>
+        <h2  class="rectitle">첫번째 키워드 {{ firstKeyword }}에 대한 연관 키워드 입니다.</h2>
         <div v-for="vec in firstData" :key="vec.id">
             <p>{{vec}}</p>
         </div>
@@ -21,20 +23,20 @@
     </transition>
     <transition name="fade">
       <div v-if="tryNum == 2">
-        <h2>두번째 키워드 {{ secoundKeyword }}에 대한 연관 키워드 입니다.</h2>
+        <h2 class="rectitle">두번째 키워드 {{ secoundKeyword }}에 대한 연관 키워드 입니다.</h2>
         <p v-for="vec in secoundData" :key="vec.id">
             <a href="" >{{vec}}</a>
           </p>
       </div>
-    </transition>
+    </transition> 
     <transition name="fade">
       <div v-if="tryNum == 3">
         <div v-if="loding == 0">
-        <h2>선택하신 키워드는 다음과 같습니다.</h2>
-        <p>첫번째 키워드 : {{firstKeyword}}</p>
-        <p>두번째 키워드 : {{secoundKeyword}}</p>
-        <p>세번째 키워드 : {{thirdKeyword}}</p>
-        <button v-if="tryNum == 3" @click="getMovie">키워드 전송!</button>
+        <h2  class="rectitle">선택하신 키워드는 다음과 같습니다.</h2>
+        <p class="reccontent">첫번째 키워드 : {{firstKeyword}}</p>
+        <p class="reccontent">두번째 키워드 : {{secoundKeyword}}</p>
+        <p class="reccontent">세번째 키워드 : {{thirdKeyword}}</p>
+        <button v-if="tryNum == 3" @click="getMovie" >키워드 전송!</button>
         <b-button  @click="reset">리셋</b-button>
         </div>
       </div>
@@ -46,12 +48,12 @@
         <hr>
         
           <div v-for="movieEl in movieList" v-bind:key="movieEl">
-            <b-container class="bv-example-row text-center" >
+            <b-container class="bv-example-row text-center" style="margin: -1.5rem;" >
               <b-row class=" justify-content-md-center text-center" >
-                <b-col cols="1" class="d-flex align-items-center text-center">{{movieEl[0]}}</b-col>
-                <b-col cols="4" class="d-flex align-items-center text-center">{{movieEl[1]}}</b-col>
-                <b-col cols="5" class="d-flex align-items-center text-center">{{movieEl[2]}}</b-col>
-                <b-col cols="1" class="d-flex align-items-center text-center">
+                <b-col cols="1" class="d-flex align-items-center text-center rectitle">{{movieEl[0]}}</b-col>
+                <b-col cols="3" class="d-flex align-items-center text-center rectitle">{{movieEl[1]}}</b-col>
+                <b-col cols="5" class="d-flex align-items-center text-center rectitle">{{movieEl[2]}}</b-col>
+                <b-col cols="1" class="d-flex align-items-center text-center rectitle">
                   <a v-if="movieEl[0] != '순번'" :href="movieEl[3]">  <b-button variant="outline-primary">이동</b-button></a>
                     <p v-if="movieEl[0] == '순번'">{{movieEl[3]}}</p>
                   </b-col>
@@ -250,6 +252,7 @@ export default {
 </script>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 .fade-enter {
   opacity: 0;
 }
@@ -263,5 +266,19 @@ export default {
    opacity: 0;
 
 }
+.keyword-input-button {
+  height: 2rem;
+  width: 10rem;
+}
+.reccontent {
+  margin: auto;
+  color: black;
+  font-family: 'Hanna', sans-serif;
 
+}
+.rectitle {
+  margin-bottom: 1rem;
+  color: black;
+  font-family: 'Hanna', sans-serif;
+}
 </style>
