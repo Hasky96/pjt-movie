@@ -1,9 +1,9 @@
 <template>
   <b-row @click="$router.push({path:`/review/${review.id}`})" class="review">
-    <b-col cols="1">{{review.user.username}}</b-col>
+    <b-col cols="2">{{review.user.username}}</b-col>
     <b-col cols="6">{{review.title}}</b-col>
     <b-col cols="3">{{review.created_at| moment("from", "now")}}</b-col>
-    <b-col cols="2">{{review.like_users|count}}</b-col>
+    <b-col cols="1">{{review.like_users|count}}</b-col>
   </b-row>
 </template>
 
@@ -22,6 +22,10 @@ export default {
 </script>
 
 <style scoped>
+.review{
+  background:#1b1b1b;
+  color: #808080;
+}
 .review:hover{
   border: #eff solid 1px;
   background: #eee;

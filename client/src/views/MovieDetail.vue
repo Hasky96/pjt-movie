@@ -44,28 +44,30 @@
       </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active oneline" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
-            <movie-comment></movie-comment>
+            <movie-comment
+            :comments="movie.comment_set"
+            >
+            </movie-comment>
           </div>
           <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            
+            <review-list class="review"
+            :movieId="movie.id"
+            ></review-list>
           </div>
         </div>
     </section>
-{{movie}}
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import MovieComment from '@/components/MovieComment.vue'
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import ReviewList from '@/components/ReviewList.vue'
 
 export default {
   components: { 
     MovieComment,
-    swiper,
-    swiperSlide,
+    ReviewList 
   },
   name: 'MovieDetail',
   data:function(){
@@ -129,7 +131,7 @@ export default {
 }
 .imgSection{
   height: 40vw;
-  margin-top: 3em;
+  margin-top: 0.5em;
   background:black;
 }
 #imgTag{
@@ -193,6 +195,7 @@ export default {
   margin-top: 3em;
   margin-left: 10vw;
   margin-right: 10vw;
+  background-color:#1b1b1b;
 }
 .recommendTag{
    /* 임시 어딘지 보라고 넣어논 border */
@@ -201,6 +204,13 @@ export default {
   margin-left: 10vw;
   margin-right: 10vw;
 }
+<<<<<<< HEAD
+.review{
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+=======
 .swiper-button-next,
 .swiper-button-prev, 
 .swiper-container-rtl .swiper-button-prev,
@@ -212,6 +222,7 @@ export default {
 }
 
 
+>>>>>>> 14d20231d6bd3d733c8802aedeea60607728b3f9
 </style>
 <style>
 .active{
@@ -219,7 +230,14 @@ export default {
   color:#1b1b1b !important;
 }
 #nav-comment-tab, #nav-review-tab{
-  color: #808080;;
+  color: #808080;
+  text-align: center  !important;
 }
+.tab-pane{
+  background-color: #1b1b1b !important;
+}
+<<<<<<< HEAD
+=======
 
+>>>>>>> 14d20231d6bd3d733c8802aedeea60607728b3f9
 </style>
