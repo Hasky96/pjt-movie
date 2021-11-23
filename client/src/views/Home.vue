@@ -1,21 +1,15 @@
 <template>
-  <div id="d">
-    <h1 class="text-light">Welcome Home</h1>
-  </div>
+  <hello-world />
 </template>
 
 <script>
-export default {
-  name: "Home",
-  methods:{
-  },
-}
-</script>
+  import HelloWorld from '../components/HelloWorld'
 
-<style scoped>
-  #d{
-    background : url('../../imgs/mini.gif');
-    background-size: cover;
-    height: 500px;
+  export default {
+    name: 'Home',
+
+    components: {
+      HelloWorld,
+    },
   }
-</style>
+</script>

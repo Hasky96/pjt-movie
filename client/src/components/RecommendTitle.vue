@@ -1,22 +1,23 @@
 <template>
-  <div style="background : white;">
-    <h1>추천 타이틀 페이지 입니다.</h1>
-    <input type="text" name="" id="" v-model.trim="titleGet" class="mt-4" @keyup.enter="titleSend">  
+  <div style="background : #202020;" class="container">
+    <h1 class="rectitle">추천 타이틀 페이지 입니다.</h1>
+    <div >
+    <b-form-input type="text" name="" id="" v-model.trim="titleGet" class="" @keyup.enter="titleSend"  placeholder="영화 제목을 입력해 주세요" style="width : 30rem; margin : auto;">  </b-form-input>
     <b-button  @click="titleSend" variant="primary" class="m-2">제목 전송!</b-button>
-  
+    </div>
     <div class="container" >
       <transition-group name="fade">
       <div v-for="movieEl in movieList" :key="movieEl">
-        <b-container class="bv-example-row text-center" >
+        <b-container class="bv-example-row text-center" style="margin: -1.5rem;" >
           <b-row>
             <b-col cols="1">
-              <p class="">{{movieEl[0]}}</p>
+              <p class="reccontent">{{movieEl[0]}}</p>
             </b-col>
-            <b-col cols="6">{{movieEl[1]}}</b-col>
-            <b-col cols="3">{{movieEl[2]}}</b-col>
-            <b-col cols="2">
-              <a v-if="movieEl[0] != '순번'" :href="movieEl[3]">  <b-button variant="outline-primary">이동</b-button></a>
-                <p v-if="movieEl[0] == '순번'">{{movieEl[3]}}</p>
+            <b-col cols="6" class="reccontent">{{movieEl[1]}}</b-col>
+            <b-col cols="3" class="reccontent">{{movieEl[2]}}</b-col>
+            <b-col cols="2" class="reccontent">
+              <a v-if="movieEl[0] != '순번'" :href="movieEl[3]" target='_blank'>  <b-button variant="outline-primary" class="reccontent">이동</b-button></a>
+                <p v-if="movieEl[0] == '순번'" class="reccontent">{{movieEl[3]}}</p>
             </b-col>
           </b-row>
         </b-container>
@@ -97,17 +98,30 @@ export default {
 </script>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 .fade-enter {
   opacity: 0;
 }
 .fade-enter-active{
   transition: opacity 1s ease-in;
+
   }
 .fade-leave-active {
   transition: opacity 0.2s ease-out;
 }
 .fade-leave-to {
    opacity: 0;
+}
+.reccontent {
+  margin: auto;
+  color: gray;
+  font-family: 'Hanna', sans-serif;
 
 }
+.rectitle {
+  margin-bottom: 1rem;
+  color: gray;
+  font-family: 'Hanna', sans-serif;
+}
+
 </style>

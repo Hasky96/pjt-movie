@@ -2,47 +2,61 @@
   <div>
     <div class="page-top">
       <div class="page-top-inner-wrap">
-        <h2 class="page-title">추천 시스템</h2>
+        <h2 class="page-title recalltitle">추천 시스템</h2>
       </div>
     </div>
   <div class="mt-5 container ">
       
       <hr>
     </div >
-    <!-- style="width: 25rem; height: 28rem;" -->
-      <div v-if="selected == null" class="d-flex justify-content-around">
-        <div class="recbox" @click="title">
-          <img src="..\assets\keypa.png" alt="" class="recpic2">
-          <h2 class="rectitle">키워드 추천</h2>
-          <div class="reccontent">
-            <h4>선택한 키워드를 바탕으로</h4>
-            <h4> 연관된 영화를 추천합니다.</h4>
+      <transition name="fade">
+      <div v-if="selected == null" class="d-flex justify-content-center">
+        <a href="#"  @click="keyword" style="text-decoration:none; margin-right: 10rem;">
+          <div class="recbox">
+            <img src="..\assets\keypa.png" alt="" class="recpic2">
+            <h2 class="rectitle">키워드 추천</h2>
+            <div class="reccontent">
+              <h4>선택한 키워드를 바탕으로</h4>
+              <h4> 연관된 영화를 추천합니다.</h4>
+            </div>
           </div>
-        </div>
-        <div class="recbox" @click="title">
-          <img src="..\assets\keyword2.png" alt="" class="recpic2">
-          <h2 class="rectitle">유사도 추천</h2>
-          <div class="reccontent">
-            <h4> COS 유사도를 바탕으로 선택한 영화와</h4>
-            <h4>  가장 비슷한 영화를 추천합니다.</h4>
+        </a>
+        <a href="#"  @click="keyword" style="text-decoration:none margin-left: 2rem;">
+          <div class="recbox" @click="title">
+            <img src="..\assets\keyword2.png" alt="" class="recpic2">
+            <h2 class="rectitle">유사도 추천</h2>
+            <div class="reccontent">
+              <h4> COS 유사도를 바탕으로 선택한 영화와</h4>
+              <h4>  가장 비슷한 영화를 추천합니다.</h4>
+            </div>
           </div>
-        </div>
+        </a>
     </div>
+    </transition>
+    <transition name="fade">
     <div v-if="selected == 1">
+      
       <div  class="d-flex justify-content-center">
       <b-button @click="keyword" class="m-3 mt-0 mb-2">키워드 추천</b-button>
       <b-button @click="title" class="m-3 mt-0 mb-2">타이틀 추천</b-button>
       </div>
-      <recommend-detail></recommend-detail>
+      <transition name="fade">
+              <recommend-detail></recommend-detail>
+      </transition>
     </div>
+    </transition>
+    <transition name="fade">
     <div v-if="selected == 2">
+      
       <div class="d-flex justify-content-center">
       <b-button @click="keyword" class="m-3 mt-0 mb-2">키워드 추천</b-button>
       <b-button @click="title" class="m-3 mt-0 mb-2">타이틀 추천</b-button>
-
       </div>
+      <transition name="fade">
       <recommend-title></recommend-title>
+      </transition>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -85,6 +99,19 @@ export default {
 
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: opacity 1s ease-in;
+  }
+.fade-leave-active {
+  transition: opacity 0s ease-out;
+}
+.fade-leave-to {
+   opacity: 0;
+
+}
 .recpic2 {
   width: 15rem; 
   height: 15rem;
@@ -102,6 +129,7 @@ export default {
   color: white;
   font-family: 'Hanna', sans-serif;
 }
+
 .recbox {
   border: solid;
   border-color: white;
@@ -119,9 +147,10 @@ export default {
     text-align: left;
 }
 .page-title {
-    font-size: 24px;
+    font-size: 3rem;
     line-height: 36px;
     color: rgb(255, 255, 255);
+    font-family: 'Hanna', sans-serif;
     font-weight: 400;
 }
 .page-top {
