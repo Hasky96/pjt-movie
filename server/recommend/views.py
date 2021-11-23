@@ -20,6 +20,7 @@ from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
+import random
 # Word2Vec 모델 불러오기
 embedding_model = gensim.models.Word2Vec.load('recommend\word2VecModel')
 
@@ -156,7 +157,6 @@ def title_recommend(request):
 @api_view(['POST'])
 def catch_data(request):
     try:
-        print('들어옴')
         a = request.data.get('movieList')
         movie = get_object_or_404(Movie, title=a)
         print(movie)
@@ -176,7 +176,7 @@ def detail_recommend(request,movie_pk):
     genres = movie.genre.all()
     print(genres)
     data = Movie.objects.filter(genre__in = genres).order_by('-vote_count').distinct()
-    data = data[:10]
+    data = data[10:20]
     title = []
     overview = []
     pp = []
