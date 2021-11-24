@@ -106,7 +106,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 .fade-enter {
   opacity: 0;
@@ -123,13 +123,13 @@ export default {
 }
 .reccontent {
   margin: auto;
-  color: gray;
+  color: #dddddd;
   font-family: 'Hanna', sans-serif;
 
 }
 .rectitle {
   margin-bottom: 1rem;
-  color: gray;
+  color: #dddddd;
   font-family: 'Hanna', sans-serif;
 }
 

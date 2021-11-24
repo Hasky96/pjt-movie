@@ -1,4 +1,5 @@
 <template>
+<div>
 <div class="container">
   <div class="page-top">
       <div class="page-top-inner-wrap text-center">
@@ -57,13 +58,21 @@
     <b-button @click="create" >작성하기</b-button>
   </div>
   </div>
+<footer style="margin-top : 20rem; paddint-bottom : 5rem;">
+     <fotter></fotter>
+    </footer>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Fotter from '../components/fotter.vue'
 
 export default {
   name: 'ReviewCreate',
+  components : {
+    Fotter
+  },
   data:function(){
     return {
       searchList: null,
@@ -212,6 +221,12 @@ export default {
 .rate > label:hover ~ input:checked ~ label {
   color: gold;
 }
+.ft-logo {
+  margin :auto;
+  margin-top: 1rem;
+  width: 4rem;
+}
+
 
 
 </style>
