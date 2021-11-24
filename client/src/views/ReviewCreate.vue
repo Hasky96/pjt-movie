@@ -1,43 +1,61 @@
 <template>
-  <div>
-    <label for="reviewTitle">글 제목 : </label>
-    <input v-model="title" name="reviewTitle" type="text"><br>
-    <label for="movieTitle">영화제목 : </label>
-    <input type="text"  @click="$bvModal.show('modal-movie')" name="movieTitle" :value='movieTitle' readonly> 
-    <b-button v-b-modal.modal-movie>영화검색</b-button>
-    <b-modal id=modal-movie ok-title="확인" ok-only>
-      <div>
-        <input type="text" v-model="search" placeholder="영화제목을 입력하세요" style="width: 100%">
-        <section style="overflow: auto; height: 500px;">
-          <div class="movieItem p-2" v-for="movie in searchList" :key="movie.id" @click="setSearch(movie.id, movie.title)">
-            <img :src="movie.poster_path" height="100px" alt="">
-            <section class="sec1">
-              <p class="fs-5">{{movie.title}}</p> 
-              <p style="text-align: end;">개봉일{{movie.release_date}}</p>
-            </section>
-          </div>
-        </section>
-      </div>
-    </b-modal>
-    <div>
-      <div class="rate">
-        <input v-model="rankString" type="radio" id="star5" name="rate" value="5" />
-        <label  for="star5" title="text">5 stars</label>
-        <input v-model="rankString" type="radio" id="star4" name="rate" value="4" />
-        <label for="star4" title="text">4 stars</label>
-        <input v-model="rankString" type="radio" id="star3" name="rate" value="3" checked/>
-        <label for="star3" title="text">3 stars</label>
-        <input v-model="rankString" type="radio" id="star2" name="rate" value="2" />
-        <label for="star2" title="text">2 stars</label>
-        <input v-model="rankString" type="radio" id="star1" name="rate" value="1" />
-        <label for="star1" title="text">1 star</label>
+<div class="container">
+  <div class="page-top">
+      <div class="page-top-inner-wrap text-center">
+        <h2 class="page-title recalltitle">새로운 리뷰</h2>
       </div>
     </div>
-    <label for="reviewContent">content : </label>
-    <textarea v-model="content" 
+  <div>
+    <label for="reviewTitle"> </label>
+    <b-input v-model="title" name="reviewTitle" type="text" placeholder="제목을 입력해 주세요"></b-input>
+      <br>
+    
+    <div class="d-flex justify-content-between">
+      <div>
+      <label for="movieTitle"></label>
+      <input type="text"  @click="$bvModal.show('modal-movie')" name="movieTitle" :value='movieTitle' readonly placeholder="영화를 검색해 주세요"> 
+      <b-button v-b-modal.modal-movie>영화검색</b-button>
+      <b-modal id=modal-movie ok-title="확인" ok-only>
+        <div>
+          <input type="text" v-model="search" placeholder="영화제목을 입력하세요" style="width: 100%">
+          <section style="overflow: auto; height: 500px;">
+            <div class="movieItem p-2" v-for="movie in searchList" :key="movie.id" @click="setSearch(movie.id, movie.title)">
+              <img :src="movie.poster_path" height="100px" alt="">
+              <section class="sec1">
+                <p class="fs-5">{{movie.title}}</p> 
+                <p style="text-align: end;">개봉일{{movie.release_date}}</p>
+              </section>
+            </div>
+          </section>
+        </div>
+      </b-modal>
+      </div>
+      <div style="margin-right : 10rem;">
+        <p style="margin-bottom : -1rem;">당신이 생각하는 영화 별점은?</p>
+        <div class="rate">
+          <input v-model="rankString" type="radio" id="star5" name="rate" value="5" />
+          <label  for="star5" title="text">5 stars</label>
+          <input v-model="rankString" type="radio" id="star4" name="rate" value="4" />
+          <label for="star4" title="text">4 stars</label>
+          <input v-model="rankString" type="radio" id="star3" name="rate" value="3" checked/>
+          <label for="star3" title="text">3 stars</label>
+          <input v-model="rankString" type="radio" id="star2" name="rate" value="2" />
+          <label for="star2" title="text">2 stars</label>
+          <input v-model="rankString" type="radio" id="star1" name="rate" value="1" />
+          <label for="star1" title="text">1 star</label>
+        </div>
+      </div>
+
+    </div>
+    
+    <label for="reviewContent"></label>
+    <b-textarea v-model="content" 
     style="resize:none"
-    name="reviewContent" type="textarea" cols="50" rows="10"/>
-    <button @click="create">작성하기</button>
+    name="reviewContent" type="textarea" cols="50" rows="10" placeholder="리뷰를 입력해 주세요"></b-textarea>
+    <br>
+    <b-button @click="create" >취소</b-button>
+    <b-button @click="create" >작성하기</b-button>
+  </div>
   </div>
 </template>
 

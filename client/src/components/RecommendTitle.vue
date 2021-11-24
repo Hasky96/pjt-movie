@@ -1,11 +1,16 @@
 <template>
-  <div style="background : #202020;" class="container">
+  <div class="container">
     <h1 class="rectitle" style="margin-top : 1rem; padding-top:1rem;">추천 타이틀 페이지 입니다.</h1>
     <div >
     <b-form-input type="text" name="" id="" v-model.trim="titleGet" class="" @keyup.enter="titleSend"  placeholder="영화 제목을 입력해 주세요" style="width : 30rem; margin : auto;  margin-bottom : 0.5rem;">  </b-form-input>
     <b-button  @click="titleSend"  class="m-2" style="margin:auto;">제목 전송!</b-button>
     </div>
-    <div class="container"   style="margin-bottom: 10rem;">
+
+    <span style="font-size: 20px; color: rgb(164,219,214);font-family: 'Hanna', sans-serif;margin: 10px;">
+            영화정보는 네이버에 검색된 결과가 나옵니다.
+          </span>
+    <br>
+    <div class="container"   style="margin-bottom: 10rem; margin-top: 2.5rem;">
       <transition-group name="fade">
       <div v-for="movieEl in movieList" :key="movieEl">
         <b-container class="bv-example-row text-center" style="margin: -0.5rem;" >
