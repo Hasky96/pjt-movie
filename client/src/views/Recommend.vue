@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-div">
     <div class="page-top">
       <div class="page-top-inner-wrap text-center">
         <h2 class="page-title ">추천 시스템</h2>
@@ -96,8 +96,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
+}
 .fade-enter {
   opacity: 0;
 }

@@ -1,5 +1,5 @@
 <template>
-<div >
+<div class="main-div">
   <div class="page container grayborder" style="margin : auto; margin-bottom : 10rem;">
     <header class="hea grayborder">
       <p id="back"  style="margin-top : 1rem;" >리뷰></p>
@@ -112,6 +112,11 @@ export default {
 </script>
 
 <style scoped>
+.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
+}
 div{
   margin : 0px
 }

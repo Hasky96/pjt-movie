@@ -158,6 +158,11 @@ export default {
 </script>
 
 <style scoped>
+.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
+}
 .sec1{
   display: inline-block; 
   height: 100%;
