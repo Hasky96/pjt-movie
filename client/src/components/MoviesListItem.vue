@@ -1,5 +1,5 @@
 <template>
-    <b-col cols="3" class="p-2 movieContainer" >
+    <div class="col-sm-3 p-2 movieContainer" >
       <div class="poster-movie" @click="$router.push({path:`/movie/${movieId}/`})">
         <div class="imgDiv">
           <img class="imgTag" :class="{'imgTag-hover':ishover}" :src="movie.poster_path" alt="" width="100%">
@@ -10,7 +10,7 @@
           <p class="vote"><i class="fas fa-star starTag"/> {{movie.vote_average}}</p>
         </div>
       </div>
-    </b-col >
+    </div >
 </template>
 
 <script>
@@ -32,29 +32,26 @@ export default {
 
 <style scoped>
 .movieContent{
-  padding: 30px;
-  text-align: left;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  text-align: left;
   color: white;
   opacity: 0%;
+  width: 100%;
+  height: 100%;
   z-index: 2;
+  top: 0px;
+  padding: 30px;
 }
 .movieContent:hover{
   transition-duration: 1s;
   opacity: 100%;
 }
 .movieContainer{
-  position: relative;
-  padding-bottom: 0px !important;
+  height: 100%;
 }
 .poster-movie{
   position: relative;
   background-color: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100%;
   padding: 0px;
@@ -63,13 +60,14 @@ export default {
   vertical-align: middle;
 }
 .imgDiv{
-  max-height: 100%;
+  height: 100%;
 }
 .imgTag-hover{
   opacity: 20%;
   transition-duration: 0.5s;
 }
 .imgTag{
+  height: 80%;
   display: block;
   margin: auto;
 }

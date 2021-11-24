@@ -100,10 +100,11 @@ export default {
   border: red dashed 1px;
   margin-left: 10vw;
   margin-right:10vw;
-  height: 80vh;
+  height: 80%;
 }
 .searchTab{
-   border: blue dashed 1px;
+  width: 100%;
+  border: blue dashed 1px;
   text-align: center;
   padding: 5px;
   height: 7%;
