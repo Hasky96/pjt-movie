@@ -1,19 +1,20 @@
 <template>
-  <div style="width:100%;">
-    <b-container v-if="movies" style="width:100%;">
-      <b-row style="width:100%; ">
-        <movies-list-item
+<div>
+    <div class="container-sm" v-if="movies" style="height: 100%;">
+      <div class="row" style="height: 30vh;">
+        <movies-list-item style="height: 100%;"
         v-for="movie in movies" :key=movie.id
         :movie="movie.fields"
         :movieId="movie.pk"
         >
         </movies-list-item>
-      </b-row>
-    </b-container>
+      </div>
+    </div>
     <section v-else>
       <h3>아직 영화정보가 없습니다.</h3>
     </section>
   </div>
+
 </template>
 
 <script>
@@ -37,5 +38,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -1,18 +1,16 @@
 <template>
-    <b-col cols="3" class="p-2 movieContainer">
-      <div class="poster" @click="$router.push({path:`/movie/${movieId}/`})">
-        <img :src="movie.poster_path" alt="" height="95%"  width="100%">
-        <div class="movieCard">
-          <b-card :title="movie.title" :sub-title="movie.release_date" style="height: 80%; overflow:hidden;">
-            <b-card-text>
-              
-            </b-card-text>
-            <b-card-text>★ : {{movie.vote_average}}</b-card-text>
-          </b-card>
+    <div class="col-sm-3 p-2 movieContainer" >
+      <div class="poster-movie" @click="$router.push({path:`/movie/${movieId}/`})">
+        <div class="imgDiv">
+          <img class="imgTag" :class="{'imgTag-hover':ishover}" :src="movie.poster_path" alt="">
+        </div>
+        <div class="movieContent" @mouseover="ishover=true" @mouseleave="ishover=false">
+          <h4 class="fw-bold">{{movie.title}}</h4>
+          <p>{{movie.release_date}}</p>
+          <p class="vote"><i class="fas fa-star starTag"/> {{movie.vote_average}}</p>
         </div>
       </div>
-     
-    </b-col >
+    </div >
 </template>
 
 <script>
@@ -22,40 +20,63 @@ export default {
     movie: Object,
     movieId:Number
   },
-  data:function(){
+  data(){
     return{
+      ishover: false
     }
   },
   methods:{
-    showDetail(){
-    }
   }
 }
 </script>
 
 <style scoped>
-.movieCard{
+.movieContent{
   position: absolute;
-  height: 80%;
-  top: 0px;
-  z-index: -1;
-  padding-top: 1em;
-  padding-right: 1em;
-  width: 100%;
-}
-.movieContainer{
-  position: relative;
-  padding-bottom: 0px !important;
-}
-.poster{
-  padding: 0px;
-  margin: 0px;
+  top: 0;
+  text-align: left;
+  color: white;
+  opacity: 0%;
   width: 100%;
   height: 100%;
+  z-index: 2;
+  padding: 30px;
 }
-.poster>img:hover{
-  opacity: 0;
+.movieContent:hover{
+  transition-duration: 1s;
+  opacity: 100%;
 }
-
+.movieContainer{
+  height: 100%;
+}
+.poster-movie{
+  position: relative;
+  background-color: black;
+  align-items: center;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.imgDiv{
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+}
+.imgTag-hover{
+  opacity: 20%;
+  transition-duration: 0.5s;
+}
+.imgTag{
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+}
+.starTag{
+  color: gold;
+  font-size: 30px;
+}
+.vote{
+  font-size: 30px;
+}
 
 </style>

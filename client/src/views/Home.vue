@@ -131,11 +131,6 @@ export default {
 
 <style scoped>
 
-.main-div{
-  margin-left: 10vw;
-  margin-right:10vw;
-  height: 80vh;
-}
 .slot {
   margin : 5rem 0rem;
 }

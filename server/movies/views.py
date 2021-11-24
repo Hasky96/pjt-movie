@@ -43,11 +43,14 @@ def page(request, page_num):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def search(request):
+def search(request, page_num):
     keyword = request.GET.get('keyword')
     movies_list = Movie.objects.filter(title__icontains=keyword)
-    serializer = MovieSerializer(movies_list, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    paginator = Paginator(movies_list, 8)
+    page = page_num
+    page_obj = paginator.get_page(page)
+    data = serializers.serialize('json', page_obj)
+    return HttpResponse(data, content_type='application/json')
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
