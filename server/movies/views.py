@@ -78,3 +78,15 @@ def like_comment(request,movie_pk,comment_pk):
         # 'count' : count
     }
     return Response(context, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def slot_search(request):
+    print('슬롯용 주소 들어옴')
+    keyword =  request.data.get('target')
+    movie_list = Movie.objects.filter(pk__in=keyword)
+    serializer = MovieSerializer(movie_list, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+    

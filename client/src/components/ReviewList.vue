@@ -101,7 +101,6 @@ export default {
 
 <style scoped>
 .container{
-  background-color: #202020;
   color: #808080;
 }
 .tableHeader{
@@ -119,7 +118,7 @@ export default {
   color: red
 }
 .group{
-  background-color: #202020;
+  background-color: #1b1b1b;
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: -10px;

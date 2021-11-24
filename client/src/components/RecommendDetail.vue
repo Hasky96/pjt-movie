@@ -1,5 +1,5 @@
 <template>
-  <div style="background : #202020;" class="container">
+  <div  class="container">
     <h1 class="rectitle" style="margin-top : 1rem; padding-top:1rem;"  v-if="tryNum != 3 ">키워드 추천 페이지 입니다!</h1>
     <!-- 키워드 입력  -->
 
@@ -48,7 +48,7 @@
       </div>
     </transition>
    <transition name="fade" >
-    <img src="..\assets\loding.gif" alt="" v-if="loding == 1">
+    <img src="..\assets\loding.gif" alt="" v-if="loding == 1" class="imgsize">
     </transition>
     <transition name="fade" >
     <div v-if="tryNum == 4" class="container">
@@ -313,5 +313,10 @@ export default {
   margin-bottom: 1rem;
   color: black;
   font-family: 'Hanna', sans-serif;
+}
+.imgsize {
+  margin-top: 5rem;
+  width: 20rem;
+  height: 20rem;
 }
 </style>

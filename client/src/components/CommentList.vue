@@ -1,8 +1,8 @@
 <template>
   <div>
-  <div class="comment" v-for="comment in comments" :key="comment.id">
+  <div class="comment " v-for="comment in comments" :key="comment.id" style="margin: 1rem 0rem;">
     <span class="user">{{comment.user.username}}</span>
-    <span class="line mx-2">-</span>
+    <span class="mx-2">-</span>
     <span class="commenttext">{{comment.content}}</span>
   </div>
   </div>
