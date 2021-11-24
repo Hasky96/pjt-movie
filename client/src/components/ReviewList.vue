@@ -8,13 +8,13 @@
         <b-col class='myCol' cols="3">작성일</b-col>
         <b-col class='myCol' cols="1"><i class="fas fa-heart heart"></i></b-col>
       </b-row>
-      <b-list-group-item v-if="isSelected" class="group">
+      <b-list-group-item v-if="isSelected" class="group" >
         <review-list-item  v-for="review in selected" :key="review.id"
         :review="review"
         >
       </review-list-item>
       </b-list-group-item >
-      <b-list-group-item v-else class="group">
+      <b-list-group-item v-else class="group" >
         <review-list-item v-for="review in reviews" :key="review.id"
         :review="review"
         >
@@ -101,7 +101,7 @@ export default {
 
 <style scoped>
 .container{
-  background-color: #1b1b1b;
+  background-color: #202020;
   color: #808080;
 }
 .tableHeader{
@@ -109,17 +109,22 @@ export default {
   font-weight: 800;
   color: #808080;
   padding-bottom: 10px;
-  border-bottom: #808080 dashed 1px;
+  border-bottom: #808080 solid 1px;
 }
 .myCol{
   text-align: center;
+  font-size: 1.5rem;
 } 
 .heart{
   color: red
 }
 .group{
-  background-color: #1b1b1b;
+  background-color: #202020;
   padding-left: 0px;
   padding-right: 0px;
+  padding-bottom: -10px;
+}
+.reviewTitle {
+  font-size: 2rem;
 }
 </style>

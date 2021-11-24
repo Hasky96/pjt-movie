@@ -45,7 +45,9 @@
         </div>
       </div>
     </transition>
-    <img src="..\assets\CMCLoading.gif" alt="" v-if="loding == 1">
+   <transition name="fade" >
+    <img src="..\assets\loding.gif" alt="" v-if="loding == 1">
+    </transition>
     <transition name="fade" >
     <div v-if="tryNum == 4" class="container">
       <div v-if="loding == 2" class="">
