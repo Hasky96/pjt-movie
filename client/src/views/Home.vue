@@ -115,13 +115,9 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .main-div{
   margin-left: 10vw;
   margin-right:10vw;
   height: 80vh;
 }
-=======
-
->>>>>>> 767522f6d63cc0a2c399c127c153b74034aaa733
 </style>

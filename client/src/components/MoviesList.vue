@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;">
+<div style="width:100%;">
     <b-container v-if="movies" style="width:100%;">
       <b-row style="width:100%; ">
         <movies-list-item
@@ -14,6 +14,7 @@
       <h3>아직 영화정보가 없습니다.</h3>
     </section>
   </div>
+
 </template>
 
 <script>
@@ -37,5 +38,4 @@ export default {
 </script>
 
 <style>
-
 </style>

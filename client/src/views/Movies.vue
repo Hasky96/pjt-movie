@@ -3,10 +3,12 @@
     <section class="searchTab">
       <input class="search-input" type="text"><button class="btn-search">검색</button>
     </section>
-    <movies-list class="movie-table"
-    :movies ="movies">
-    </movies-list>
-    <div>
+    <div class="movie-table">
+      <movies-list style="clearfix height=100%;border: #eee dashed 1px;"
+      :movies ="movies">
+      </movies-list>
+    </div>
+    <div class="pagination-div">
       <i v-if="pageStatus!='first'" @click="prePagination" class="fas fa-angle-left angle"></i>
       <span v-for="page in pages" :class="{'pagi-active':page==curPage}" :key="page" @click="getPages(page)" class="pagi" >{{page}}</span>
       <i v-if="pageStatus!='last'" @click="nextPagination" class="fas fa-angle-right angle"></i>
@@ -95,13 +97,16 @@ export default {
 
 <style scoped>
 .main-div{
+  border: red dashed 1px;
   margin-left: 10vw;
   margin-right:10vw;
   height: 80vh;
 }
 .searchTab{
+   border: blue dashed 1px;
   text-align: center;
   padding: 5px;
+  height: 7%;
 }
 
 .pagi{
@@ -127,8 +132,10 @@ export default {
 .angle{
   font-size: 30px
 }
-.movietable{
+.movie-table{
+   border: green dashed 1px;
   text-align:center;
+  height: 86%;
 }
 .search-input{
   border: #808080 1px solid;
@@ -141,5 +148,9 @@ export default {
   border: #808080 1px solid;
   border-radius: 5px;
   color: #eee;
+}
+.pagination-div{
+  border: yellow dashed 1px;
+  height: 7%;
 }
 </style>
