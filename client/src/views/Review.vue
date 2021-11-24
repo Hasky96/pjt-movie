@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="main-div" >
     <div class="page-top">
       <div class="page-top-inner-wrap text-center">
@@ -22,17 +23,24 @@
       <b-button @click="$router.push({name: 'ReviewCreate'})" >new Review</b-button>
     </div>
     </div>
+    </div>
+  <footer style="margin-top : 20rem; paddint-bottom : 5rem;">
+        <fotter></fotter>
+    </footer>
+  
   </div>
 </template>
 
 <script>
 import ReviewList from '@/components/ReviewList.vue'
 import {mapState} from 'vuex'
+import Fotter from '../components/fotter.vue'
 
 export default {
   name: "Reviews",
   components:{
     ReviewList,
+    Fotter
   },
   data:function(){
     return{
@@ -64,4 +72,10 @@ export default {
   margin-top: 3rem;
   padding:2rem;
 }
+.ft-logo {
+  margin :auto;
+  margin-top: 1rem;
+  width: 4rem;
+}
+
 </style>

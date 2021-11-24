@@ -1,4 +1,6 @@
 <template>
+<div>
+  <div>
   <div class="main-div">
     <div class="page-top">
       <div class="page-top-inner-wrap text-center">
@@ -40,7 +42,7 @@
       <b-button @click="title" class="m-3 mt-0 mb-2">타이틀 추천</b-button>
       </div>
       <transition name="fade">
-              <recommend-detail></recommend-detail>
+              <recommend-detail style="margin-bottom : 30rem"></recommend-detail>
       </transition>
     </div>
     </transition>
@@ -52,22 +54,29 @@
       <b-button @click="title" class="m-3 mt-0 mb-2">타이틀 추천</b-button>
       </div>
       <transition name="fade">
-      <recommend-title></recommend-title>
+      <recommend-title style="margin-bottom : 30rem"></recommend-title>
       </transition>
     </div>
     </transition>
+    </div>
+    </div>
+    <footer style="margin-top : 60rem; paddint-bottom : 5rem;">
+      <fotter></fotter>
+    </footer>
   </div>
 </template>
 
 <script>
 import RecommendDetail from '@/components/RecommendDetail.vue'
 import RecommendTitle from '@/components/RecommendTitle.vue'
+import Fotter from '../components/fotter.vue'
 
 export default {
   name: "Recommend",
   components: {
     RecommendDetail,
     RecommendTitle,
+    Fotter
 
   },
   data: function(){
@@ -163,6 +172,11 @@ export default {
   text-align: left;
   margin: 0 auto;
 
+}
+.ft-logo {
+  margin :auto;
+  margin-top: 1rem;
+  width: 4rem;
 }
 
 </style>
