@@ -26,18 +26,18 @@
     <hr>
     <section class="sec">
       <div class="row grayborder">
-        <div class="col-4 p-0 ">
+        <div class="col-4 p-0 text-center">
           <img :src="movie.poster_path" alt="" width="100%" style="margin: 0px; padding: 0.1em;">
           <div class="col">
           <h5 class="fw-bold">{{movie.title}}</h5>
-          <span style="font-size: 0.9em">{{movie.release_date}}</span><span style="font-size: 0.9em">star: {{movie.vote_average}}</span>  
+          <span style="font-size: 0.9em">개봉 일자 : {{movie.release_date}}</span>  
         </div>
         </div>
         
         <div class="grayborder reviewContent col">
           <h2>사용자 리뷰</h2>
           <hr>
-           {{review.content}}
+           <p>{{review.content}}</p>
         </div>
       </div>
     </section>

@@ -7,7 +7,6 @@
     </div>
   <div class="mt-5 container ">
       
-      <hr>
     </div >
       <transition name="fade">
       <div v-if="selected == null" class="d-flex justify-content-center">
@@ -159,7 +158,7 @@ export default {
     font-weight: 400;
 }
 .page-top {
-  background: #252525;
+  background: #1b1b1b;
   padding: 40px 0px;
   text-align: left;
   margin: 0 auto;

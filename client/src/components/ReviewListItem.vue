@@ -23,8 +23,6 @@ export default {
 
 <style scoped>
 .review{
-  background:#202020;
-  color: #808080;
   padding-bottom : 10px;
   
 }

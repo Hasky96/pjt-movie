@@ -60,7 +60,6 @@ export default {
 }
 .recboxs {
   /* border-radius: 20px; */
-  background: #202020;
   opacity:0.9; 
   margin-top: 3rem;
   padding:2rem;
