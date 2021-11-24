@@ -1,8 +1,8 @@
 <template>
 <div>
-    <div class="container-sm" v-if="movies">
-      <div class="row" style="">
-        <movies-list-item 
+    <div class="container-sm" v-if="movies" style="height: 100%;">
+      <div class="row" style="height: 30vh;">
+        <movies-list-item style="height: 100%;"
         v-for="movie in movies" :key=movie.id
         :movie="movie.fields"
         :movieId="movie.pk"

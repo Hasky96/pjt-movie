@@ -2,7 +2,7 @@
     <div class="col-sm-3 p-2 movieContainer" >
       <div class="poster-movie" @click="$router.push({path:`/movie/${movieId}/`})">
         <div class="imgDiv">
-          <img class="imgTag" :class="{'imgTag-hover':ishover}" :src="movie.poster_path" alt="" width="100%">
+          <img class="imgTag" :class="{'imgTag-hover':ishover}" :src="movie.poster_path" alt="">
         </div>
         <div class="movieContent" @mouseover="ishover=true" @mouseleave="ishover=false">
           <h4 class="fw-bold">{{movie.title}}</h4>
@@ -33,13 +33,13 @@ export default {
 <style scoped>
 .movieContent{
   position: absolute;
+  top: 0;
   text-align: left;
   color: white;
   opacity: 0%;
   width: 100%;
   height: 100%;
   z-index: 2;
-  top: 0px;
   padding: 30px;
 }
 .movieContent:hover{
@@ -56,10 +56,10 @@ export default {
   height: 100%;
   padding: 0px;
   margin: 0px;
-  overflow: hidden;
-  vertical-align: middle;
 }
 .imgDiv{
+  display: flex;
+  overflow: hidden;
   height: 100%;
 }
 .imgTag-hover{
@@ -67,9 +67,9 @@ export default {
   transition-duration: 0.5s;
 }
 .imgTag{
-  height: 80%;
-  display: block;
-  margin: auto;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
 }
 .starTag{
   color: gold;

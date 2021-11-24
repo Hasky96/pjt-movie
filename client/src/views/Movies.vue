@@ -4,7 +4,7 @@
       <input class="search-input" type="text"><button class="btn-search">검색</button>
     </section>
     <div class="movie-table">
-      <movies-list style="clearfix height=100%;border: #eee dashed 1px;"
+      <movies-list
       :movies ="movies">
       </movies-list>
     </div>
@@ -97,14 +97,11 @@ export default {
 
 <style scoped>
 .main-div{
-  border: red dashed 1px;
   margin-left: 10vw;
   margin-right:10vw;
-  height: 80%;
 }
 .searchTab{
   width: 100%;
-  border: blue dashed 1px;
   text-align: center;
   padding: 5px;
   height: 7%;
@@ -134,7 +131,6 @@ export default {
   font-size: 30px
 }
 .movie-table{
-   border: green dashed 1px;
   text-align:center;
   height: 86%;
 }
@@ -151,7 +147,6 @@ export default {
   color: #eee;
 }
 .pagination-div{
-  border: yellow dashed 1px;
   height: 7%;
 }
 </style>
