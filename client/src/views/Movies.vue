@@ -1,12 +1,15 @@
 <template>
   <div class="movies">
-    <div>
-    <movies-list class="moviesChild"
+    <section class="searchTab">
+      <input class="search-input" type="text"><button class="btn-search">검색</button>
+    </section>
+    <movies-list class="movie-table"
     :movies ="movies">
     </movies-list>
-    </div>
-    <div >
+    <div>
+      <i v-if="pageStatus!='first'" @click="prePagination" class="fas fa-angle-left angle"></i>
       <span v-for="page in pages" :class="{'pagi-active':page==curPage}" :key="page" @click="getPages(page)" class="pagi" >{{page}}</span>
+      <i v-if="pageStatus!='last'" @click="nextPagination" class="fas fa-angle-right angle"></i>
     </div>
   </div>
 </template>
@@ -26,24 +29,40 @@ export default {
       movies:null,
       totalPage:null,
       curPage: 1,
-      pages : [1, 2, 3, 4, 5]
+      pages : [1, 2, 3, 4, 5],
+      pageStatus: "first"
     }
   },
   methods:{
     reviewPage(movieId){
       this.$router.push({name: 'Review', params: {movieId: movieId}})
     },
+    nextPagination(){
+      let start = _.last(this.pages)+1
+      let last = start+5
+      if (last>this.totalPage+1){
+        this.pages = _.range(start,this.totalPage+1)
+        this.pageStatus="last"
+      }else{
+        this.pages = _.range(start,last)
+        this.pageStatus="middle"
+      }
+      this.curPage = _.head(this.pages)
+    },
+    prePagination(){
+      let last = _.head(this.pages)
+      let start = last-5
+      if(start<0){
+        this.pages = [1,2,3,4,5]
+        this.pageStatus="first"
+      }else{
+        this.pages= _.range(start,last)
+        this.pageStatus="middle"
+      }
+      this.curPage = _.head(this.pages)
+    },
     getPages(c){
       this.curPage = c
-      let start = c-2
-      let end = c+3
-      if(c < 1 || c==1 || c==2){
-        this.pages = [1, 2, 3, 4, 5]
-      }else if(c>this.totalPage || c == this.totalPage|| c.totalPage-1){
-        this.pages = [this.totalPage-3, this.totalPage-2, this.totalPage-1, this.totalPage, this.totalPage+1]
-      }else{
-        this.pages = _.range(start,end)
-      }
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/server/movies/list/${c}/`
@@ -75,30 +94,52 @@ export default {
 </script>
 
 <style scoped>
-.moviesChild{
-  z-index: 0;
+.movies{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
 }
+.searchTab{
+  text-align: center;
+  padding: 5px;
+}
+
 .pagi{
   text-align: center;
-  color: #808080;
+  color: #eee;
   font-size: 30px;
-  border: #808080 solid 1px;
-  background-color: #1b1b1b;
-  border-radius: 5px ;
   margin: 5px;
   padding-left: 5px;
   padding-right: 5px;
 }
 .pagi-active{
   text-align: center;
-  color: #1b1b1b;
+  color: #eee;
   font-size: 30px;
-  border: #1b1b1b solid 1px;
-  background-color: #808080;
+  border: #eee solid 1px;
+  background-color: #1b1b1b;
   border-radius: 5px ;
   margin: 5px;
   padding-left: 5px;
   padding-right: 5px;
   transform: scale(1.01);
+}
+.angle{
+  font-size: 30px
+}
+.movietable{
+  text-align:center;
+}
+.search-input{
+  border: #808080 1px solid;
+  border-radius: 5px;
+  margin: 5px;
+  width: 40%;
+}
+.btn-search{
+  background-color: #808080;
+  border: #808080 1px solid;
+  border-radius: 5px;
+  color: #eee;
 }
 </style>
