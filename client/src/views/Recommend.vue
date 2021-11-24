@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="page-top">
-      <div class="page-top-inner-wrap">
-        <h2 class="page-title recalltitle">추천 시스템</h2>
+      <div class="page-top-inner-wrap text-center">
+        <h2 class="page-title ">추천 시스템</h2>
       </div>
     </div>
   <div class="mt-5 container ">
