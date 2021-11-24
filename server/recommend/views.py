@@ -30,7 +30,7 @@ with open('recommend\movie_dict.pickle', 'rb') as f:
 df = pd.DataFrame(list(movie_dict.items()),columns = ['title','review'])  
 tfidf = TfidfVectorizer()
 tfidf_matrix = tfidf.fit_transform(df.review)
-cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
+cos_similar = linear_kernel(tfidf_matrix, tfidf_matrix)
 indices = pd.Series(df.index, index = df.title)
 ###------------ 추천시스템 -------------- ###
 
@@ -101,11 +101,11 @@ def show_recommend_movie(request):
     Tfidf = TfidfVectorizer() 
     Tfidf_matrix = Tfidf.fit_transform(mymyCut['word'])
 
-    cosine_sim = linear_kernel(Tfidf_matrix, Tfidf_matrix)
+    cos_similar = linear_kernel(Tfidf_matrix, Tfidf_matrix)
 
-    def getRecommendation1(cosine_sim= cosine_sim):
+    def getRecommendation1(cos_similar= cos_similar):
         # idx = indices[title]
-        simScores = list(enumerate(cosine_sim[-1])) #코사인유사도
+        simScores = list(enumerate(cos_similar[-1])) #코사인유사도
         # simScores : 튜플 (인덱스,코사인유사도)
         simScores = sorted(simScores, key=lambda x: x[1] ,reverse=True)
         # 코사인유사도 기준 내림차순 정렬된 튜플중 자기 제외하고 20개 뽑음
@@ -124,21 +124,21 @@ def show_recommend_movie(request):
 @api_view(['POST'])
 def title_recommend(request):
     print('도착했음')
-    def movie_Recommendation(title, cosine_sim=cosine_sim):
+    def movie_Recommendation(title, cos_similar=cos_similar):
         try:
             print('멈추기 전')
             idx = indices[title]
             print('들어옴')
             # 모든 영화에 대해서 해당 영화와의 유사도를 구하기
-            sim_scores = list(enumerate(cosine_sim[idx]))
-            sim_scores = sorted(sim_scores, key=lambda x:x[1], reverse = True) # score 순으로 정렬
+            cos_like = list(enumerate(cos_similar[idx]))
+            cos_like = sorted(cos_like, key=lambda x:x[1], reverse = True) # score 순으로 정렬
 
-            sim_scores = sim_scores[1:21] # 가장 유사한 10개의 영화를 받아옴
-            movie_indices = [i[0] for i in sim_scores] # 인덱스 받아오기
+            cos_like = cos_like[1:21] # 가장 유사한 10개의 영화를 받아옴
+            movie_indices = [i[0] for i in cos_like] # 인덱스 받아오기
             
             result_df = df.iloc[movie_indices].copy()  #기존에 읽어들인 데이터에서 해당 인덱스의 값을 가져오기 스코어 열을 추가
-            result_df['score'] = [i[1] for i in sim_scores]
-            # 가장 유사한 10개의 영화의 제목을 리턴
+            result_df['score'] = [i[1] for i in cos_like]
+            # 20개의
             context = {
                 'state' : True,
                 'Veclist1' : result_df,
