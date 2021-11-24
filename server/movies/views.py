@@ -11,6 +11,8 @@ from django.core import serializers
 from django.db.models import Count
 import math
 
+from .serializers import MovieCommentSerializer
+
 from .models import Movie, Comment
 # Create your views here.
 
@@ -56,17 +58,15 @@ def movie_detail(request, movie_pk):
 
 # 한줄평 만들기
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def comment_create(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
+    movie = get_object_or_404(Movie, pk = movie_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie)# user= request.user
+        serializer.save(movie=movie, user= request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # 한줄평 좋아요
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def like_comment(request,movie_pk,comment_pk):
     comment = get_object_or_404(Comment, pk = comment_pk)
     if comment.like_users.filter(pk=request.user.pk).exists():
@@ -78,3 +78,10 @@ def like_comment(request,movie_pk,comment_pk):
         # 'count' : count
     }
     return Response(context, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def comments(request, movie_pk):
+    movie = get_object_or_404(Movie, pk = movie_pk)
+    serializer = MovieCommentSerializer(movie, many=False)
+    return Response(serializer.data)

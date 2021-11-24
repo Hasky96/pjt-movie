@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-div">
     <label for="reviewTitle">글 제목 : </label>
     <input v-model="title" name="reviewTitle" type="text"><br>
     <label for="movieTitle">영화제목 : </label>
@@ -140,6 +140,11 @@ export default {
 </script>
 
 <style scoped>
+.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
+}
 .sec1{
   display: inline-block; 
   height: 100%;

@@ -1,5 +1,5 @@
 <template>
-  <div class="movies">
+  <div class="main-div">
     <section class="searchTab">
       <input class="search-input" type="text"><button class="btn-search">검색</button>
     </section>
@@ -78,7 +78,7 @@ export default {
   created:function(){
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:8000/server/movies/list/totalpage/'
+      url: 'http://127.0.0.1:8000/server/movies/list/totalpages/'
     }).then(res=>{
       this.totalPage=res.data.pages
       // console.log(res)
@@ -94,7 +94,7 @@ export default {
 </script>
 
 <style scoped>
-.movies{
+.main-div{
   margin-left: 10vw;
   margin-right:10vw;
   height: 80vh;

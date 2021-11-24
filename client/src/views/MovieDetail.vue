@@ -1,5 +1,5 @@
 <template>
-  <div id="template">
+  <div id="main-div">
     <!--이미지-->
     <section class="imgSection">
       <img :src="movie.poster_path" alt="poster" id="imgTag" >
@@ -12,7 +12,7 @@
       <p id="contentTag">{{movie.overview}}</p>
     </section>
     <section class="recommendTag">
-            <div >
+          <div class="recommend-div">
           <br>
           <h2 style="margin-top : 2rem;">추천 영화</h2>
           <div class="container" style="margin-top : 2rem">
@@ -21,8 +21,8 @@
                   <div class="slide-content" style=" margin :0rem 0.5rem;" @click="move(movie[2])">
                       <img :src="movie[1]" alt="" style="width: 15rem; height: 18rem;"> 
                     <h5 class="recplat" style="width: 15rem;  padding : 0.5rem 0rem;">{{ movie[0] }}</h5> 
-                  <br>
-                </div>
+                    <br>
+                  </div>
                 </swiper-slide>
                 <div class="swiper-pagination sp-custom" slot="pagination"></div>
                 <div class="swiper-button-prev" slot="button-prev"></div>
@@ -40,8 +40,9 @@
       </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active oneline" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
-            <movie-comment
+            <movie-comment class="comment-tab"
             :comments="movie.comment_set"
+            :movieid="movie.id"
             >
             </movie-comment>
           </div>
@@ -62,12 +63,11 @@ import ReviewList from '@/components/ReviewList.vue'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
-
 export default {
   components: { 
     MovieComment,
     ReviewList,
-        swiper,
+    swiper,
     swiperSlide,
   },
   name: 'MovieDetail',
@@ -150,9 +150,11 @@ export default {
 </script>
 
 <style scoped>
-  @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
-#template{
-  position: relative;
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+#main.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
 }
 .imgSection{
   height: 40vw;
@@ -225,7 +227,7 @@ export default {
 .recommendTag{
    /* 임시 어딘지 보라고 넣어논 border */
   background: #1b1b1b;
-  height: 30vw;
+  height: 500px;
   margin-left: 10vw;
   margin-right: 10vw;
 }
@@ -248,6 +250,15 @@ font-family: 'Hanna', sans-serif;
 }
 .slide-content:hover{
   transform:scale(1.05);
+}
+.comment-tab{
+  height: 700px;
+}
+.recommend-div{
+  height: 500px;
+}
+.tab-content{
+  height: 800;
 }
 
 

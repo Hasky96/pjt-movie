@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="main-div" >
     <div class="page-top">
       <div class="page-top-inner-wrap text-center">
         <h2 class="page-title recalltitle">리뷰 리스트</h2>
@@ -53,6 +53,11 @@ export default {
 </script>
 
 <style>
+.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
+}
 .recboxs {
   /* border-radius: 20px; */
   background: #202020;

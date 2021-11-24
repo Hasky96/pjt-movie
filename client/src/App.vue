@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <div class>
     <!-- Image and text -->
       <b-navbar class="mx-4 row" variant="#1b1b1b" type="#1b1b1b">
       <div class="col-3">
@@ -74,7 +73,6 @@
         </span>
       </div>
       </b-navbar>
-    </div>
     <router-view @login="isLogin=true"/>
   </div>
 </template>

@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div class="main-div">
+    
+  </div>
 </template>
 
 <script>
@@ -16,4 +18,9 @@ export default {
 </script>
 
 <style scoped>
+.main-div{
+  margin-left: 10vw;
+  margin-right:10vw;
+  height: 80vh;
+}
 </style>

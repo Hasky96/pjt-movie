@@ -1,20 +1,88 @@
 <template>
-  <div class="container row px-5">
-    <div class="newDiv row g-0">
-      <span class="col-10"><input type="text"></span><span class="col-2"><button >작성</button></span>
+  <div class="px-5">
+    <div class="newDiv row g-0 mb-3">
+      <div class="col-3 star-select">
+        <select v-model="rankString" class="star star-select" name="" id="">
+          <option class="star" value="1">★</option>
+          <option value="2">★★</option>
+          <option value="3">★★★</option>
+          <option value="4">★★★★</option>
+          <option value="5">★★★★★</option>
+        </select>
+
+      </div>
+      <span class="col-7"><input v-model="content" type="text"></span><span class="col-2"><button @click="write">작성</button></span>
     </div>
-    <article class="comment" v-for="comment in comments" :key="comment.id" >
-      <i class="fas fa-star star"/> <span class="rank">{{comment.rank}}</span>
-      <span class="content">{{comment.content}}</span>
-    </article>
+    <div class="comments-list">
+      <article class="comment p-3 px-5" v-for="comment in commentss" :key="comment.id" >
+        <span v-if="comment" class="content">{{comment.user.username}}</span>
+        <span v-if="comment" class="text- mx-4"> - </span>
+        <span v-if="comment" class="content">{{comment.content}}</span>
+        <i v-if="comment" class="fas fa-star star ms-5"/> <span class="rank ">{{comment.rank}}</span>
+      </article>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props:{
-    comments: Array
-  }
+    comments: Array,
+    movieid:Number
+  },
+  data:function(){
+    return{
+      newComments: null,
+      content: null,
+      rankString:"3",
+    }
+  },
+  computed:{
+    rankInt : function(){
+      return parseInt(this.rankString)
+    },
+    commentss: function(){
+      if(this.newComments){
+        return this.newComments
+      }else{
+        return this.comments 
+      }
+    }
+  },
+  methods:{
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    write(){
+      console.log(this.rankInt)
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/server/movies/${this.movieid}/comment_create/`,
+        data: {
+          content : this.content,
+          rank: this.rankInt,
+        },
+        headers: this.setToken()
+      }).then(()=>{
+        axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/server/movies/${this.movieid}/comments/`,
+        }).then(res=>{
+          this.newComments = res.data.comment_set
+        }).catch(err=>{
+          console.log(err)
+        })
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+  },
 }
 </script>
 
@@ -28,7 +96,11 @@ export default {
   width: 100%;
   max-width: 100%;
 }
+.comments-list{
+  overflow: auto;
+}
 .newDiv{
+  top: 20px;
   margin: 0px;
   margin-top: 10px;
 }
@@ -36,7 +108,6 @@ export default {
   background: #1b1b1b;
   border: 1px #808080 solid;
   border-radius: 5px;
-  height: 40px;
   font-size: 20px;
   color: #808080;
   width: 100%;
@@ -51,19 +122,27 @@ export default {
   width: 100%;
 }
 .star{
-  font-size: 20px;
   color: gold;
 }
 .comment{
   text-align: left;
-  padding: 10px;
   background-color: #1b1b1b;
   color: #808080;
+  font-size: 40px;
 }
 .rank{
-  font-size: 20px;
+  font-size: 40px;
+}
+.text-{
+  font-size: 50px;
 }
 .content{
   margin-left: 20px;
+}
+.star-select{
+  -webkit-appearance: none;
+  font-size: 22px;
+  background-color: #1b1b1b;
+  border: none;
 }
 </style>
