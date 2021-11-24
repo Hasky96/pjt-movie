@@ -7,6 +7,7 @@
     <section class="contentSection">
       <p id="titleTag">{{movie.title}}</p>
       <p id="dateTag">{{movie.release_date}} 개봉</p>
+      <p id="dateTag">{{movie.genres}} 개봉</p>
       <p id="rankTag"> <i class="fas fa-star star"/> <span style="filter: contrast(10%);">{{movie.vote_average}}</span></p>
       <p id="contentTag">{{movie.overview}}</p>
     </section>

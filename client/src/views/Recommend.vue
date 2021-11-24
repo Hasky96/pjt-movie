@@ -103,7 +103,7 @@ export default {
   opacity: 0;
 }
 .fade-enter-active{
-  transition: opacity 1s ease-in;
+  transition: opacity 0.3s ease-in;
   }
 .fade-leave-active {
   transition: opacity 0s ease-out;

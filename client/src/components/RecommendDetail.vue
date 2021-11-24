@@ -16,26 +16,28 @@
     <transition name="fade">
       <div v-if="tryNum == 1">
         <h2  class="rectitle">첫번째 키워드 {{ firstKeyword }}에 대한 연관 키워드 입니다.</h2>
-        <div v-for="vec in firstData" :key="vec.id">
-            <p>{{vec}}</p>
+        <div class="keyword-container">
+          <div @click='onC(vec)' class="keyword" v-for="vec in firstData" :key="vec.id">
+              {{vec}}
+          </div>
         </div>
       </div>
     </transition>
     <transition name="fade">
       <div v-if="tryNum == 2">
+        <h2  class="rectitle">첫번째 키워드 {{ firstKeyword }}에 대한 연관 키워드 입니다.</h2>
         <h2 class="rectitle">두번째 키워드 {{ secoundKeyword }}에 대한 연관 키워드 입니다.</h2>
-        <p v-for="vec in secoundData" :key="vec.id">
-            <a href="" >{{vec}}</a>
-          </p>
+        <div class="keyword-container">
+          <div @click='onD(vec)' class="keyword" v-for="vec in secoundData" :key="vec.id">
+              {{vec}}
+          </div>
+        </div>
       </div>
     </transition> 
     <transition name="fade">
       <div v-if="tryNum == 3">
         <div v-if="loding == 0">
-        
         <h2  class="rectitle">선택하신 키워드는 다음과 같습니다.</h2>
-                
-
         <p class="reccontent" style="margin-bottom: 1rem;">첫번째 키워드 : {{firstKeyword}}</p>
         <p class="reccontent" style="margin-bottom: 1rem;">두번째 키워드 : {{secoundKeyword}}</p>
         <p class="reccontent" style="margin-bottom: 1rem;">세번째 키워드 : {{thirdKeyword}}</p>
@@ -49,8 +51,10 @@
     <transition name="fade" >
     <div v-if="tryNum == 4" class="container">
       <div v-if="loding == 2" class="">
+          <span style="font-size: 20px; color: rgb(164,219,214);font-family: 'Hanna', sans-serif;margin: 10px;">
+            영화정보는 네이버에 검색된 결과가 나옵니다.
+          </span>
         <hr>
-        
           <div v-for="movieEl in movieList" v-bind:key="movieEl">
             <b-container class="bv-example-row text-center" style="margin: -0.5rem;" >
               <b-row   >
@@ -58,7 +62,7 @@
                 <b-col cols="4" class="reccontent" style="margin: auto;">{{movieEl[1]}}</b-col>
                 <b-col cols="5" class="reccontent" style="margin: auto;">{{movieEl[2]}}</b-col>
                 <b-col cols="1" class="reccontent" style="margin: auto;">
-                  <a v-if="movieEl[0] != '순번'" :href="movieEl[3]">  <b-button  style="margin: auto;">이동</b-button></a>
+                  <a target="_blank" v-if="movieEl[0] != '순번'" :href="movieEl[3]">  <b-button  style="margin: auto;">이동</b-button></a>
                     <p v-if="movieEl[0] == '순번'" style="margin: auto;">{{movieEl[3]}}</p>
                   </b-col>
               </b-row>
@@ -138,8 +142,8 @@ export default {
         })
       }}
     },
-    onC : function(){
-      
+    onC : function(word){
+      this.inputKeyword ??=word
       const Keyword = {
         inputKeyword: this.inputKeyword,
       }
@@ -172,8 +176,8 @@ export default {
         })
       }}
     },
-    onD : function(){
-      
+    onD : function(word){
+      this.inputKeyword ??=word
       const Keyword = {
         inputKeyword: this.inputKeyword,
       }
@@ -254,7 +258,30 @@ export default {
   
   
 </script>
-
+<style scoped>
+.keyword-container{
+  margin-top: 30px;
+  position: relative;
+  width: 100%
+}
+.keyword{
+  font-family: 'Hanna', sans-serif;
+  font-size:20px;
+  margin: 2%;
+  text-align: center;
+  padding: 10px;
+  display: inline-block;
+  background-color: #adb5bd;
+  color: #1b1b1b;
+  border: solid #adb5bd 1px;
+  border-radius: 10px;
+  width: 16%;
+}
+.keyword:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+</style>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 .fade-enter {
