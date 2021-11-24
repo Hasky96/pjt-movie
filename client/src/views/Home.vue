@@ -1,61 +1,54 @@
 <template>
   <div>
-    <div class="container">
-      <h1>메인 페이지</h1>
-      <div>
-      <b-carousel
-      id="carousel-1"
-      v-model="slide"
-      :interval="3000"
-      controls
-      fade
-      indicators
-      background="#ababab"
-      img-width="1024"
-      img-height="480"
-      style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
-    >
-      <b-carousel-slide
-        caption="First slide"
-        text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-        img-src="https://picsum.photos/1024/480/?image=52"
-      ></b-carousel-slide>
 
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
+      <div class="casel">
+        <b-carousel
+        id="carousel-fade"
+        v-model="slide"
+        :interval="4000"
+        controls
+        fade
+        indicators
+        img-width="1024"
+        img-height="480"
+        style="text-shadow: 1px 1px 2px #333;"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
+      >
+        <a href="#" @click="move1()"><b-carousel-slide
+          img-src="https://blog.kakaocdn.net/dn/bCyVRA/btrl01k1Hoy/Uk9gobu3m0iwJ5rsZR71Kk/img.jpg"
+        ></b-carousel-slide></a>
 
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
+        <a href="#" @click="move2()"><b-carousel-slide 
+        img-src="https://blog.kakaocdn.net/dn/uMH8H/btrl00zy4pS/vhlnrBlmCQVAKU6wmaYfJ1/img.jpg">
+        </b-carousel-slide></a>
 
-      <b-carousel-slide>
-        <template #img>
-          <img
-            class="d-block img-fluid w-100"
-            width="1024"
-            height="480"
-            src="https://picsum.photos/1024/480/?image=55"
-            alt="image slot"
-          >
-        </template>
-      </b-carousel-slide>
+        <a href="#" @click="move3()"><b-carousel-slide 
+        img-src="https://blog.kakaocdn.net/dn/boQlPa/btrl439IerO/hKgDaKojQkE5r6zMwnZawk/img.jpg">
+        </b-carousel-slide></a>
 
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-          a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-    </b-carousel>
+        <a href="#" @click="move4()"><b-carousel-slide 
+        img-src="https://blog.kakaocdn.net/dn/YjoP9/btrl6OxbfLv/x8l6RHPXNUksEgJcR8k58k/img.jpg">
+        </b-carousel-slide></a>
+
+        <a href="#" @click="move5()"><b-carousel-slide 
+        img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FVfkYK%2Fbtrl1Xo5uki%2F29hXRYjYwCiW0GESyelyX0%2Fimg.jpg">
+        </b-carousel-slide></a>
+
+      </b-carousel>
   </div>
-  <slot-1></slot-1>
-  <slot-2></slot-2>
-  <slot-3></slot-3>
-  <slot-4></slot-4>
-  <!-- 하부 슬라이더 들 -->
+  <div class="container ">
+    <br>
+    <slot-1 class="slot"></slot-1>
+    <slot-2 class="slot"></slot-2>
+    <slot-3 class="slot"></slot-3>
+    <slot-4 class="slot"></slot-4>
+    <!-- 하부 슬라이더 들 -->
   
   </div>
+<footer style="margin-top : 20rem; paddint-bottom : 5rem;">
+      <fotter></fotter>
+    </footer>
   </div>
 </template>
 
@@ -68,6 +61,8 @@ import Slot1 from '../components/main/slot1.vue'
 import Slot2 from '../components/main/slot2.vue'
 import Slot3 from '../components/main/slot3.vue'
 import Slot4 from '../components/main/slot4.vue'
+import Fotter from '../components/fotter.vue'
+
 Vue.use(CarouselPlugin)
 export default {
   name: "Home",
@@ -76,6 +71,7 @@ export default {
     Slot2,
     Slot3,
     Slot4,
+    Fotter
   },
   data() {
       return {
@@ -102,22 +98,55 @@ export default {
     ...mapState(['movies'])
   },
   methods: {
-  onSlideStart(slide) {
+  onSlideStart() {
     this.sliding = true
-    console.log(slide)
   },
-  onSlideEnd(slide) {
+  onSlideEnd() {
     this.sliding = false
-        console.log(slide)
-  }
+
+  },
+  move1(){
+    this.$router.replace(`/movie/930/`)
+    window.scrollTo(0,0)
+    },
+  move2(){
+    this.$router.replace(`/movie/1/`)
+    window.scrollTo(0,0)
+    },
+  move3(){
+    this.$router.replace(`/movie/3640/`)
+    window.scrollTo(0,0)
+    },
+  move4(){
+    this.$router.replace(`/recommend/`)
+    window.scrollTo(0,0)
+    },
+  move5(){
+    this.$router.replace(`/movie/1208/`)
+    window.scrollTo(0,0)
+    },
 }
 }
 </script>
 
 <style scoped>
-.main-div{
-  margin-left: 10vw;
-  margin-right:10vw;
-  height: 80vh;
+
+.slot {
+  margin : 5rem 0rem;
 }
+.casel {
+  margin : 0rem 19rem;
+}
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-property: opacity;
+    transform: none;
+    display: block;
+}
+.ft-logo {
+  margin :auto;
+  margin-top: 1rem;
+  width: 4rem;
+}
+
 </style>

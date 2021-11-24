@@ -53,6 +53,9 @@
           </div>
         </div>
     </section>
+   <footer style="margin-top : 20rem; paddint-bottom : 5rem;">
+      <fotter></fotter>
+    </footer>
   </div>
 </template>
 
@@ -62,6 +65,7 @@ import MovieComment from '@/components/MovieComment.vue'
 import ReviewList from '@/components/ReviewList.vue'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Fotter from '../components/fotter.vue'
 
 export default {
   components: { 
@@ -69,6 +73,7 @@ export default {
     ReviewList,
     swiper,
     swiperSlide,
+    Fotter
   },
   name: 'MovieDetail',
   data:function(){
@@ -299,4 +304,10 @@ fill: white;
 .swiper-pagination-bullet-active {
   background-color: #000;
 }
+.ft-logo {
+  margin :auto;
+  margin-top: 1rem;
+  width: 4rem;
+}
+
 </style>

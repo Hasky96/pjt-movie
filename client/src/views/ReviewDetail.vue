@@ -1,4 +1,5 @@
 <template>
+<div >
 <div class="main-div">
   <div class="page container grayborder" style="margin : auto; margin-bottom : 10rem;">
     <header class="hea grayborder">
@@ -35,9 +36,7 @@
         </div>
         
         <div class="grayborder reviewContent col">
-          <h2>사용자 리뷰</h2>
-          <hr>
-           <p>{{review.content}}</p>
+           <h5>{{review.content}}</h5>
         </div>
       </div>
     </section>
@@ -49,15 +48,21 @@
     </footer>
   </div>
   </div>
+ <footer style="margin-top : 40rem; paddint-bottom : 5rem;">
+      <fotter></fotter>
+    </footer>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Comment from '@/components/Comment.vue'
+import Fotter from '../components/fotter.vue'
 
 export default {
   components: { 
-    Comment 
+    Comment ,
+    Fotter
   },
   name: "ReviewDetail",
   data: function(){
@@ -173,4 +178,10 @@ div{
   height: 2rem;
   font-size: 0.7rem;
 }
+.ft-logo {
+  margin :auto;
+  margin-top: 1rem;
+  width: 4rem;
+}
+
 </style>

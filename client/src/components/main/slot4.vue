@@ -1,12 +1,13 @@
 <template>
   <div style="margin-top : 5rem;" >
-      <span class="slot-info d-flex flex-row" style="font-family: 'Hanna', sans-serif;" >대충 스릴러 영화 모음이라는 뜻</span>
+      <span class="slot-info d-flex flex-row" style="font-family: 'Hanna', sans-serif;" >오늘은 #신나는 #판타지</span>
       <swiper class="swiper" :options="swiperOption" style="margin-top : 2rem;">
         <swiper-slide v-for="movieEl in movie" :key="movieEl.id">
-          <div class="slide-content" style=" margin :0rem 0.5rem;">
+          <a href="" style="text-decoration:none;"  @click="move(movieEl.id)"><div class="slide-content" style=" margin :0rem 0.5rem;">
             <img :src="movieEl.poster_path" alt="" style="width: 15rem; height: 18rem;"> 
             <h5 class="recplat" style="width: 15rem;  padding : 0.5rem 0rem;">{{movieEl.title}}</h5> 
-          </div>
+            <br>
+          </div></a>
         </swiper-slide>
         
     
@@ -68,7 +69,7 @@ export default {
       
   },
   getRecData(){
-    const keyword = [6602,6220,6358,5310,4701,5310,5380,6309,4829,4483]
+    const keyword = [6602,6220,6358,5310,4701,5310,5380,6309,4829,4948]
     console.log(keyword)
     console.log('키워드 출력 됨')
     axios({
@@ -83,6 +84,13 @@ export default {
         console.log(err)
       })
     },
+  move(id){
+    if(id!=this.$route.params.movieId){
+      this.$router.replace(`/movie/${id}/`)
+      this.getRecData()
+      window.scrollTo(0,0)
+    }
+    }
 },
 created:function(){
   this.getRecData()

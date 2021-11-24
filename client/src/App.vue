@@ -73,7 +73,9 @@
         </span>
       </div>
       </b-navbar>
-    <router-view @login="isLogin=true"/>
+      <div><router-view @login="isLogin=true"/></div>
+    
+    
   </div>
 </template>
 <script>

@@ -284,7 +284,7 @@ export default {
   cursor: pointer;
 }
 </style>
-<style>
+<style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 .fade-enter {
   opacity: 0;
@@ -305,13 +305,13 @@ export default {
 }
 .reccontent {
   margin: auto;
-  color: black;
+  color: #dddddd;
   font-family: 'Hanna', sans-serif;
 
 }
 .rectitle {
   margin-bottom: 1rem;
-  color: black;
+  color: #dddddd;
   font-family: 'Hanna', sans-serif;
 }
 .imgsize {
