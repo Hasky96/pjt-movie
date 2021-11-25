@@ -114,7 +114,7 @@ def comment_del(request, comment_pk):
             print('delete 넘었음')
             comment.delete()
             data =  {
-                'message' : f'코멘트 {comment_pk} 가 사라졌습니다',
+                'message' : f' {comment_pk} 가 사라졌습니다',
             }
             return Response(data,status = status.HTTP_204_NO_CONTENT)
     return Response(status = status.HTTP_403_FORBIDDEN)
