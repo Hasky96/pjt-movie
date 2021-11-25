@@ -21,6 +21,8 @@ urlpatterns = [
     # 메인페이지 슬롯 용 영화 찾기
     path('slot/', views.slot_search),
     # 장르
-    path('<int:movie_pk>/genres/', views.genre)
+    path('<int:movie_pk>/genres/', views.genre),
+    # 코멘트 삭제
+    path('comments/<int:comment_pk>/del/', views.comment_del)
 
 ]

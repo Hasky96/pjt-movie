@@ -67,9 +67,20 @@ def comments(request, review_pk):
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data, status.HTTP_200_OK)
 
+@api_view(["DELETE"])
+def comments_delete(request, comment_pk):
+    comment = get_object_or_404(Comment,pk=comment_pk)
+    if comment.user == request.user:
+        if request.method == 'DELETE':
+            print('delete 넘었음')
+            comment.delete()
+            data =  {
+                'message' : f'리뷰 {comment_pk} 가 사라졌습니다',
+            }
+            return Response(data,status = status.HTTP_204_NO_CONTENT)
+    return Response(status = status.HTTP_403_FORBIDDEN)
 
 @api_view(['GET','PUT','DELETE'])
-@permission_classes([AllowAny])
 def review_detail_or__update_or_delete(request,review_pk):
     print('삭제 페이지 진입 합')
     review = get_object_or_404(Review,pk=review_pk)

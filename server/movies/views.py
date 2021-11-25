@@ -106,3 +106,15 @@ def slot_search(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
     
+@api_view(["DELETE"])
+def comment_del(request, comment_pk):
+    comment = get_object_or_404(Comment,pk=comment_pk)
+    if comment.user == request.user:
+        if request.method == 'DELETE':
+            print('delete 넘었음')
+            comment.delete()
+            data =  {
+                'message' : f'코멘트 {comment_pk} 가 사라졌습니다',
+            }
+            return Response(data,status = status.HTTP_204_NO_CONTENT)
+    return Response(status = status.HTTP_403_FORBIDDEN)

@@ -4,11 +4,13 @@
     <span class="user">{{comment.user.username}}</span>
     <span class="mx-2">-</span>
     <span class="commenttext">{{comment.content}}</span>
+    <b-button @click="deleteComment(comment.id)" class="btnsize">삭제</b-button>
   </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 
   props:{
@@ -19,6 +21,28 @@ export default {
     return {
     }
   },
+  methods : {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    deleteComment(id) {
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/server/community/comments/${id}/del/`,
+        headers: this.setToken()
+        }).then(res=>{
+          console.log(res)
+          this.$router.go()
+        }).catch(err=>{
+          console.log(err)
+          alert('권한이 없습니다.')
+        })
+    }
+  }
 }
 </script>
 
@@ -41,5 +65,11 @@ export default {
 }
 .line{
   font-size: 1.5em;
+}
+.btnsize {
+  width: 4rem;
+  height: 2rem;
+  font-size: 0.7rem;
+  margin-left: 1rem;
 }
 </style>
