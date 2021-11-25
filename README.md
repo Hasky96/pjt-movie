@@ -142,7 +142,7 @@
 
 ![erd](README.assets/erd.png)
 
-# 개발 일지
+# 개발 일지 (https://www.notion.so/stoneage)
 
 ## 목표
 
