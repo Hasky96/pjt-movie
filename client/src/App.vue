@@ -21,7 +21,7 @@
       <div class="col-2">
         <!-- 로그인 라우터 -->
         <span v-if="isLogin">
-          <router-link class="btn fs-5 nav-font-color" @click.native="logout" to="#">{{user}} Logout</router-link>
+          <router-link class="btn fs-5 nav-font-color" @click.native="logout" to="#"><i class="far fa-user-circle profile"/>{{user}} Logout</router-link>
         </span>
         <span v-else>
           <button @click="$bvModal.show('modal-login')" class="btn fs-5 nav-font-color">Login</button>
@@ -120,7 +120,6 @@ export default {
         this.isLogin = true
         this.$bvModal.hide('modal-login')
         alert("로그인 성공!")
-        this.$router.push({name:'Home'})
       }).catch(err=>{
         console.log(err)
         alert('아이디 또는 비밀번호가 틀렸습니다.')
@@ -291,5 +290,8 @@ export default {
 }
 #modal-login___BV_modal_content_, #modal-signup___BV_modal_content_{
   background-color: #1b1b1b !important;
+}
+.profile{
+  margin-right: 10px;
 }
 </style>
