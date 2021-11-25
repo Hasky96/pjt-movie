@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     movies : [],
     reviews: [],
+    userInfo: null,
   },
   mutations: {
     SET_MOVIES(state, movies){
@@ -15,6 +16,12 @@ export default new Vuex.Store({
     SET_REVIEWS(state, reviews){
       state.reviews = reviews
     },
+    LOGIN(state, username){
+      state.userInfo = username
+    },
+    LOGOUT(state){
+      state.userInfo = null
+    }
   },
   actions: {
     setMovies({commit}, movies){
