@@ -74,8 +74,6 @@
       </div>
       </b-navbar>
       <div><router-view @login="isLogin=true"/></div>
-    
-    
   </div>
 </template>
 <script>

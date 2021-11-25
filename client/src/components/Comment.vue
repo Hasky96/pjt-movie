@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: 10rem;">
     <comment-new
     :reviewId="reviewId"
     @refresh="refresh"

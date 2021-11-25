@@ -19,6 +19,8 @@ urlpatterns = [
     # 영화리스트 제목
     path('search/<int:page_num>', views.search),
     # 메인페이지 슬롯 용 영화 찾기
-    path('slot/', views.slot_search)
+    path('slot/', views.slot_search),
+    # 장르
+    path('<int:movie_pk>/genres/', views.genre)
 
 ]

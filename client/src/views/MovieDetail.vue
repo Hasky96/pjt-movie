@@ -7,9 +7,10 @@
     <section class="contentSection">
       <p id="titleTag">{{movie.title}}</p>
       <p id="dateTag">{{movie.release_date}} 개봉</p>
-      <p id="dateTag">{{movie.genres}} 개봉</p>
+      <p id="dateTag">{{genres_String}}</p>
       <p id="rankTag"> <i class="fas fa-star star"/> <span style="filter: contrast(10%);">{{movie.vote_average}}</span></p>
       <p id="contentTag">{{movie.overview}}</p>
+      <p></p>
     </section>
     <section class="recommendTag">
           <div class="recommend-div">
@@ -79,6 +80,7 @@ export default {
   data:function(){
     return {
       model: null,
+      genres: {},
       movie: {},
       movieList : [],
       number : 1,
@@ -108,6 +110,13 @@ export default {
       return config
     },
     getRecData(){
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/server/movies/${this.$route.params.movieId}/genres/`,
+        }).then(res=>{
+          console.log(res.data)
+          this.genres = res.data
+        })
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/server/movies/${this.$route.params.movieId}/info/`,
@@ -146,6 +155,11 @@ export default {
     this.getRecData()
   },
   computed:{
+    genres_String(){
+      let str = ""
+      this.genres.forEach(p => str+=p.name+" ")
+      return str
+    },
     movies:function(){
       const id = this.$route.params.movieId
       return this.movieList.filter( movie => movie[2] != id)

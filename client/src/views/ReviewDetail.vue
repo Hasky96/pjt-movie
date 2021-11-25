@@ -48,21 +48,16 @@
     </footer>
   </div>
   </div>
- <footer style="margin-top : 40rem; paddint-bottom : 5rem;">
-      <fotter></fotter>
-    </footer>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Comment from '@/components/Comment.vue'
-import Fotter from '../components/fotter.vue'
 
 export default {
   components: { 
     Comment ,
-    Fotter
   },
   name: "ReviewDetail",
   data: function(){
@@ -118,6 +113,7 @@ export default {
 
 <style scoped>
 .main-div{
+  margin-bottom: 10rem;
   margin-left: 10vw;
   margin-right:10vw;
   height: 80vh;

@@ -7,6 +7,7 @@
         <div class="movieContent" @mouseover="ishover=true" @mouseleave="ishover=false">
           <h4 class="fw-bold">{{movie.title}}</h4>
           <p>{{movie.release_date}}</p>
+          <p>{{genres_String}}</p>
           <p class="vote"><i class="fas fa-star starTag"/> {{movie.vote_average}}</p>
         </div>
       </div>
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name : 'MovieListItem',
   props:{
@@ -22,11 +25,29 @@ export default {
   },
   data(){
     return{
+      genres: [],
       ishover: false
     }
   },
   methods:{
+  },
+  mounted(){
+    axios({
+      method: 'get',
+      url: `http://127.0.0.1:8000/server/movies/${this.movieId}/genres/`,
+    }).then(res=>{
+      // console.log(res)
+      this.genres = res.data
+    })
+  },
+  computed:{
+    genres_String(){
+      let str = ""
+      this.genres.forEach(p => str+=p.name+" ")
+      return str
+    },
   }
+
 }
 </script>
 
