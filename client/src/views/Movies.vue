@@ -42,26 +42,26 @@ export default {
     nextPagination(){
       let start = _.last(this.pages)+1
       let last = start+5
-      if (last>this.totalPage+1){
+      if (_.range(start,last).includes(this.totalPage)){
         this.pages = _.range(start,this.totalPage+1)
         this.pageStatus="last"
       }else{
         this.pages = _.range(start,last)
         this.pageStatus="middle"
       }
-      this.curPage = _.head(this.pages)
+      this.getPages(_.head(this.pages))
     },
     prePagination(){
       let last = _.head(this.pages)
       let start = last-5
-      if(start<0){
+      if(start<6){
         this.pages = [1,2,3,4,5]
         this.pageStatus="first"
       }else{
         this.pages= _.range(start,last)
         this.pageStatus="middle"
       }
-      this.curPage = _.head(this.pages)
+      this.getPages(_.last(this.pages))
     },
     getPages(c){
       this.curPage = c
@@ -89,6 +89,7 @@ export default {
         method: 'get',
         url: `http://127.0.0.1:8000/server/movies/list/1/`
       }).then(res=>{
+        // console.log(res)
         this.movies = res.data
       })
   }
@@ -106,7 +107,6 @@ export default {
   padding: 5px;
   height: 7%;
 }
-
 .pagi{
   text-align: center;
   color: #eee;
@@ -116,16 +116,8 @@ export default {
   padding-right: 5px;
 }
 .pagi-active{
-  text-align: center;
-  color: #eee;
-  font-size: 30px;
   border: #eee solid 1px;
-  background-color: #1b1b1b;
   border-radius: 5px ;
-  margin: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  transform: scale(1.01);
 }
 .angle{
   font-size: 30px

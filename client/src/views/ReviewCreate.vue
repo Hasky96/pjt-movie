@@ -12,19 +12,19 @@
       <br>
     
     <div class="d-flex justify-content-between">
-      <div>
+      <div class="movie-title">
       <label for="movieTitle"></label>
-      <input type="text"  @click="$bvModal.show('modal-movie')" name="movieTitle" :value='movieTitle' readonly placeholder="영화를 검색해 주세요"> 
+      <input  type="text"  @click="$bvModal.show('modal-movie')" name="movieTitle" :value='movieTitle' readonly placeholder="영화를 검색해 주세요"> 
       <b-button v-b-modal.modal-movie>영화검색</b-button>
       <b-modal id=modal-movie ok-title="확인" ok-only>
         <div>
           <input type="text" v-model="search" placeholder="영화제목을 입력하세요" style="width: 100%">
           <section style="overflow: auto; height: 500px;">
-            <div class="movieItem p-2" v-for="movie in searchList" :key="movie.id" @click="setSearch(movie.id, movie.title)">
-              <img :src="movie.poster_path" height="100px" alt="">
+            <div class="movieItem p-2" v-for="movie in searchList" :key="movie.id" @click="setSearch(movie.pk , movie.fields.title)">
+              <img :src="movie.fields.poster_path" height="100px" alt="">
               <section class="sec1">
-                <p class="fs-5">{{movie.title}}</p> 
-                <p style="text-align: end;">개봉일{{movie.release_date}}</p>
+                <p class="fs-5">{{movie.fields.title}}</p> 
+                <p style="text-align: end;">개봉일{{movie.fields.release_date}}</p>
               </section>
             </div>
           </section>
@@ -54,7 +54,7 @@
     style="resize:none"
     name="reviewContent" type="textarea" cols="50" rows="10" placeholder="리뷰를 입력해 주세요"></b-textarea>
     <br>
-    <b-button @click="backtoreview" variant="outline-danger"  style="margin-right : 1rem;">취소</b-button>
+    <b-button @click="$router.go(-1)" variant="outline-danger"  style="margin-right : 1rem;">취소</b-button>
     <b-button @click="create" variant="outline-success" >작성하기</b-button>
   </div>
   </div>
@@ -93,11 +93,12 @@ export default {
     search: function(){
       axios({
         method : 'get',
-        url: 'http://127.0.0.1:8000/server/movies/search/',
+        url: 'http://127.0.0.1:8000/server/movies/search/1/',
         params:{
           keyword : String(this.search)
         }
       }).then(res=>{
+        console.log(res)
         this.searchList = res.data
       }).catch(err=>{
         console.log(err)
@@ -120,9 +121,7 @@ export default {
       }
       return config
     },
-    backtoreview(){
-      this.$router.push({name:'Review'})
-    },
+
     create(){
       axios({
         method: 'post',
@@ -154,7 +153,7 @@ export default {
     if (localStorage.getItem('jwt')) {
       axios({
         method : 'get',
-        url: 'http://127.0.0.1:8000/server/movies/search/',
+        url: 'http://127.0.0.1:8000/server/movies/search/1/',
         params:{
           keyword : String("")
         }
@@ -231,7 +230,16 @@ export default {
   margin-top: 1rem;
   width: 4rem;
 }
-
-
+.movie-title{
+  text-align: left;
+  width: 50%;
+}
+.movie-title>input{
+  width: 50%;
+  margin-right: 20px;
+}
+.btn-review{
+  margin: 20px
+}
 
 </style>

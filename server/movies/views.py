@@ -13,7 +13,7 @@ import math
 
 from .serializers import MovieCommentSerializer
 
-from .models import Movie, Comment
+from .models import Genre, Movie, Comment
 # Create your views here.
 
 @api_view(['GET'])
@@ -43,10 +43,18 @@ def page(request, page_num):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def genre(request, movie_pk):
+    movie = get_object_or_404(Movie, pk = movie_pk)
+    data = list(movie.genre.all().values("name"))
+    return JsonResponse(data, safe=False)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def search(request, page_num):
     keyword = request.GET.get('keyword')
     movies_list = Movie.objects.filter(title__icontains=keyword)
-    paginator = Paginator(movies_list, 8)
+    paginator = Paginator(movies_list, 20)
     page = page_num
     page_obj = paginator.get_page(page)
     data = serializers.serialize('json', page_obj)
