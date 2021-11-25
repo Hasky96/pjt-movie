@@ -22,7 +22,7 @@ export default {
     CommentList
   },
   props:{
-    reviewId:Number,
+    reviewId:Number, 
     comments: Array
   },
   data:function(){
@@ -41,6 +41,7 @@ export default {
         method: 'GET',
         url: `http://127.0.0.1:8000/server/community/review/${this.reviewId}/comments/`
       }).then(res=>{
+        console.log(res)
         this.new_comments = res.data
       }).catch(err=>{
         console.log(err)

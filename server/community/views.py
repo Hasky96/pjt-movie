@@ -59,6 +59,8 @@ def review_by_movieID(request, movie_id):
     serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data, status.HTTP_200_OK)
 
+@api_view(["GET"])
+@permission_classes([AllowAny])
 def comments(request, review_pk):
     review = get_object_or_404(Review,pk=review_pk)
     comments =review.comment_set.all()

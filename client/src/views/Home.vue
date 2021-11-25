@@ -34,7 +34,6 @@
         <a href="#" @click="move5()"><b-carousel-slide 
         img-src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FVfkYK%2Fbtrl1Xo5uki%2F29hXRYjYwCiW0GESyelyX0%2Fimg.jpg">
         </b-carousel-slide></a>
-
       </b-carousel>
   </div>
   <div class="container ">
