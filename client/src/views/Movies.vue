@@ -42,7 +42,7 @@ export default {
     nextPagination(){
       let start = _.last(this.pages)+1
       let last = start+5
-      if (_.range(start,this.totalPage+1).includes(this.totalPage)){
+      if (_.range(start,last).includes(this.totalPage)){
         this.pages = _.range(start,this.totalPage+1)
         this.pageStatus="last"
       }else{
