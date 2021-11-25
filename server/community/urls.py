@@ -16,6 +16,7 @@ urlpatterns = [
     path('movie/<int:movie_id>/reviews/', views.review_by_movieID),
     # 리뷰의 코멘트 다주세요
     path('review/<int:review_pk>/comments/', views.comments),
-    
+    # 리뷰 수정, 삭제
+    path('review/<int:review_pk>/updel/', views.review_detail_or__update_or_delete),
 
 ]

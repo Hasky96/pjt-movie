@@ -114,7 +114,6 @@ export default {
         method: 'get',
         url: `http://127.0.0.1:8000/server/movies/${this.$route.params.movieId}/genres/`,
         }).then(res=>{
-          console.log(res.data)
           this.genres = res.data
         })
       axios({
@@ -135,7 +134,6 @@ export default {
                 movie_list.push([res.data.title[step], res.data.pp[step], res.data.pk[step]])
               } 
               this.movieList = movie_list
-              // console.log(movie_list)
               }).catch(err=>{
                 console.log(err)
               })

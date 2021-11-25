@@ -109,7 +109,6 @@ export default {
     setSearch(id, title){
       this.movieId = id
       this.movieTitle = title
-      console.log(title)
       this.$bvModal.hide('modal-movie')
       // document.querySelector('#movieTitle').setText(title)
 
