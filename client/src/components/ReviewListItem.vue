@@ -14,7 +14,6 @@ export default {
   },
   filters:{
     count: function(arr){
-      console.log(arr.length)
       return arr.length
     }
   }

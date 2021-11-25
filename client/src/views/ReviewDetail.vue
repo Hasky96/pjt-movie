@@ -17,7 +17,12 @@
         </div>
         
         <div class="d-flex justify-content-end">
-          <b-button @click="like"  class="btnsize" style="">좋아요</b-button> 
+          <!-- user 정보가 리뷰 작성자 정보랑 일치 하면?? -->
+            <b-button class="btnsize" @click="deletes()">delete</b-button>
+            <b-button class="btnsize" @click="update()">update</b-button>
+
+  
+          <b-button @click="like"  class="btnsize" style="" >좋아요</b-button> 
           <!-- 버튼 사이즈 조절하기 -->
           <p  class="">  {{this.likes}} 명</p>
         </div>
@@ -78,7 +83,6 @@ export default {
         method: 'get',
         url : `http://127.0.0.1:8000/server/movies/${res.data.movie}/info/`,
       }).then(res=>{
-        // console.log(res.data)
         this.movie = res.data
       }).catch(err=>{
         console.log(err)
@@ -106,7 +110,30 @@ export default {
         }).catch(err=>{
           console.log(err)
         })
-    }
+    },
+    update : function() {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/updel/`,
+        headers: this.setToken()
+        }).then(res=>{
+          console.log(res)
+        }).catch(err=>{
+          console.log(err)
+        })
+    },
+    deletes : function() {
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/updel/`,
+        headers: this.setToken()
+        }).then(res=>{
+          console.log(res)
+          this.$router.push({name : 'Review'})
+        }).catch(err=>{
+          console.log(err)
+        })
+    },
   }
 }
 </script>
