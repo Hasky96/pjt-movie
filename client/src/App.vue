@@ -209,7 +209,7 @@ export default {
   margin: 10px;
   color: #808080;
   background-color: #1b1b1b;
-  border: 2px #eee solid;
+  border: 1px #eee solid;
   border-radius: 5px;
 }
 .label-id:focus{
@@ -217,7 +217,7 @@ export default {
   margin: 10px;
   color: #808080;
   background-color: #1b1b1b;
-  border: 2px #eee solid;
+  border: 1px #eee solid;
   border-radius: 5px;
 }
 .label-pw:focus{
@@ -225,7 +225,7 @@ export default {
   margin: 10px;
   color: #808080;
   background-color: #1b1b1b;
-  border: 2px #eee solid;
+  border: 1px #eee solid;
   border-radius: 5px;
 }
 .label-id{
@@ -269,7 +269,7 @@ export default {
 }
 .btn-login:hover{
   background-color: lightblue; 
-  transform: scale(1.01);
+  transform: scale(1);
   color : #eee;
 }
 .pTag{
@@ -282,7 +282,7 @@ export default {
 .p-signup:hover{
   color: #eee;
   cursor: pointer;
-  transform: scale(1.01);
+  transform: scale(1);
 }
 </style>
 <style>

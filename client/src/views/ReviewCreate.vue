@@ -54,8 +54,8 @@
     style="resize:none"
     name="reviewContent" type="textarea" cols="50" rows="10" placeholder="리뷰를 입력해 주세요"></b-textarea>
     <br>
-    <b-button @click="create" >취소</b-button>
-    <b-button @click="create" >작성하기</b-button>
+    <b-button @click="backtoreview" variant="outline-danger"  style="margin-right : 1rem;">취소</b-button>
+    <b-button @click="create" variant="outline-success" >작성하기</b-button>
   </div>
   </div>
 <footer style="margin-top : 20rem; paddint-bottom : 5rem;">
@@ -119,6 +119,9 @@ export default {
         Authorization: `JWT ${token}`
       }
       return config
+    },
+    backtoreview(){
+      this.$router.push({name:'Review'})
     },
     create(){
       axios({

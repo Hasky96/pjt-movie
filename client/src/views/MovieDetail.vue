@@ -11,7 +11,7 @@
       <p id="rankTag"> <i class="fas fa-star star"/> <span style="filter: contrast(10%);">{{movie.vote_average}}</span></p>
       <p id="contentTag">{{movie.overview}}</p>
     </section>
-    <section class="recommendTag">
+    <section class="recommendTag" style="margin-top : 3rem;">
           <div class="recommend-div">
           <br>
           <h2 style="margin-top : 2rem;">추천 영화</h2>
@@ -202,13 +202,13 @@ export default {
   color: gold;
 }
 #contentTag{
-  font-size: 13px;
+  font-size: 1rem;
   letter-spacing: 0.3px;
   text-align: left;
   margin-left: 10vw;
   margin-right: 10vw;
   color: #808080;
-  height: 200px;
+  height: 400px;
   overflow: auto;
 }
 #contentTag::-webkit-scrollbar{

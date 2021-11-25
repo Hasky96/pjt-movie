@@ -1,6 +1,6 @@
 <template>
   <div class="row comment">
-    <input v-model="content" class="inp col-11" type="text">
+    <input v-model="content" class="inp col-11" type="text" @keyup.enter="write">
     <button @click="write" class="btn col-1 p-0">작성</button>
   </div>
 </template>

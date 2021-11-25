@@ -60,7 +60,7 @@
     </transition>
     </div>
     </div>
-    <footer style="margin-top : 60rem; paddint-bottom : 5rem;">
+    <footer style="margin-top : 80rem; paddint-bottom : 5rem; fixed-bottom">
       <fotter></fotter>
     </footer>
   </div>
