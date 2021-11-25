@@ -3,7 +3,7 @@
 <div class="main-div">
   <div class="page container grayborder" style="margin : auto; margin-bottom : 10rem;">
     <header class="hea grayborder">
-      <p id="back"  style="margin-top : 1rem;" >리뷰></p>
+      <p id="back" @click="$router.push({name:'Review'})"  style="margin-top : 1rem;" >리뷰></p>
       <h2 class="my-0 pb-0 reviewTitle"  style="">{{review.title}}</h2>
       
       <div class="py-0 mt-2"  >

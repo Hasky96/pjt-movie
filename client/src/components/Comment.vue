@@ -32,7 +32,11 @@ export default {
   },
   computed:{
     propdata:function(){
-      return this.new_comments ?? this.comments
+      if(this.new_comments){
+        return this.new_comments
+      }else{
+        return this.comments
+      }
     }
   },
   methods:{
