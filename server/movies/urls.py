@@ -17,7 +17,7 @@ urlpatterns = [
     # 한줄평 좋아요
     path('<int:movie_pk>/<int:comment_pk>/like/', views.like_comment),
     # 영화리스트 제목
-    path('search/<int:page_num>', views.search),
+    path('search/<int:page_num>/', views.search),
     # 메인페이지 슬롯 용 영화 찾기
     path('slot/', views.slot_search),
     # 장르

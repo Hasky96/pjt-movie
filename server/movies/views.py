@@ -54,7 +54,7 @@ def genre(request, movie_pk):
 def search(request, page_num):
     keyword = request.GET.get('keyword')
     movies_list = Movie.objects.filter(title__icontains=keyword)
-    paginator = Paginator(movies_list, 8)
+    paginator = Paginator(movies_list, 20)
     page = page_num
     page_obj = paginator.get_page(page)
     data = serializers.serialize('json', page_obj)

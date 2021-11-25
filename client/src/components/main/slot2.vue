@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top : 5rem;" >
-      <span class="slot-info d-flex flex-row" style="font-family: 'Hanna', sans-serif;" ># 강호 최강자 # 무림 협객!</span>      <swiper class="swiper" :options="swiperOption" style="margin-top : 2rem;">
+      <span class="slot-info d-flex flex-row tag-color" style="font-family: 'Hanna', sans-serif;" ># 강호 최강자 # 무림 협객!</span>      <swiper class="swiper" :options="swiperOption" style="margin-top : 2rem;">
         <swiper-slide v-for="movieEl in movie" :key="movieEl.id">
           <a href="" style="text-decoration:none;"  @click="move(movieEl.id)"><div class="slide-content" style=" margin :0rem 0.5rem;">
             <img :src="movieEl.poster_path" alt="" style="width: 15rem; height: 18rem;"> 

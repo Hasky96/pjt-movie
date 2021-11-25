@@ -1,7 +1,8 @@
 <template>
+<div class="">
   <div class="px-5">
-    <div class="newDiv row g-0 mb-3">
-      <div class="col-3 star-select">
+    <div class="newDiv row g-0 mb-3 d-flex justify-content-evenly">
+      <div class="col-3 star-select" style="width : 5rem;">
         <select v-model="rankString" class="star star-select" name="" id="">
           <option class="star" value="1">★</option>
           <option value="2">★★</option>
@@ -11,16 +12,17 @@
         </select>
 
       </div>
-      <span class="col-7"><input v-model="content" type="text"></span><span class="col-2"><button @click="write">작성</button></span>
+      <span class="col-7"><input v-model="content" type="text" @keyup.enter="write"></span><span class="col-2"><button @click="write">작성</button></span>
     </div>
-    <div class="comments-list">
-      <article class="comment p-3 px-5" v-for="comment in commentss" :key="comment.id" >
+    <div class="comments-list" >
+      <article class="comment  px-5 " v-for="comment in commentss" :key="comment.id" >
         <span v-if="comment" class="content">{{comment.user.username}}</span>
-        <span v-if="comment" class="text- mx-4"> - </span>
+        <span v-if="comment" class="text- mx-4 content"> - </span>
         <span v-if="comment" class="content">{{comment.content}}</span>
-        <i v-if="comment" class="fas fa-star star ms-5"/> <span class="rank ">{{comment.rank}}</span>
+        <i v-if="comment" class="fas fa-star star ms-5"/> <span class="rank">{{comment.rank}}</span>
       </article>
     </div>
+  </div>
   </div>
 </template>
 
@@ -75,6 +77,7 @@ export default {
           url: `http://127.0.0.1:8000/server/movies/${this.movieid}/comments/`,
         }).then(res=>{
           this.newComments = res.data.comment_set
+          this.content = ''
         }).catch(err=>{
           console.log(err)
         })
@@ -98,6 +101,8 @@ export default {
 }
 .comments-list{
   overflow: auto;
+  width: 80%;
+
 }
 .newDiv{
   top: 20px;
@@ -128,13 +133,17 @@ export default {
   text-align: left;
   background-color: #1b1b1b;
   color: #808080;
-  font-size: 40px;
+  font-size: 1.5rem;
+  border: 1px #808080 solid;
+  border-radius: 5px;
+  margin-top : 1rem;
+  
 }
 .rank{
-  font-size: 40px;
+  font-size: 1.5rem;
 }
 .text-{
-  font-size: 50px;
+  font-size: 2rem;
 }
 .content{
   margin-left: 20px;
@@ -145,4 +154,5 @@ export default {
   background-color: #1b1b1b;
   border: none;
 }
+
 </style>
