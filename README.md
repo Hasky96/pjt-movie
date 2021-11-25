@@ -59,7 +59,7 @@
 - Movie System에 필요한 server, client 구축 
 - Review System에 필요한 server, client 구축 
 - Comment System에 필요한 server, client 구축 
-- 유저 커뮤니 케이션을 위한 Login, Signup System 의 server, client 구축 
+- 유저 커뮤니케이션을 위한 Login, Signup System 의 server, client 구축 
 - SPA 를 이용한 사용자 편의 개선을 위해 Router 구성
 - 페이지 내부 반응형 요소 추가
 
