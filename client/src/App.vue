@@ -112,6 +112,7 @@ export default {
         url: 'http://127.0.0.1:8000/server/accounts/api-token-auth/',
         data: this.credential
       }).then(res=>{
+        console.log(res)
         const jwt = res.data.token
         localStorage.setItem('jwt', jwt)
         localStorage.setItem('user', this.credential.username)
@@ -126,7 +127,6 @@ export default {
       })
     },
     signup(){
-      
       axios({
           method: 'post',
           url: 'http://127.0.0.1:8000/server/accounts/signup/',

@@ -16,7 +16,7 @@ export default {
     count: function(arr){
       return arr.length
     }
-  }
+  },
 }
 </script>
 
