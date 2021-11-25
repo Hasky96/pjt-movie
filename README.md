@@ -55,13 +55,15 @@
 ### 장하석
 
 - ERD 설계
-- ERD 관련 Model 및 Serializers생성 
-- Movie System에 필요한 server, client 구축 
-- Review System에 필요한 server, client 구축 
-- Comment System에 필요한 server, client 구축 
-- 유저 커뮤니케이션을 위한 Login, Signup System 의 server, client 구축 
-- SPA 를 이용한 사용자 편의 개선을 위해 Router 구성
-- 페이지 내부 반응형 요소 추가
+  - DB modeling
+  - Model 및 Serializers생성
+- DRF Server, Client 구축
+  - Movie System
+  - Review System
+  - Comment System 
+  - Login, Signup System
+- 사용자 편의 개선을 위해 SPA 를 이용한 구성(Router)
+- 페이지 내부 액션, css design 요소 추가
 
 ---
 
