@@ -10,7 +10,7 @@
       
       <div class="d-flex justify-content-between">
         <div>
-          <span >작성자 : {{review.user.username}}</span>
+          <span >작성자 : {{user}}</span>
           <br>
           <span >{{review.created_at|moment("from", "now")}}</span>
           <p class="my-0 " >별점 : {{review.rank}}</p> 
@@ -67,8 +67,9 @@ export default {
   name: "ReviewDetail",
   data: function(){
     return {
-      review: {},
+      review: [],
       movie: [],
+      user : "",
       likes : null,
     }
   },
@@ -77,11 +78,13 @@ export default {
       method: 'get',
       url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/`,
     }).then(res=>{
+      // console.log(res)
       this.review = res.data
       this.likes = this.review.like_users.length
+      this.user = res.data.user.username
       axios({
         method: 'get',
-        url : `http://127.0.0.1:8000/server/movies/${res.data.movie}/info/`,
+        url : `http://127.0.0.1:8000/server/movies/${res.data.movie.id}/info/`,
       }).then(res=>{
         this.movie = res.data
       }).catch(err=>{
@@ -100,7 +103,7 @@ export default {
       }
       return config
     },
-    like : function() { 
+    like() { 
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/like/`,
