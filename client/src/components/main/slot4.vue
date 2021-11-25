@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top : 5rem;" >
-      <span class="slot-info d-flex flex-row" style="font-family: 'Hanna', sans-serif;" >오늘은 #신나는 #판타지</span>
+      <span class="slot-info d-flex flex-row tag-color" style="font-family: 'Hanna', sans-serif;" >오늘은 #신나는 #판타지</span>
       <swiper class="swiper" :options="swiperOption" style="margin-top : 2rem;">
         <swiper-slide v-for="movieEl in movie" :key="movieEl.id">
           <a href="" style="text-decoration:none;"  @click="move(movieEl.id)"><div class="slide-content" style=" margin :0rem 0.5rem;">

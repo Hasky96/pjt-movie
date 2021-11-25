@@ -25,7 +25,7 @@
     </transition>
     <transition name="fade">
       <div v-if="tryNum == 2">
-        <h2  class="rectitle">첫번째 키워드 {{ firstKeyword }}에 대한 연관 키워드 입니다.</h2>
+        <h2  class="rectitle">첫번째 키워드 {{ firstKeyword }}</h2>
         <h2 class="rectitle">두번째 키워드 {{ secoundKeyword }}에 대한 연관 키워드 입니다.</h2>
         <div class="keyword-container">
           <div @click='onD(vec)' class="keyword" v-for="vec in secoundData" :key="vec.id">
