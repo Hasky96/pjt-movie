@@ -1,6 +1,6 @@
 # Project Final
 
-###### ⮞*손한기*, *장하석*
+###### 
 
 
 
@@ -37,29 +37,15 @@ iv. 필수 기능에 대한 설명 v. 배포 서버 URL vi. 기타(느낀점)
 
 # FINAL PROJECT (추천 시스템 기반 영화 사이트)
 
+⮞*손한기*, *장하석*
+
 싸피 6기 1학기 관통 프로젝트입니다.
 
 
 
-## 목차
-
-  * [목차](#--)
-- [Demo-Preview](#demo-preview)
-- [Table of contents](#table-of-contents)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development](#development)
-- [Contribute](#contribute)
-    + [Sponsor](#sponsor)
-    + [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
-- [Contribute](#contribute-1)
-- [Footer](#footer)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
-
-# Demo-Preview
+# 미리보기
 
 After you have written about your project, it is a good idea to have a demo/preview(**video/gif/screenshots** are good options) of your project so that people can know what to expect in your project. You could also add the demo in the previous section with the product description.
 
@@ -67,13 +53,14 @@ Here is a random GIF as a placeholder.
 
 [![Random GIF](https://camo.githubusercontent.com/61d647cf136e8b81720294531eedb797e4a1511fb2ad76796526865642ff76e7/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f5a56696b377042747539644e532f67697068792e676966](https://camo.githubusercontent.com/61d647cf136e8b81720294531eedb797e4a1511fb2ad76796526865642ff76e7/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f5a56696b377042747539644e532f67697068792e676966)
 
-# Table of contents
+## 목차
 
-After you have introduced your project, it is a good idea to add a **Table of contents** or **TOC** as **cool** people say it. This would make it easier for people to navigate through your README and find exactly what they are looking for.
-
-Here is a sample TOC(*wow! such cool!*) that is actually the TOC for this README.
-
-
+- [Installation](#installation)
+- [Usage](#usage)
+- [Development](#development)
+- [Contribute](#contribute)
+    + [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
+- [Contribute](#contribute-1)
 
 # Installation
 
@@ -107,12 +94,6 @@ git clone https://github.com/navendu-pottekkat/nsfw-filter.git
 
 
 # Contribute
-
-
-
-### Sponsor
-
-[(Back to top)](https://github.com/navendu-pottekkat/awesome-readme#table-of-contents)
 
 
 

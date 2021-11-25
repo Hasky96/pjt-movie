@@ -16,10 +16,10 @@
     <br>
     <hr>
     <div class="d-flex flex-row justify-content-between">
-      <select v-model="movieId" >
+      <!-- <select v-model="movieId" >
         <option value="null">리뷰를 확인 할 영화를 선택해주세요</option>
         <option v-for="title in moviesTitles" :key="title.id" :value="title.id">{{title.title}}</option>
-      </select>
+      </select> -->
       <b-button @click="$router.push({name: 'ReviewCreate'})" >new Review</b-button>
     </div>
     </div>
