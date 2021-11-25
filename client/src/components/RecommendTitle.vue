@@ -76,8 +76,7 @@ export default {
           
           if (res.data.state == true) {
             this.recoGet = res.data.Veclist1.title
-            console.log(res.data.Veclist1)
-            console.log(res.data.Veclist1.title)
+
             const movie_list = [['순번' ,'제목', '유사도','영화링크']]
             var line_score =110/(res.data.Veclist1.score[0]+res.data.Veclist1.score[1])
             var step;
@@ -89,7 +88,6 @@ export default {
               this.number += 1
             } 
             this.movieList = movie_list
-            console.log(movie_list)
             this.number = 1
           }else{
             alert('검색된 제목이 없습니다! 다른 제목을 넣어주세요~')

@@ -43,7 +43,6 @@ export default {
           method: 'get',
           url: `http://127.0.0.1:8000/server/community/movie/${this.movieId}/reviews/`
         }).then(res=>{
-          console.log(res.data)
           return res.data
         }).catch(err=>{
           console.log(err)
@@ -72,7 +71,6 @@ export default {
   },
   computed:{
     isSelected:function(){
-      // console.log(this.movieId)
       if(this.movieId=='null' || !this.movieId){
         return false
       }else{
@@ -82,7 +80,6 @@ export default {
   },
   watch:{
     movieId:function(){
-      // console.log(this.movieId)
       if(this.movieId=='null' || !this.movieId){
         this.selected=null
       }else{

@@ -65,30 +65,25 @@ def movie_recommend(request):
             return context
     # 이때 키워드는 request 에 담겨서 넘어와야 한다.
     word  = request.data.get('inputKeyword')#로맨틱 #아련한
-    print(type(request.data.get('list')))
-    print(3, word)
     context = keyword_check(word)
     return Response(context, status=status.HTTP_200_OK)
 
 # 추천영화 전송 시스템
+
 @api_view(['POST'])
+
 def show_recommend_movie(request):
     FirstKeyword  = request.data.get('firstKeyword')# 첫번째 키워드
-    print(FirstKeyword)
     SecondKeyword  = request.data.get('secoundKeyword')# 두번째 키워드
     ThirdKeyword  = request.data.get('thirdKeyword')# 세번째 키워드
-    print(SecondKeyword,ThirdKeyword)
     # list_num  = request.# 리스트
     Veclist1  = request.data.get('firstData')# 리스트
     Veclist2  = request.data.get('secoundData')# 리스트
     Veclist3  =request.data.get('thirdData')# 리스트
     # 벡터 가중치 설정
-    print(Veclist1,Veclist2,Veclist3)
     myVec = [FirstKeyword]*3+Veclist1+[SecondKeyword]*2+Veclist2[:5]+[ThirdKeyword] + Veclist3[:5]
-    # print(Veclist1)
     # 테이블 불러오기
-    mymyCut = pd.read_csv("recommend\리뷰코사인을위한데이터테이블3.csv")
-    
+    mymyCut = pd.read_csv("recommend\CosDataTable.csv")
     # 코사인 유사도 확인
     mysent=""
     for i in myVec:
@@ -123,12 +118,9 @@ def show_recommend_movie(request):
 
 @api_view(['POST'])
 def title_recommend(request):
-    print('도착했음')
     def movie_Recommendation(title, cos_similar=cos_similar):
         try:
-            print('멈추기 전')
             idx = indices[title]
-            print('들어옴')
             # 모든 영화에 대해서 해당 영화와의 유사도를 구하기
             cos_like = list(enumerate(cos_similar[idx]))
             cos_like = sorted(cos_like, key=lambda x:x[1], reverse = True) # score 순으로 정렬
@@ -159,7 +151,6 @@ def catch_data(request):
     try:
         a = request.data.get('movieList')
         movie = get_object_or_404(Movie, title=a)
-        print(movie)
         serializer = MovieSerializer(movie)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -171,10 +162,8 @@ def catch_data(request):
 
 @api_view(['GET'])
 def detail_recommend(request,movie_pk):
-    print('들어옴')
     movie = get_object_or_404(Movie, pk=movie_pk)
     genres = movie.genre.all()
-    print(genres)
     data = Movie.objects.filter(genre__in = genres).order_by('-vote_count').distinct()
     selctions = [0, 10, 20, 30, 40]
     pick = random.choice(selctions)

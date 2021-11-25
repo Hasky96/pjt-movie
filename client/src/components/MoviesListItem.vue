@@ -36,7 +36,6 @@ export default {
       method: 'get',
       url: `http://127.0.0.1:8000/server/movies/${this.movieId}/genres/`,
     }).then(res=>{
-      // console.log(res)
       this.genres = res.data
     })
   },

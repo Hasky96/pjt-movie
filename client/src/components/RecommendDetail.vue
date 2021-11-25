@@ -37,10 +37,10 @@
     <transition name="fade">
       <div v-if="tryNum == 3">
         <div v-if="loding == 0">
-        <h2  class="rectitle">선택하신 키워드는 다음과 같습니다.</h2>
-        <p class="reccontent" style="margin-bottom: 1rem;">첫번째 키워드 : {{firstKeyword}}</p>
-        <p class="reccontent" style="margin-bottom: 1rem;">두번째 키워드 : {{secoundKeyword}}</p>
-        <p class="reccontent" style="margin-bottom: 1rem;">세번째 키워드 : {{thirdKeyword}}</p>
+        <h1  class="rectitle">선택하신 키워드는 다음과 같습니다.</h1>
+        <p class="reckeyword" style="margin-bottom: 1rem;">첫번째 키워드 : {{firstKeyword}}</p>
+        <p class="reckeyword" style="margin-bottom: 1rem;">두번째 키워드 : {{secoundKeyword}}</p>
+        <p class="reckeyword" style="margin-bottom: 1rem;">세번째 키워드 : {{thirdKeyword}}</p>
         <b-button  @click="reset" style="margin-bottom:1rem;" variant="danger">리셋</b-button>
         <b-button v-if="tryNum == 3" @click="getMovie" style="margin-left:2rem; margin-bottom:1rem;"  variant="success">키워드 전송!</b-button>
         
@@ -118,7 +118,6 @@ export default {
         alert('빈 키워드는 입력하실 수 없습니다!')
         this.loding = 0
       } else{
-      console.log(Keyword)
       if (Keyword.inputKeyword) {
         
         axios({
@@ -129,7 +128,6 @@ export default {
         }).then(res=>{
           if (res.data.state == true){
           this.loding = 1
-          console.log(res)
           this.firstData = res.data.Veclist1
           this.firstKeyword = res.data.first_keyword
           this.tryNum += 1
@@ -153,7 +151,6 @@ export default {
         alert('빈 키워드는 입력하실 수 없습니다!')
         this.loding = 0
       } else{
-      console.log(Keyword)
       if (Keyword.inputKeyword) {
         axios({
         method: 'post',
@@ -163,7 +160,6 @@ export default {
         }).then(res=>{
           this.loding = 1 
           if (res.data.state == true){
-          console.log(res)
           this.secoundData = res.data.Veclist1
           this.secoundKeyword = res.data.first_keyword
           this.tryNum += 1
@@ -188,7 +184,6 @@ export default {
         this.loding = 0
       } else{
       
-      console.log(Keyword)
       if (Keyword.inputKeyword) {
         this.loding = 1
         axios({
@@ -198,7 +193,6 @@ export default {
         headers: this.setToken()
         }).then(res=>{
          if (res.data.state == true){
-          console.log(res)
           this.thirdData = res.data.Veclist1
           this.thirdKeyword = res.data.first_keyword
           this.tryNum += 1
@@ -229,8 +223,6 @@ export default {
       data: keyWordData,
       headers: this.setToken()
       }).then(res=>{
-        // console.log(res) 
-        console.log(res)
         this.movieData = res.data.movie_list
         const movie_list = [['순번' ,'제목', '사용자 리뷰','영화링크']]
 
@@ -240,7 +232,6 @@ export default {
           this.number += 1
         } 
         this.movieList = movie_list
-        console.log(movie_list)
         this.tryNum += 1
         this.loding = 2
         this.number = 1
@@ -308,6 +299,12 @@ export default {
   color: #dddddd;
   font-family: 'Hanna', sans-serif;
 
+}
+.reckeyword {
+  margin: auto;
+  color: #dddddd;
+  font-family: 'Hanna', sans-serif;
+  font-size: 2rem;
 }
 .rectitle {
   margin-bottom: 1rem;

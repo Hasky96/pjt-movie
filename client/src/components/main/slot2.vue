@@ -69,8 +69,7 @@ export default {
   },
   getRecData(){
     const keyword = [485,516,1001,630,1223,2330,3595,3594,3071,1313,3072]
-    console.log(keyword)
-    console.log('키워드 출력 됨')
+
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/server/movies/slot/`,
@@ -78,7 +77,7 @@ export default {
         target : keyword}
       }).then(res=>{
         this.movie = res.data
-        console.log(res.data)
+
       }).catch(err=>{
         console.log(err)
       })

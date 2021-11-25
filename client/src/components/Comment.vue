@@ -37,7 +37,6 @@ export default {
   },
   methods:{
     refresh:function(){
-      console.log(this.reviewId)
       axios({
         method: 'GET',
         url: `http://127.0.0.1:8000/server/community/review/${this.reviewId}/comments/`
