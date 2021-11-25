@@ -6,9 +6,15 @@ from accounts.serializers import UserSerializer
 
 class ReviewListSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    # movie = MovieSerializer(read_only=True)
+    movie_info = serializers.SerializerMethodField('get_title')
     class Meta:
         model = Review
         fields = '__all__'
+    
+    def get_title(self, obj):
+        return { 'id': obj.movie.id ,'title': obj.movie.title}
+
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -18,13 +24,8 @@ class CommentSerializer(serializers.ModelSerializer):
             read_only_fields=('user', 'review')
 
 class ReviewSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    class MovieSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Movie
-            fields = "__all__"
-        movie = MovieSerializer(read_only=True)
-    
+    user = UserSerializer(read_only=True)    
+    movie = MovieSerializer(read_only=True)
     comment_set = CommentSerializer(many=True,read_only=True)
         
     class Meta:
