@@ -141,10 +141,12 @@ export default {
           this.$store.dispatch("setReviews", res.data)
         }).catch(err=>{
           console.log(err)
+          alert('입력값이 올바르지 않습니다.')
         })
         this.$router.push({name:'Review'})
       }).catch(err=>{
         console.log(err)
+        alert('입력값이 올바르지 않습니다.')
       })
     }
   },
