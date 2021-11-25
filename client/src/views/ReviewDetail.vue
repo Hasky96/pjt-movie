@@ -3,7 +3,7 @@
 <div class="main-div">
   <div class="page container grayborder" style="margin : auto; margin-bottom : 10rem;">
     <header class="hea grayborder">
-      <p id="back"  style="margin-top : 1rem;" >리뷰></p>
+      <p id="back" @click="$router.push({name:'Review'})"  style="margin-top : 1rem;" >리뷰></p>
       <h2 class="my-0 pb-0 reviewTitle"  style="">{{review.title}}</h2>
       
       <div class="py-0 mt-2"  >
@@ -13,18 +13,20 @@
           <span >작성자 : {{user}}</span>
           <br>
           <span >{{review.created_at|moment("from", "now")}}</span>
-          <p class="my-0 " >별점 : {{review.rank}}</p> 
+          <p class="my-0 " >별점 : {{review.rank}}</p>           
         </div>
         
         <div class="d-flex justify-content-end">
           <!-- user 정보가 리뷰 작성자 정보랑 일치 하면?? -->
-            <b-button class="btnsize" @click="deletes()">delete</b-button>
-            <b-button class="btnsize" @click="update()">update</b-button>
-
-  
-          <b-button @click="like"  class="btnsize" style="" >좋아요</b-button> 
-          <!-- 버튼 사이즈 조절하기 -->
-          <p  class="">  {{this.likes}} 명</p>
+          <div v-if="usercheck()"> 
+          <button class="p-0 fs-6 text-light btn btnsize bg-danger" @click="deletes">delete</button>
+          <button class="p-0 fs-6 text-light btn btnsize bg-info" @click="edit">update</button>
+          </div>
+          <div class="likediv">
+            <button @click="like" :class="[this.liked ? 'fas':'', 'far']" class="btnheart fa-heart heart" style="" ></button> 
+            <!-- 버튼 사이즈 조절하기 -->
+            <span class="like">{{this.likes}}</span>
+          </div>
         </div>
         </div>
       </div>
@@ -39,9 +41,8 @@
           <span style="font-size: 0.9em">개봉 일자 : {{movie.release_date}}</span>  
         </div>
         </div>
-        
         <div class="grayborder reviewContent col">
-           <h5>{{review.content}}</h5>
+          <h5>{{review.content}}</h5>
         </div>
       </div>
     </section>
@@ -68,12 +69,30 @@ export default {
   data: function(){
     return {
       review: [],
+      liked:null,
       movie: [],
       user : "",
       likes : null,
     }
   },
   created:function(){
+    axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/server/accounts/liked-reviews/`,
+        headers: this.setToken()
+        }).then(res=>{
+          const id = this.$route.params.reviewId
+          // console.log(res.data.like_reviews)
+          const list= res.data.like_reviews
+          list.forEach(x=>{
+            if(x.id == id){
+              this.liked = true
+              return
+            }
+          })
+        }).catch(err=>{
+          console.log(err)
+        })
     axios({
       method: 'get',
       url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/`,
@@ -96,6 +115,17 @@ export default {
     
   },
   methods : {
+    usercheck(){
+      const user = localStorage.getItem("user")
+      if (user != this.user){
+        return false
+      }else{
+        return true
+      }
+    },
+    edit(){
+      this.$router.push({path:`/review/${this.review.id}/update/`})
+    },
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
@@ -104,6 +134,7 @@ export default {
       return config
     },
     like() { 
+      this.liked = !this.liked
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/like/`,
@@ -114,7 +145,7 @@ export default {
           console.log(err)
         })
     },
-    update : function() {
+    update() {
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/updel/`,
@@ -125,18 +156,32 @@ export default {
           console.log(err)
         })
     },
-    deletes : function() {
+    deletes() {
       axios({
         method: 'delete',
         url: `http://127.0.0.1:8000/server/community/review/${this.$route.params.reviewId}/updel/`,
         headers: this.setToken()
-        }).then(res=>{
-          console.log(res)
-          this.$router.push({name : 'Review'})
+        }).then(()=>{
+          axios({
+          method: 'get',
+          url: 'http://127.0.0.1:8000/server/community/reviews/',
+          }).then(res=>{
+          this.$store.dispatch("setReviews", res.data)
+          return this.$router.push({name:'Review'})
+          }).catch(err=>{
+          console.log(err)
+          })
         }).catch(err=>{
           console.log(err)
         })
     },
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.canLeaveSite){// 
+    }
+    else{
+      next();
+    }
   }
 }
 </script>
@@ -202,12 +247,26 @@ div{
 .btnsize {
   width: 4rem;
   height: 2rem;
-  font-size: 0.7rem;
+}
+.btnheart {
+  margin: 0px;
+  padding: 0px;
+  color: red;
+  font-size: 1.5rem;
+  border: none;
+  background-color: #202020;
 }
 .ft-logo {
   margin :auto;
   margin-top: 1rem;
   width: 4rem;
+}
+.like{
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+.likediv{
+  padding-top: 0.77rem;
 }
 
 </style>

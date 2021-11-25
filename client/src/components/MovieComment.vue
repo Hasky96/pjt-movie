@@ -20,7 +20,7 @@
         <span v-if="comment" class="text- mx-4 content"> : </span>
         <span v-if="comment" class="content">{{comment.content}}</span>
         <i v-if="comment" class="fas fa-star star ms-5"/> <span class="rank">{{comment.rank}}</span>
-        <b-button @click="deleteComment(comment.id)" class="btnsize" variant="outline-secondary">삭제</b-button>
+        <b-button v-if="user==comment.user.username" @click="deleteComment(comment.id)" class="btnsize" variant="outline-secondary">삭제</b-button>
       </article>
     </div>
   </div>
@@ -40,6 +40,7 @@ export default {
       newComments: null,
       content: null,
       rankString:"3",
+      user:null,
     }
   },
   computed:{
@@ -90,16 +91,25 @@ export default {
         method: 'delete',
         url: `http://127.0.0.1:8000/server/movies/comments/${id}/del/`,
         headers: this.setToken()
-        }).then(res=>{
-          console.log(res)
-          this.$router.go()
+        }).then(()=>{
+          axios({
+            method: 'get',
+            url: `http://127.0.0.1:8000/server/movies/${this.movieid}/comments/`,
+          }).then(res=>{
+            this.newComments = res.data.comment_set
+            this.content = ''
+          }).catch(err=>{
+            console.log(err)
+          })
+          // console.log(res)
         }).catch(err=>{
           console.log(err)
-          alert('권한이 없습니다.')
         })
-      },
-    
-    }
+    },
+  },
+  created(){
+    this.user = localStorage.getItem('user')
+  }
 }
 </script>
 

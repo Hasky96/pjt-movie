@@ -1,10 +1,10 @@
 <template>
   <div>
-  <div class="comment " v-for="comment in comments" :key="comment.id" style="margin: 1rem 0rem;">
+  <div class="comment " v-for="comment in commentList" :key="comment.id" style="margin: 1rem 0rem;">
     <span class="user">{{comment.user.username}}</span>
     <span class="mx-2">-</span>
     <span class="commenttext">{{comment.content}}</span>
-    <b-button @click="deleteComment(comment.id)" class="btnsize">삭제</b-button>
+    <b-button v-if="check(comment.user.username)" @click="deleteComment(comment.id)" class="btnsize">삭제</b-button>
   </div>
   </div>
 </template>
@@ -19,9 +19,27 @@ export default {
   },
   data:function(){
     return {
+      user:null,
+      newComments:null,
     }
   },
+  computed:{
+    commentList(){
+      if (this.newComments){
+        return this.newComments
+      }else{
+        return this.comments
+      }
+    },
+  },
   methods : {
+    check(username){
+      if(this.user==username){
+        return true
+      }else{
+        return false
+      }
+    },
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
@@ -34,14 +52,23 @@ export default {
         method: 'delete',
         url: `http://127.0.0.1:8000/server/community/comments/${id}/del/`,
         headers: this.setToken()
-        }).then(res=>{
-          console.log(res)
-          this.$router.go()
+        }).then(()=>{
+          // console.log(res)
+          axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/server/community/review/${this.reviewId}/comments/`,
+          }).then(res=>{
+            // console.log(res)
+            this.newComments=res.data
+          })
         }).catch(err=>{
           console.log(err)
           alert('권한이 없습니다.')
         })
     }
+  },
+  created(){
+    this.user = localStorage.getItem('user')
   }
 }
 </script>

@@ -34,8 +34,9 @@
 <script>
 import _ from 'lodash'
 import ReviewList from '@/components/ReviewList.vue'
-import {mapState} from 'vuex'
+// import {mapState} from 'vuex'
 import Fotter from '../components/fotter.vue'
+import axios from 'axios'
 // import axios from 'axios'
 
 export default {
@@ -46,6 +47,7 @@ export default {
   },
   data:function(){
     return{
+      reviews: [],
       movies:[],
       movieId : null,
     }
@@ -53,7 +55,7 @@ export default {
   methods:{
   },
   computed:{
-    ...mapState(['reviews']),
+    // ...mapState(['reviews']),
     moviesTitles(){
       let arr = []
       this.reviews.forEach(x => {arr.push(x.movie_info)});
@@ -64,6 +66,17 @@ export default {
     id: function(){
       alert(this.id)
     }
+  },
+  mounted(){
+     axios({
+        method : 'get',
+        url: 'http://127.0.0.1:8000/server/community/reviews/',
+      }).then(res=>{
+        console.log(res)
+        this.reviews = res.data
+      }).catch(err=>{
+        console.log(err)
+      })
   }
 }
 </script>

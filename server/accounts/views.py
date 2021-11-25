@@ -31,3 +31,8 @@ def userinfo(request, user_num):
     user = get_object_or_404(User, pk=user_num)
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def liked_reviews(request):
+    serializer = UserSerializer(request.user, many=False)
+    return Response(serializer.data, status=status.HTTP_200_OK)
