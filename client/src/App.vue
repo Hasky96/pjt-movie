@@ -121,6 +121,7 @@ export default {
         this.isLogin = true
         this.$bvModal.hide('modal-login')
         alert("로그인 성공!")
+        this.$router.push({name:'Home'})
       }).catch(err=>{
         console.log(err)
         alert('아이디 또는 비밀번호가 틀렸습니다.')

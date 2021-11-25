@@ -3,7 +3,7 @@
   <div class="main-div" >
     <div class="page-top">
       <div class="page-top-inner-wrap text-center">
-        <h2 class="page-title recalltitle">리뷰 리스트</h2>
+        <h2 class="page-title ">리뷰 리스트</h2>
       </div>
     </div>
     <div class="container recboxs">
@@ -77,5 +77,18 @@ export default {
   margin-top: 1rem;
   width: 4rem;
 }
+.page-title {
+    font-size: 3rem;
+    line-height: 36px;
+    color: rgb(255, 255, 255);
+    font-family: 'Hanna', sans-serif;
+    font-weight: 400;
+}
+.page-top {
+  background: #1b1b1b;
+  padding: 40px 0px;
+  text-align: left;
+  margin: 0 auto;
 
+}
 </style>
